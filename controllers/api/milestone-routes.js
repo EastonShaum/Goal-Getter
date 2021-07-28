@@ -82,22 +82,24 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    Milestone.destroy({
-            where: {
-                id: req.params.id
-            }
-        })
-        .then(dbMilestoneData => {
-            if (!dbMilestoneData) {
-                res.status(404).json({ message: 'Milestone not found' });
-                return;
-            }
-            res.json(dbMilestoneData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    if (req.session) {
+        Milestone.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(dbMilestoneData => {
+                if (!dbMilestoneData) {
+                    res.status(404).json({ message: 'Milestone not found' });
+                    return;
+                }
+                res.json(dbMilestoneData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    }
 });
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Team, Milestone, Goal } = require('../../models');
+const { User, Team, Milestone, Goal, Tag } = require('../../models');
 
 // Get all users
 router.get('/', (req, res) => {
@@ -51,7 +51,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', authPlaceHolder, (req, res) => {
+router.post('/', (req, res) => {
     User.create({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
@@ -70,7 +70,7 @@ router.post('/', authPlaceHolder, (req, res) => {
         })
 });
 
-router.put('/:id', authPlaceHolder, (req, res) => {
+router.put('/:id', (req, res) => {
     User.update(req.body, {
             inidividualHooks: true,
             where: {
@@ -90,7 +90,7 @@ router.put('/:id', authPlaceHolder, (req, res) => {
         });
 });
 
-router.delete('/:id', authPlaceHolder, (req, res) => {
+router.delete('/:id', (req, res) => {
     User.destroy({
             where: {
                 id: req.params.id

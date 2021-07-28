@@ -20,7 +20,7 @@ Milestone.init({
     },
     due_date: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     is_public: {
         type: DataTypes.BOOLEAN,
@@ -34,6 +34,11 @@ Milestone.init({
         type: DataTypes.INTEGER,
         allowNull: true
     }
+}, {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'milestone'
 })
 
 module.exports = Milestone;
