@@ -1,9 +1,17 @@
 const router = require('express').Router();
-const { Team, User, Milestone, Tag, Goal } = require('../../models');
+const { Team, User, Milestone, Tag, Goal, Goaltag } = require('../../models');
 
 router.get('/', (req, res) => {
     Goal.findAll({
-            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at']
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'user_id', 'team_id', 'created_at'],
+            include: [
+                {
+                    model: Tag,
+                    attributes: ['name'],
+                    through: Goaltag,
+                    as: 'tags'
+                }
+            ]
         })
         .then(dbGoalData => res.json(dbGoalData))
         .catch(err => {
@@ -21,6 +29,10 @@ router.get('/:id', (req, res) => {
                 {
                     model: User,
                     attributes: ['username']
+                },
+                {
+                    model: Tag,
+                    attributes: ['name']
                 }
             ]
         })

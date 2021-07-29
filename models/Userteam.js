@@ -1,26 +1,26 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Goaltag extends Model {}
+class Userteam extends Model {}
 
-Goaltag.init({
+Userteam.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    goal_id: {
+    user_id: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'goal',
+            model: 'user',
             key: 'id'
         }
     },
-    tag_id: {
+    team_id: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'tag',
+            model: 'team',
             key: 'id'
         }
     }
@@ -28,7 +28,7 @@ Goaltag.init({
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'goaltag'
+    modelName: 'userteam'
 });
 
-module.exports = Goaltag;
+module.exports = Userteam;
