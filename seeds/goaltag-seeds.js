@@ -1,6 +1,6 @@
-const { GoalTag } = require('../models');
+const { Goaltag } = require('../models');
 
-const goalTagData = [
+const goaltagData = [
     {
         goal_id: 1,
         tag_id: 1,
@@ -15,6 +15,6 @@ const goalTagData = [
     },
 ];
 
-const seedGoalTags = () => GoalTag.bulkCreate(goalTagData);
+const seedGoaltags = () => Goaltag.bulkCreate(goaltagData);
 
-module.exports = seedGoalTags;
+module.exports = seedGoaltags;

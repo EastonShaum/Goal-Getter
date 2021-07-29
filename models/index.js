@@ -2,7 +2,7 @@ const Tag = require('./Tag');
 const Team = require('./Team');
 const User = require('./User');
 const Goal = require('./Goal');
-const GoalTag = require('./GoalTag');
+const Goaltag = require('./Goaltag');
 const Milestone = require('./Milestone');
 const Note = require('./Note');
 
@@ -11,11 +11,11 @@ User.hasMany(Goal, {as: 'goals'});
 Goal.belongsTo(User);
 
 //Goal.belongsToMany(Tag, {
-    //through: GoalTag,
+    //through: Goaltag,
     //as: 'tags'
 //});
 //Tag.belongsToMany(Goals, {
-    //through: GoalTag,
+    //through: Goaltag,
     //as: 'goals'
 //});
 
@@ -59,4 +59,4 @@ Goal.belongsTo(User);
 //     foreignKey: 'mile'
 // });
 
-module.exports = { Tag, Team, User, Goal, GoalTag, Milestone, Note };
+module.exports = { Tag, Team, User, Goal, Goaltag, Milestone, Note };

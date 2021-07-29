@@ -2,7 +2,7 @@ const seedTags = require('./tag-seeds');
 const seedTeams = require('./team-seeds');
 const seedUsers = require('./user-seeds');
 const seedGoals = require('./goal-seeds');
-const seedGoalTags = require('./goaltag-seeds');
+const seedGoaltags = require('./goaltag-seeds');
 const seedMilestones = require('./milestone-seeds');
 const seedNotes = require('./note-seeds');
 
@@ -24,7 +24,7 @@ const seedAll = async () => {
     await seedGoals();
     console.log('GOALS SEEDED');
 
-    await seedGoalTags();
+    await seedGoaltags();
     console.log('THROUGH TABLE SEEDED');
 
     await seedMilestones();
