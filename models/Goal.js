@@ -16,7 +16,7 @@ Goal.init({
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     due_date: {
         type: DataTypes.STRING,
