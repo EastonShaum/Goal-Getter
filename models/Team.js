@@ -13,6 +13,10 @@ Team.init({
     name: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    motto: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
     sequelize,
