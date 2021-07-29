@@ -34,14 +34,6 @@ Goal.init({
             key: 'id'
         }
     },
-    team_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'team',
-            key: 'id'
-        }
-    }
 }, {
     sequelize,
     freezeTableName: true,

@@ -1,10 +1,14 @@
 const router = require('express').Router();
-const { Team, User, Milestone, Tag, Goal, Goaltag } = require('../../models');
+const { Team, User, Milestone, Tag, Goal, Goaltag, Note } = require('../../models');
 
 router.get('/', (req, res) => {
     Goal.findAll({
-            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'user_id', 'team_id', 'created_at'],
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'created_at'],
             include: [
+                {
+                    model: User,
+                    attributes: ['username', 'first_name', 'last_name']
+                },
                 {
                     model: Tag,
                     attributes: ['name'],
@@ -32,7 +36,24 @@ router.get('/:id', (req, res) => {
                 },
                 {
                     model: Tag,
-                    attributes: ['name']
+                    attributes: ['name'],
+                    through: Goaltag,
+                    as: 'tags'
+                },
+                {
+                    model: Milestone,
+                    attributes: ['title', 'description', 'due_date'],
+                    as: 'milestones',
+                    include: [
+                        {
+                            model: Note,
+                            attributes:['text']
+                        }
+                    ]
+                },
+                {
+                    model: Note,
+                    attributes: ['text']
                 }
             ]
         })

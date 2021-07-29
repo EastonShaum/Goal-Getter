@@ -7,7 +7,6 @@ const goalData = [
         due_date: '7/27/2022',
         is_public: true,
         user_id: 1,
-        team_id: 1,
     },
     {
         title: 'Save money',
@@ -15,7 +14,6 @@ const goalData = [
         due_date: '7/27/2022',
         is_public: true,
         user_id: 2,
-        team_id: 2,
     },
 ];
 
