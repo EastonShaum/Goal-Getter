@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
                     attributes: [''],
                     include: {
                         model: User,
-                        attributes: ['first_name', 'last_name']
+                        attributes: ['username']
                     }
                 }
             ]
@@ -55,14 +55,14 @@ router.post('/', (req, res) => {
     User.create({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password
         })
         .then(dbUserData => {
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
-                req.session.first_name = dbUserData.first_name;
-                req.session.last_name = dbUserData.last_name;
+                req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
                 res.json(dbUserData);
@@ -112,7 +112,7 @@ router.delete('/:id', (req, res) => {
 router.post('/login', (req, res) => {
     User.findOne({
             where: {
-                email: req.body.email
+                username: req.body.username
             }
         })
         .then(dbUserData => {
@@ -128,8 +128,7 @@ router.post('/login', (req, res) => {
 
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
-                req.session.first_name = dbUserData.first_name;
-                req.session.last_name = dbUserData.last_name;
+                req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
                 res.json({ user: dbUserData, message: 'Logged in!' });
