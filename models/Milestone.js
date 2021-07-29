@@ -28,11 +28,19 @@ Milestone.init({
     },
     goal_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'goal',
+            key: 'id'
+        }
     },
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'user',
+            key: 'id'
+        }
     }
 }, {
     sequelize,
