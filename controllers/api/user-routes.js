@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
                     attributes: [''],
                     include: {
                         model: User,
-                        attributes: ['first_name', 'last_name']
+                        attributes: ['username']
                     }
                 }
             ]

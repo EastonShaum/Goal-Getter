@@ -46,4 +46,4 @@ const Note = require('./Note');
 //     foreignKey: 'mile'
 // });
 
-module.exports = { User, Team, Milestone, Goal, Tag };
+module.exports = { User, Team, Milestone, Goal, Tag, Note };

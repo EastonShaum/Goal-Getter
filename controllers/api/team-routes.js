@@ -2,7 +2,9 @@ const router = require('express').Router();
 const { User, Team, Milestone, Goal, Tag } = require('../../models');
 
 router.get('/', (req, res) => {
-    Team.findAll()
+    Team.findAll({
+            attributes: ['id', 'name', 'motto']
+        })
         .then(dbTeamData => res.json(dbTeamData))
         .catch(err => {
             console.log(err);
@@ -32,7 +34,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     if (req.session) {
         Team.create({
-                name: req.body.name
+                name: req.body.name,
+                motto: req.body.motto
             })
             .then(dbTeamData => { res.json(dbTeamData) })
             .catch(err => {

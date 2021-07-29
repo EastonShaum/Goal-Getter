@@ -2,7 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag } = require('../models');
 
-router.get('/', withAuth, (req, res) => {
+router.get('/', (req, res) => {
     Goal.finaAll({
             where: {
                 user_id: req.session.user_id
@@ -36,7 +36,7 @@ router.get('/', withAuth, (req, res) => {
         });
 });
 
-router.get('/', withAuth, (req, res) => {
+router.get('/', (req, res) => {
     Milestone.findAll({
             where: {
                 user_id: req.session.user_id
@@ -66,7 +66,7 @@ router.get('/', withAuth, (req, res) => {
         });
 });
 
-router.get('/edit/:id', withAuth, (req, res) => {
+router.get('/edit/:id', (req, res) => {
     Goal.findByPk(req.params.id, {
             attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at'],
             include: [{
@@ -105,7 +105,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         });
 });
 
-router.get('/edit/:id', withAuth, (req, res) => {
+router.get('/edit/:id', (req, res) => {
     Milestone.findByPk(req.body.id, {
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
             include: [{

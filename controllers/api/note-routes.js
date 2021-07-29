@@ -2,7 +2,9 @@ const router = require('express').Router();
 const { Note } = require('../../models');
 
 router.get('/', (req, res) => {
-    Note.findAll()
+    Note.findAll({
+            attributes: ['id', 'text', 'goal_id', 'milestone_id']
+        })
         .then(dbNoteData => res.json(dbNoteData))
         .catch(err => {
             console.log(err);
@@ -21,6 +23,27 @@ router.post('/', (req, res) => {
             console.log(err);
             res.status(400).json(err);
         });
+});
+
+router.put('/:id', (req, res) => {
+    if (req.session) {
+        Note.update(req.body, {
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(dbNoteData => {
+                if (!dbNoteData[0]) {
+                    res.status(404).json({ message: 'Note not found' });
+                    return;
+                }
+                res.json(dbNoteData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    }
 });
 
 router.delete('/:id', (req, res) => {
