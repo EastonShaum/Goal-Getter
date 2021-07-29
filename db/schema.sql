@@ -6,10 +6,19 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(15) NOT NULL,
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(15) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL
+    team_id INTEGER,
+    password VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_team FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE
+);
+
+CREATE TABLE team (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    motto VARCHAR(100)
 );
 
 CREATE TABLE tags (
@@ -25,9 +34,11 @@ CREATE TABLE goals (
     is_public BOOLEAN NOT NULL,
     tag_id INTEGER,
     user_id INTEGER,
+    team_id INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_tags FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE SET NULL,
-    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_team FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE
 );
 
 CREATE TABLE milestones (
