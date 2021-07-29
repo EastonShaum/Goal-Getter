@@ -54,6 +54,8 @@ CREATE TABLE milestones (
     CONSTRAINT fk_msuser FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+
+
 CREATE TABLE notes (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     text VARCHAR(50) NOT NULL,
