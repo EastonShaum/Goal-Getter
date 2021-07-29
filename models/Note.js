@@ -16,11 +16,19 @@ Note.init({
     },
     goal_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'goal',
+            key: 'id'
+        }
     },
     milestone_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'milestone',
+            key: 'id'
+        }
     }
 }, {
     sequelize,

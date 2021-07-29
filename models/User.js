@@ -46,6 +46,14 @@ User.init({
             len: [4]
         }
     },
+    team_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'team',
+            key: 'id'
+        }
+    }
 }, {
     hooks: {
         async beforeCreate(newUserData) {

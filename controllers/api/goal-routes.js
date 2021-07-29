@@ -5,7 +5,7 @@ router.get('/', (req, res) => {
     Goal.findAll({
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at']
         })
-        .then(dbGoalData => res.json(dbTagData))
+        .then(dbGoalData => res.json(dbGoalData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);

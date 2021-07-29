@@ -16,7 +16,7 @@ Goal.init({
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     due_date: {
         type: DataTypes.STRING,
@@ -28,11 +28,27 @@ Goal.init({
     },
     tag_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        references: {
+            model: 'tag',
+            key: 'id'
+        }
     },
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: false,
+        references: {
+            model: 'user',
+            key: 'id'
+        }
+    },
+    team_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'team',
+            key: 'id'
+        }
     }
 }, {
     sequelize,
