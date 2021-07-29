@@ -18,6 +18,10 @@
     justify-content: start;
 }
 
+.fill-remaining{
+    flex-grow: 1;
+}
+
 footer {
     background-color: #F0F0F0;
 }
