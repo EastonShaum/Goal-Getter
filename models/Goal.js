@@ -26,14 +26,6 @@ Goal.init({
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    tag_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'tag',
-            key: 'id'
-        }
-    },
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

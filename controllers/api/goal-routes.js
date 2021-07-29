@@ -16,7 +16,13 @@ router.get('/:id', (req, res) => {
     Goal.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
         })
         .then(dbGoalData => {
             if (!dbGoalData) {
