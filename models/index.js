@@ -8,10 +8,10 @@ const Milestone = require('./Milestone');
 const Note = require('./Note');
 
 // associations
-User.hasMany(Goal, {as: 'goals'});
+User.hasMany(Goal, { as: 'goals' });
 Goal.belongsTo(User);
 
-Goal.hasMany(Milestone, {as: 'milestones'});
+Goal.hasMany(Milestone, { as: 'milestones' });
 Milestone.belongsTo(Goal);
 
 Goal.belongsToMany(Tag, {
@@ -35,45 +35,5 @@ Team.belongsToMany(User, {
     as: 'users',
     foreignKey: 'team_id'
 });
-
-//User.belongsToMany(Milestone, {
-    //foreignKey: 'user_id'
-//});
-
-//User.belongsToMany(Goal, {
-    //through: Team,
-    //as: 'team_goals',
-    //foreignKey: 'user_id'
-//});
-
-//User.belongsToMany(Team, {
-    //through: Milestone,
-    //as: 'goal_milestones',
-    //foreignKey: 'user_id'
-//});
-
-// Team.belongsToMany(User, {
-//     foreignKey: 'team_id'
-// });
-
-// Team.belongsToMany(Goal, {
-//     foreignKey: 'team_id'
-// });
-
-// Goal.belongsTo(Team, {
-//     foreignKey: 'team_id'
-// });
-
-// Goal.belongsToMany(Milestone, {
-//     foreignKey: 'goal_id'
-// });
-
-// Milestone.belongsTo(User, {
-//     foreignKey: 'milestone_id'
-// });
-
-// Milestone.belongsTo(Goal, {
-//     foreignKey: 'mile'
-// });
 
 module.exports = { Tag, Team, User, Userteam, Goal, Goaltag, Milestone, Note };
