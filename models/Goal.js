@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const tomorrowsDate = require('../utils/nextDay.js')
 
 class Goal extends Model {}
 
@@ -20,7 +21,10 @@ Goal.init({
     },
     due_date: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        validate: {
+            isAfter: tomorrowsDate()
+        }
     },
     is_public: {
         type: DataTypes.BOOLEAN,
