@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Team, User, Milestone, Tag, Goal, Goaltag, Note } = require('../../models');
+const { Tag, Team, User, Userteam, Goal, Goaltag, Milestone, Note } = require('../../models');
 
 router.get('/', (req, res) => {
     Goal.findAll({
