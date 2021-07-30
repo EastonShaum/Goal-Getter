@@ -16,11 +16,11 @@ router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
     }
-    res.render('login');
+    res.render('login', { layout: "blank" });
 });
 
 router.get('/signup', (req, res) => {
-    res.render('signup')
+    res.render('signup', { layout: "blank" })
         // .catch(err => {
         //     console.log(err);
         //     res.status(500).json(err);
