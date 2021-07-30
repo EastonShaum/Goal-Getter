@@ -1,23 +1,16 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const webpack = require("webpack")
-
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 module.exports = {
     mode: "production",
     entry: {
         customBootstrap: "./src/app.js",
+        getStarted: "./src/getStarted.js",
+        helpers: "./src/helpers.js",
     },
     output: {
         filename: '[name]',
         path: path.resolve(__dirname, 'public/assets/css')
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: "[name].css"
-        })
-    ],
-    devServer: {
-        contentBase: path.join(__dirname, "public"),
     },
     module: {
         rules: [
@@ -40,5 +33,11 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].css"
+        }),
+        new CleanWebpackPlugin()
+    ]
 };

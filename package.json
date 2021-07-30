@@ -39,10 +39,13 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.3.1",
+        "clean-webpack-plugin": "^4.0.0-alpha.0",
         "css-loader": "^6.2.0",
         "exports-loader": "^3.0.0",
+        "install": "^0.13.0",
         "mini-css-extract-plugin": "^2.1.0",
         "node-sass": "^6.0.1",
+        "npm": "^7.20.3",
         "postcss-loader": "^6.1.1",
         "sass-loader": "^12.1.0",
         "style-loader": "^3.2.1",
