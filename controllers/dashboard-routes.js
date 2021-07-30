@@ -3,37 +3,38 @@ const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag } = require('../models');
 
 router.get('/', (req, res) => {
-    Goal.findAll({
-            where: {
-                user_id: req.session.user_id
-            },
-            attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at'],
-            include: [{
-                    model: Team,
-                    attributes: ['id', 'name', 'motto'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                {
-                    model: Milestone,
-                    attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                }
-            ]
-        })
-        .then(dbGoalData => {
-            const goals = dbGoalData.map(goal => goal.get({ plain: true }));
-            res.render('dashboard', { goals, loggedIn: true });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    res.render('dashboard')
+    // Goal.findAll({
+    //         where: {
+    //             user_id: req.session.user_id
+    //         },
+    //         attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at'],
+    //         include: [{
+    //                 model: Team,
+    //                 attributes: ['id', 'name', 'motto'],
+    //                 include: {
+    //                     model: User,
+    //                     attributes: ['username']
+    //                 }
+    //             },
+    //             {
+    //                 model: Milestone,
+    //                 attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
+    //                 include: {
+    //                     model: User,
+    //                     attributes: ['username']
+    //                 }
+    //             }
+    //         ]
+    //     })
+    //     .then(dbGoalData => {
+    //         const goals = dbGoalData.map(goal => goal.get({ plain: true }));
+    //         res.render('dashboard', { goals, loggedIn: true });
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         res.status(500).json(err);
+    //     });
 });
 
 router.get('/', (req, res) => {
