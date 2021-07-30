@@ -1,7 +1,13 @@
+ 
 .link-unstyled, .link-unstyled:link, .link-unstyled:hover {
     color: inherit;
     text-decoration: inherit;
-  }
+}
+
+.ling-underline, .ling-underline:link, .ling-underline:hover {
+    color: inherit;
+    text-decoration: underline;
+}
 
 .control {
       height: 100%;

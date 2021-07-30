@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Goal Getter</title>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/customBootstrap.css">
+  <link rel="stylesheet" href="/assets/css/helpers.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body class="bg-light control">
@@ -18,10 +20,13 @@
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
           <div class="d-flex">
+          {{#if loggedIn}}
+            <button class="btn btn-dark me-2 fw-bold text-light" type="button" onclick="location.href='/'">Logout</button>
+          {{else}}
             <button class="btn btn-dark me-2 fw-bold text-light" type="button" onclick="location.href='/signup'">Signup</button>
             <button class="btn btn-light fw-bold" type="button" onclick="location.href='/login'">Login</button>
+          {{/if}}
           </div>
       </div>
     </nav>
@@ -59,4 +64,4 @@
     </div>
   </footer>
 </body>
-<script src="/assets/js/bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
