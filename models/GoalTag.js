@@ -1,44 +1,26 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Milestone extends Model {}
+class Goaltag extends Model {}
 
-Milestone.init({
+Goaltag.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    description: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    due_date: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    is_public: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
     goal_id: {
         type: DataTypes.INTEGER,
-        allowNull: true,
         references: {
             model: 'goal',
             key: 'id'
         }
     },
-    user_id: {
+    tag_id: {
         type: DataTypes.INTEGER,
-        allowNull: true,
         references: {
-            model: 'user',
+            model: 'tag',
             key: 'id'
         }
     }
@@ -46,7 +28,7 @@ Milestone.init({
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'milestone'
-})
+    modelName: 'goaltag'
+});
 
-module.exports = Milestone;
+module.exports = Goaltag;

@@ -3,14 +3,14 @@ DROP TABLE IF EXISTS milestones;
 DROP TABLE IF EXISTS goals;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS team;
+DROP TABLE IF EXISTS teams;
 
 CREATE TABLE tags (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE team (
+CREATE TABLE teams (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
     motto VARCHAR(100)
@@ -18,13 +18,13 @@ CREATE TABLE team (
 
 CREATE TABLE users (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(15) NOT NULL,
+    username VARCHAR(20) NOT NULL,
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(15) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    team_id INTEGER,
     password VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_team FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE
+    team_id INTEGER,
+    CONSTRAINT fk_team FOREIGN KEY (team_id) REFERENCES teams(id)
 );
 
 CREATE TABLE goals (
@@ -37,9 +37,9 @@ CREATE TABLE goals (
     user_id INTEGER,
     team_id INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_tags FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE SET NULL,
+    CONSTRAINT fk_tags FOREIGN KEY (tag_id) REFERENCES tags(id),
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT fk_nteam FOREIGN KEY (team_id) REFERENCES team(id) ON DELETE CASCADE
+    CONSTRAINT fk_nteam FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE
 );
 
 CREATE TABLE milestones (

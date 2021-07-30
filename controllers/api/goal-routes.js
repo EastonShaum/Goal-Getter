@@ -1,11 +1,23 @@
 const router = require('express').Router();
-const { Team, User, Milestone, Tag, Goal } = require('../../models');
+const { Team, User, Milestone, Tag, Goal, Goaltag, Note } = require('../../models');
 
 router.get('/', (req, res) => {
     Goal.findAll({
-            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at']
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'created_at'],
+            include: [
+                {
+                    model: User,
+                    attributes: ['username', 'first_name', 'last_name']
+                },
+                {
+                    model: Tag,
+                    attributes: ['name'],
+                    through: Goaltag,
+                    as: 'tags'
+                }
+            ]
         })
-        .then(dbGoalData => res.json(dbTagData))
+        .then(dbGoalData => res.json(dbGoalData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -16,7 +28,34 @@ router.get('/:id', (req, res) => {
     Goal.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                },
+                {
+                    model: Tag,
+                    attributes: ['name'],
+                    through: Goaltag,
+                    as: 'tags'
+                },
+                {
+                    model: Milestone,
+                    attributes: ['title', 'description', 'due_date'],
+                    as: 'milestones',
+                    include: [
+                        {
+                            model: Note,
+                            attributes:['text']
+                        }
+                    ]
+                },
+                {
+                    model: Note,
+                    attributes: ['text']
+                }
+            ]
         })
         .then(dbGoalData => {
             if (!dbGoalData) {

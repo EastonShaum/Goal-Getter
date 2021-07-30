@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Milestone } = require('../../models');
+const { Milestone, Goal, User, Team } = require('../../models');
 
 router.get('/', (req, res) => {
     Milestone.findAll()
@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
             },
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'user_id', 'created_at'],
                 },
                 {
                     model: User,

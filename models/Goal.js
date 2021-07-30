@@ -16,7 +16,7 @@ Goal.init({
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     due_date: {
         type: DataTypes.STRING,
@@ -26,14 +26,14 @@ Goal.init({
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    tag_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
-    }
+        allowNull: false,
+        references: {
+            model: 'user',
+            key: 'id'
+        }
+    },
 }, {
     sequelize,
     freezeTableName: true,

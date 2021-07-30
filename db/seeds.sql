@@ -1,13 +1,19 @@
-INSERT INTO users (first_name, last_name, email, password)
+INSERT INTO teams (name, motto)
 VALUES
-  ('James', 'Fraser', 'jf@goldenbough.edu', '12345'),
-  ('Jack', 'London', 'jlondon@ualaska.edu', '12345'),
-  ('Robert', 'Bruce', 'rbruce@scotland.net', '12345'),
-  ('Peter', 'Greenaway', 'pgreenaway@postmodern.com', '12345'),
-  ('Derek', 'Jarman', 'djarman@prospectcottage.net', '12345'),
-  ('Paolo', 'Pasolini', 'ppasolini@salo.com', '12345'),
-  ('Heathcote', 'Williams', 'hwilliams@bafta.com', '12345'),
-  ('Sandy', 'Powell', 'spowell@oscars.com', '12345');
+  ('Fitness Gurus', 'Healthy body healthy life'),
+  ('Finance Masters', 'Work, save, invest'),
+  ('Self-care Professionals', 'Mindfulness will bring happiness');
+
+INSERT INTO users (username, first_name, last_name, email, password, team_id)
+VALUES
+  ('jamie_fraser', 'James', 'Fraser', 'jf@goldenbough.edu', '12345', 1),
+  ('jack_london', 'Jack', 'London', 'jlondon@ualaska.edu', '12345', 2),
+  ('robert_bruce', 'Robert', 'Bruce', 'rbruce@scotland.net', '12345', 3),
+  ('peter_greenaway', 'Peter', 'Greenaway', 'pgreenaway@postmodern.com', '12345', null),
+  ('derek_jarman', 'Derek', 'Jarman', 'djarman@prospectcottage.net', '12345', null),
+  ('paolo_pasolini', 'Paolo', 'Pasolini', 'ppasolini@salo.com', '12345', null),
+  ('heathcote_williams', 'Heathcote', 'Williams', 'hwilliams@bafta.com', '12345', null),
+  ('sandy_powell', 'Sandy', 'Powell', 'spowell@oscars.com', '12345', null);
 
   INSERT INTO tags (name)
   VALUES
@@ -18,10 +24,10 @@ VALUES
   ('Diet'),
   ('Career');
 
-  INSERT INTO goals (title, description, due_date, is_public, tag_id, user_id)
+  INSERT INTO goals (title, description, due_date, is_public, tag_id, user_id, team_id)
   VALUES
-  ('Get fit', 'Exercize four days a week for a year', '7/27/2022', 1, 1, 1),
-  ('Save money', 'save $200 a month for a year', '7/27/2022', 1, 2, 2);
+  ('Get fit', 'Exercize four days a week for a year', '7/27/2022', 1, 1, 1, 1),
+  ('Save money', 'save $200 a month for a year', '7/27/2022', 1, 2, 2, 2);
 
   INSERT INTO milestones (title, description, due_date, is_public, goal_id, user_id)
   VALUES
