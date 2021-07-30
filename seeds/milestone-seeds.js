@@ -7,7 +7,6 @@ const milestoneData = [
         due_date: '1/27/2022',
         is_public: true,
         goal_id: 1,
-        user_id: 1,
     },
     {
         title: 'saved $1,000',
@@ -15,7 +14,6 @@ const milestoneData = [
         due_date: '12/27/2021',
         is_public: true,
         goal_id: 2,
-        user_id: 2,
     },
 ];
 

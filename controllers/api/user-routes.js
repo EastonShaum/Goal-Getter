@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Team, Milestone, Goal, Tag } = require('../../models');
+const { User, Team, Milestone, Goal, Tag, Userteam } = require('../../models');
 
 // Get all users
 router.get('/', (req, res) => {
@@ -20,21 +20,29 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
-            include: [{
+            include: [
+                {
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'created_at'],
+                    as: 'goals',
                     include: {
                         model: Milestone,
-                        attributes: ['title', 'description', 'due_date', 'is_publlic', 'goal_id', 'user_id']
+                        attributes: ['title', 'description', 'due_date', 'is_public'],
+                        as: 'milestones'
                     }
                 },
                 {
                     model: Team,
-                    attributes: [''],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
+                    attributes: ['name', 'motto'],
+                    through: Userteam,
+                    as: 'teams',
+                    include: [
+                        {
+                            model: User,
+                            attributes:['first_name', 'last_name'],
+                            as: 'users'
+                        }
+                    ]
                 }
             ]
         })

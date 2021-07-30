@@ -1,44 +1,34 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Goal extends Model {}
+class Userteam extends Model {}
 
-Goal.init({
+Userteam.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    description: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    due_date: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    is_public: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
             model: 'user',
             key: 'id'
         }
     },
+    team_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'team',
+            key: 'id'
+        }
+    }
 }, {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'goal'
+    modelName: 'userteam'
 });
 
-module.exports = Goal;
+module.exports = Userteam;

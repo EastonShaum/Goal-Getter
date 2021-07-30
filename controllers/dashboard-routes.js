@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag } = require('../models');
 
 router.get('/', (req, res) => {
-    Goal.finaAll({
+    Goal.findAll({
             where: {
                 user_id: req.session.user_id
             },
@@ -57,7 +57,7 @@ router.get('/', (req, res) => {
             ]
         })
         .then(dbMilestoneData => {
-            const miltestones = dbMilestoneData.map(goal => goal.get({ plain: true }));
+            const milestones = dbMilestoneData.map(goal => goal.get({ plain: true }));
             res.render('dashboard', { milestones, loggedIn: true });
         })
         .catch(err => {
