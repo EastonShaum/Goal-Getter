@@ -4,11 +4,11 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "webpack serve --open",
-        "server": "node server.js",
+        "start": "node server.js",
         "test": "jest",
         "build": "webpack",
-        "seed": "node seeds/index.js"
+        "seed": "node seeds/index.js",
+        "prestart": "npm run build"
     },
     "repository": {
         "type": "git",
