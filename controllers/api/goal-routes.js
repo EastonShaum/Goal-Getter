@@ -4,8 +4,7 @@ const { Team, User, Milestone, Tag, Goal, Goaltag, Note } = require('../../model
 router.get('/', (req, res) => {
     Goal.findAll({
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'created_at'],
-            include: [
-                {
+            include: [{
                     model: User,
                     attributes: ['username', 'first_name', 'last_name']
                 },
@@ -29,8 +28,7 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
-            include: [
-                {
+            include: [{
                     model: User,
                     attributes: ['username']
                 },
@@ -44,12 +42,10 @@ router.get('/:id', (req, res) => {
                     model: Milestone,
                     attributes: ['title', 'description', 'due_date'],
                     as: 'milestones',
-                    include: [
-                        {
-                            model: Note,
-                            attributes:['text']
-                        }
-                    ]
+                    include: [{
+                        model: Note,
+                        attributes: ['text']
+                    }]
                 },
                 {
                     model: Note,

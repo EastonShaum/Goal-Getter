@@ -1,9 +1,9 @@
 async function newNoteHandler(event) {
     event.preventDefault();
 
-    const text = document.querySelector('input[name=note-text]').value;
-    const milestoneId = document.querySelector('input[name=milestone-title]').value;
-    const goalId = document.querySelector('input[name=goal-title]').vlaue;
+    const text = document.querySelector('input[name="note-text"]').value.trim();
+    const milestoneId = document.querySelector('input[name="milestone-title"]').value.trim();
+    const goalId = document.querySelector('input[name="goal-title"]').vlaue.trim();
 
     const response = await fetch('/api/notes', {
         method: 'POST',
@@ -45,7 +45,7 @@ async function deleteNoteHandler(event) {
 async function editNoteHandler(event) {
     event.preventDefault();
 
-    const text = document.querySelector('input[name=note-text]').value;
+    const text = document.querySelector('input[name="note-text"]').value.trim();
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
