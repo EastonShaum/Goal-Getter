@@ -3,7 +3,7 @@ async function loginFormHandler(event) {
 
     const username = $('#username-input').val().trim();
     const password = $('#password-input').val().trim();
-    console.log(username, password)
+
     if (username && password) {
         const response = await fetch('/api/users/login', {
             method: 'post',
