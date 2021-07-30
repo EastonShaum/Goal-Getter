@@ -19,10 +19,13 @@
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
           <div class="d-flex">
+          {{#if loggedIn}}
+            <button class="btn btn-dark me-2 fw-bold text-light" type="button" onclick="location.href='/'">Logout</button>
+          {{else}}
             <button class="btn btn-dark me-2 fw-bold text-light" type="button" onclick="location.href='/signup'">Signup</button>
             <button class="btn btn-light fw-bold" type="button" onclick="location.href='/login'">Login</button>
+          {{/if}}
           </div>
       </div>
     </nav>
