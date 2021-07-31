@@ -124,6 +124,7 @@ router.post('/login', (req, res) => {
             }
         })
         .then(dbUserData => {
+
             if (!dbUserData) {
                 res.status(404).json({ message: 'User not found' });
                 return;
