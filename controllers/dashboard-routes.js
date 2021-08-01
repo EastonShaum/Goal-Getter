@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
 router.get("/goal/:id", (req, res) => {
     Goal.findOne({
         where: {
-            user_id: req.session.user_id,
+            user_id: 1,
             id: req.params.id
         },
         attributes: [
@@ -60,20 +60,22 @@ router.get("/goal/:id", (req, res) => {
         ],
         include: [
             {
-                model: Milestone
+                model: Milestone,
+                // as: "milestone"
             }
         ],
         plain: true
     })
     .then(data => {
-        console.log(data)
+        const goalData = data.get({ plain: true })
+        console.log(goalData)
         if(!data){
             res.status(404).json({ message: "No goals found with provided id"});
             return;
         }
-        res.render("dashboard/single-goal", { 
+        res.render("dashboard-pages/single-goal", { 
             layout: "dashboard",
-            data
+            goalData
         })
     })
     .catch(err => {

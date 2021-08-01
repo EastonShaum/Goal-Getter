@@ -1,15 +1,13 @@
-<article class="col-lg-4 col-md-6 col-sm-12">
+<article class="col">
         <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <div class="d-flex align-items-center text-elipsis">
-                    {{!-- <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{title}}">{{title}}&nbsp;</h4> --}}
-                    <h5 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Milestone Title">Milestone Title&nbsp;</h5>
-                    {{!-- <span class="fw-bold fs-6 text-success mt-1"> - {{due_date}}&nbsp;</span> --}}
-                    <span class="fw-bold fs-6 text-success mt-1 text-nowrap"> - 8/30/2021&nbsp;</span>
+                    <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{title}}">{{title}}&nbsp;</h4>
+                    <span class="fw-bold fs-6 text-success mt-1"> - {{due_date}}&nbsp;</span>
                 </div>
                 <div class="dropdown">
-                    <button class="btn btn-secondary py-0 dropdown-toggle" type="button" id="milestone-{{id}}-status" data-bs-toggle="dropdown" aria-expanded="false">Status</button>
+                    <button class="btn btn-secondary py-0 dropdown-toggle" type="button" id="milestone-{{id}}-status" data-bs-toggle="dropdown" aria-expanded="false">{{status}}</button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="milestone-{{id}}-status">
                         <li class="dropdown-item selected">To Do</li>
                         <li class="dropdown-item">In Progress</li>
@@ -19,7 +17,6 @@
                     </ul>
                 </div>
             </div>
-            {{!-- <h5>{{current_milestone}}</h5> --}}
             <div class="row">
                 <div class="col-3 my-auto">
                     <div class="d-flex justify-content-around">
@@ -27,8 +24,8 @@
                     </div>
                 </div>
                 <p class="col-9 my-auto">
-                    {{!-- {{description}} --}}
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem aut vel itaque perspiciatis dicta?
+                    {{description}}
+                    {{!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem aut vel itaque perspiciatis dicta? --}}
                 </p>
             </div>
         </div>

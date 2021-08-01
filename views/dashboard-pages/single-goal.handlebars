@@ -1,33 +1,35 @@
-<div class="row g-4">
-    <h3 class="text-primary">{{title}}</h3>
+<div class="container mx-auto row g-4">
+    <h3 class="text-primary">{{goalData.title}}</h3>
     <hr class="m-1">
-    <section class="col-lg-4 ">
+    <section class="col-lg-6 ">
         <h4 class="text-primary">Information</h4>
-        <p class="fw-bold">Started: <span id="start-date">{{created_at}}</span></p>
-        <p class="ml-2"><span id="from-created-date">X&nbsp;</span> Days Ago</p>
-        <p class="fw-bold">Accomplish Date: <span id="due-date">{{due_date}}</span></p>
-        <p class="ml-2"><span id="to-due-date">X&nbsp;</span> Days Away</p>
+        <p class="fw-bold">Started: <span id="start-date">{{goalData.created_at}}</span></p>
+        <p class="ml-2"><span id="from-created-date">{{goalData.created_at}}</span> Days Ago</p>
+        <p class="fw-bold">Accomplish Date: <span id="due-date">{{goalData.due_date}}</span></p>
+        <p class="ml-2"><span id="to-due-date">{{goalData.due_date}}</span> Days Away</p>
         <h4 class="text-primary">Description</h4>
-        <p>{{description}}</p>
+        <p>{{goalData.description}}</p>
         <h4 class="text-primary">Notes</h4>
         {{!-- Create add new note section ??Dropdown/collapse form??--}}
-        {{#each notes as |note|}}
+        {{#each goalData.notes as |note|}}
         <p>{{note.text}}</p>
         <p class="fw-light text-darkest-light">Posted: {{note.created_at}}</p>
         <hr class="my-0 mx-3">
         {{/each}}
     </section>
-    <section class="col-lg-8">
-        <div class="d-flex align-items-center">
+    <section class="col-lg-6">
+        <div class="d-flex align-items-center mb-3">
             <h4 class="text-primary m-0">Milestones&nbsp;</h4>
-            <span class="fw-bold fs-6 text-success mt-1 text-nowrap">- X/X Milestones Completed</span>
+            <span class="fw-bold fs-6 text-darkest-light mt-1 text-nowrap">- {{goalData.complete_milestones}}/{{goalData.total_milestones}} Milestones Completed</span>
         </div>
         <div class="progress">
             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25"
                 aria-valuemin="0" aria-valuemax="100">25%</div>
         </div>
-        {{#each milestones as |milestone|}}
-        {{> milestoneCard milestone}}
-        {{/each}}
+        <div class="row g-4 mt-2">
+            {{#each goalData.milestones as |milestone|}}
+            {{> milestoneCard milestone}}
+            {{/each}}
+        </div>
     </section>
 </div>
