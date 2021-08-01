@@ -38,6 +38,50 @@ router.get('/', (req, res) => {
     //     });
 });
 
+// GET SINGLE GOAL AND MILESTONES
+router.get("/goal/:id", (req, res) => {
+    Goal.findOne({
+        where: {
+            user_id: req.session.user_id,
+            id: req.params.id
+        },
+        attributes: [
+            "id",
+            "created_at",
+            "updated_at",
+            "title",
+            "description",
+            "due_date",
+            "is_public",
+            "user_id",
+            "completed",
+            [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.goal_id = goal.id)"), "total_milestones"],
+            [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Completed' AND milestone.goal_id = goal.id)"), "complete_milestones"],
+        ],
+        include: [
+            {
+                model: Milestone
+            }
+        ],
+        plain: true
+    })
+    .then(data => {
+        console.log(data)
+        if(!data){
+            res.status(404).json({ message: "No goals found with provided id"});
+            return;
+        }
+        res.render("dashboard/single-goal", { 
+            layout: "dashboard",
+            data
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err)
+    })
+})
+
 router.get('/', withAuth, (req, res) => {
     Milestone.findAll({
             where: {

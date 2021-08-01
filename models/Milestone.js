@@ -45,6 +45,14 @@ Milestone.init({
             model: 'user',
             key: 'id'
         }
+    },
+    status: {
+        type: DataTypes.STRING(20),
+        allowNull: false, 
+        defaultValue: "To Do", // To Do, In Progress, Completed
+        validate: {
+            isIn: [["To Do", "In Progress", "Completed"]]
+        }
     }
 }, {
     sequelize,

@@ -38,6 +38,11 @@ Goal.init({
             key: 'id'
         }
     },
+    completed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+    }
 }, {
     sequelize,
     freezeTableName: true,
