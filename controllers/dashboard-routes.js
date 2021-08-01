@@ -4,7 +4,7 @@ const { User, Team, Milestone, Goal, Tag } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
-    res.render('dashboard')
+    res.render('dashboard-pages/myGoals', { layout: "dashboard" })
     // Goal.findAll({
     //         where: {
     //             user_id: req.session.user_id
