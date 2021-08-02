@@ -5,8 +5,7 @@ async function signupFormHandler(event) {
     const email = $('#email-input').val().trim();
     const password = $('#password-input').val().trim();
     const username = $('#username-input').val().trim();
-    console.log(username, password)
-    if (username && password) {
+    if (first_name && last_name && email && password && username) {
         const response = await fetch('/api/users', {
             method: 'post',
             body: JSON.stringify({
@@ -20,11 +19,27 @@ async function signupFormHandler(event) {
         });
 
         if (response.ok) {
-            console.log("account created")
+            alert('account created');
             document.location.replace('/dashboard');
         } else {
-            alert(response.statusText);
+            response.json().then(function(data) {
+                console.log(data);
+                switch (data[0].path) {
+                    case 'password':
+                        alert ('Password validation failed');
+                        break;
+                    case 'username':
+                        alert ('Username too short');
+                        break;
+                    case 'email':
+                        alert ('Not a valid email address');
+                        break;
+                }
+            });
         }
+    } else {
+        alert('Please fill out all text fields before continuing.');
+        return;
     }
 }
 
@@ -33,7 +48,6 @@ async function loginFormHandler(event) {
 
     const username = $('#username-input').val().trim();
     const password = $('#password-input').val().trim();
-    console.log(username, password)
     if (username && password) {
         const response = await fetch('/api/users/login', {
             method: 'post',
@@ -47,10 +61,44 @@ async function loginFormHandler(event) {
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            alert(response.statusText);
+            if (response.status === 404)
+            alert('Invalid username or password');
         }
+    }
+}
+
+async function passwordChecker() {
+    let password = $('#password-input').val().trim();
+
+    const response = await fetch('/api/users/password', {
+        method: 'post',
+        body: JSON.stringify({
+            password
+        }),
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if(response.ok) {
+        response.json().then(function(data) {
+            if (data.value === 'Invalid') {
+                $('#password-strength').removeClass();
+                $('#password-strength').html('Password Strength: Invalid').addClass('mt-1 mb-0 text-danger');
+            } else if (data.value === 'Weak') {
+                $('#password-strength').removeClass();
+                $('#password-strength').html('Password Strength: Weak').addClass('mt-1 mb-0 text-warning');
+            } else if (data.value === 'Good') {
+                $('#password-strength').removeClass();
+                $('#password-strength').html('Password Strength: Good').addClass('mt-1 mb-0 text-secondary');
+            } else {
+                $('#password-strength').removeClass();
+                $('#password-strength').html('Password Strength: Strong ✓').addClass('mt-1 mb-0 text-success');
+            }
+        });
+    } else {
+        return;
     }
 }
 
 $('#login-form').on('submit', loginFormHandler);
 $('#signup-form').on('submit', signupFormHandler);
+$('#password-input').on('change', passwordChecker);
