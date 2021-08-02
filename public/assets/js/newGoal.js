@@ -28,10 +28,10 @@ async function addGoalHandler(event) {
     event.preventDefault();
 
     const title = $('#goal-title-input').val();
-    const description = $('#due-date-input').val();
+    const description = $('#goal-description-input').val();
 
     // can use the jquery datepicker function to turn a modal into a calendar
-    const due_date = dueDate
+    const due_date = $('#due-date-input').val();
 
     // Use a radio button for this so that a boolean value can be used
     const is_public = $('#public-goal-checkbox').val();

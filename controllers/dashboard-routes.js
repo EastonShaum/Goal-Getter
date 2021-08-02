@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
     Goal.findAll({
             where: {
                 user_id: req.session.user_id
+                // user_id: 1
             },
             attributes: [
                 'title',
