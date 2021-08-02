@@ -47,7 +47,8 @@ async function loginFormHandler(event) {
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            alert(response.statusText);
+            if (response.status === 404)
+            alert('Invalid username or password');
         }
     }
 }
