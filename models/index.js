@@ -38,5 +38,9 @@ Team.belongsToMany(User, {
     // as: 'users',
     foreignKey: 'team_id'
 });
+Goal.belongsTo(Team, {
+    through: Userteam,
+    foreignKey: "user_id"
+})
 
 module.exports = { Tag, Team, User, Userteam, Goal, Goaltag, Milestone, Note };

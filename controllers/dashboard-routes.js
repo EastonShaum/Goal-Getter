@@ -4,38 +4,45 @@ const { User, Team, Milestone, Goal, Tag } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
-    res.render('dashboard-pages/myGoals', { layout: "dashboard" })
-    // Goal.findAll({
-    //         where: {
-    //             user_id: req.session.user_id
-    //         },
-    //         attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at'],
-    //         include: [{
-    //                 model: Team,
-    //                 attributes: ['id', 'name', 'motto'],
-    //                 include: {
-    //                     model: User,
-    //                     attributes: ['username']
-    //                 }
-    //             },
-    //             {
-    //                 model: Milestone,
-    //                 attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
-    //                 include: {
-    //                     model: User,
-    //                     attributes: ['username']
-    //                 }
-    //             }
-    //         ]
-    //     })
-    //     .then(dbGoalData => {
-    //         const goals = dbGoalData.map(goal => goal.get({ plain: true }));
-    //         res.render('dashboard', { goals, loggedIn: true });
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         res.status(500).json(err);
-    //     });
+    Goal.findAll({
+            where: {
+                user_id: 1
+                // user_id: req.session.user_id
+            },
+            attributes: [
+                'title',
+                'description', 
+                'due_date', 
+                'is_public', 
+                'user_id',  
+                'created_at', 
+                [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.goal_id = goal.id)"), "total_milestones"],
+                [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Completed' AND milestone.goal_id = goal.id)"), "complete_milestones"],
+            ],
+            include: [
+                {
+                    model: Team,
+                    attributes: ['id', 'name', 'motto'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                },
+                {
+                    model: Milestone,
+                    order: ["due_date", "DESC"]
+                }
+            ]
+        })
+        .then(dbGoalData => {
+            const goals = dbGoalData.map(goal => goal.get({ plain: true }));
+            console.log(goals[0])
+            res.render('dashboard-pages/myGoals', { layout: "dashboard", goals, loggedIn: true })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 // GET SINGLE GOAL AND MILESTONES
@@ -61,7 +68,6 @@ router.get("/goal/:id", (req, res) => {
         include: [
             {
                 model: Milestone,
-                // as: "milestone"
             }
         ],
         plain: true

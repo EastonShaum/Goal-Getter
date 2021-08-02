@@ -46,7 +46,7 @@ User.init({
         validate: {
             len: [4]
         }
-    },
+    }
 }, {
     hooks: {
         async beforeCreate(newUserData) {
