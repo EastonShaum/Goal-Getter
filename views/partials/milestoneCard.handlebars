@@ -4,7 +4,7 @@
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <div class="d-flex align-items-center text-elipsis">
                     <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{title}}">{{title}}&nbsp;</h4>
-                    <span class="fw-bold fs-6 text-success mt-1"> - {{due_date}}&nbsp;</span>
+                    <span class="fw-bold fs-6 text-success mt-1" id="due-date"> - {{due_date}}&nbsp;</span>
                 </div>
                 <div class="dropdown">
                     <button class="btn btn-secondary py-0 dropdown-toggle" type="button" id="milestone-{{id}}-status" data-bs-toggle="dropdown" aria-expanded="false">{{status}}</button>
@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-3 my-auto">
                     <div class="d-flex justify-content-around">
-                        <i class="fas fa-medal fa-4x text-primary"></i>
+                        <i class="fas fa-medal fa-4x text-primary" id="icon"></i>
                     </div>
                 </div>
                 <p class="col-9 my-auto">

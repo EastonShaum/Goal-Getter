@@ -3,7 +3,13 @@
     <hr class="m-1">
     {{#if goals}}
     {{#each goals as |goal|}}
+    {{#if goal.completed}}
+        {{>completedGoalCard goal}}
+        {{!-- {{>goalCard goal}} --}}
+    {{else}}
         {{>goalCard goal}}
+        {{!-- {{>completedGoalCard goal}}                 --}}
+    {{/if}}
     {{/each}}
     {{else}}
         <h5 class="text-darkest-light">Looks like your Goal board is empty! There is no better time to start a new goal than right now! <a href="/new-goal">Click here to get started!</a></h5>

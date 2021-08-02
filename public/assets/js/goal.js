@@ -10,6 +10,8 @@ async function addGoalHandler(event) {
     // Use a radio button for this so that a boolean value can be used
     const isPublic = document.querySelector('.goal-public-btn').value;
 
+    const isCompleted = document.querySelector('.goal-completed-btn').value;
+
     if (goalTitle && goalDesc && isPublic) {
         const response = await fetch('/api/goals', {
             method: 'POST',
@@ -18,7 +20,8 @@ async function addGoalHandler(event) {
                 goalDesc,
                 goalDuedate,
                 isPublic,
-                userId
+                userId,
+                isCompleted
             }),
             headers: { 'Content-Type': 'application/json' }
         });
@@ -43,6 +46,10 @@ async function editGoalHandler(event) {
     // Use a radio button for this so that a boolean value can be used
     const isPublic = document.querySelector('.goal-public-btn').value;
 
+    // Use a radio button for this so that a boolean value can be used
+    const isCompleted = document.querySelector('.goal-completed-btn').value;
+
+
 
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -55,7 +62,8 @@ async function editGoalHandler(event) {
                 goalTitle,
                 goalDesc,
                 goalDuedate,
-                isPublic
+                isPublic,
+                isCompleted
             }),
             headers: {
                 'Content-Type': 'appliation/json'
@@ -89,7 +97,7 @@ async function deleteGoalHandler(event) {
 }
 
 const triggerTip = (event) => {
-    console.log(event)
+    // console.log(event)
 }
 const disableTip = (event) => {
 

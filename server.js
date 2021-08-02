@@ -21,7 +21,28 @@ const sess = {
 
 app.use(session(sess));
 
-const hbs = exphbs.create();
+const hbs = exphbs.create({
+    helpers: {
+        checkGoalCompleted: function(goal) {
+            if (goal.completed === true) {
+                console.log(goal.completed);
+                return true;
+            }
+            console.log(goal.completed);
+            return false;
+        },
+        checkMilestoneStatus: function(milestone, options) {
+            switch (milestone.status) {
+                case "To Do":
+                    return ('<i class="fas fa-list-ul" id="icon"></i>');
+                case "In Progress":
+                    return ('<i class="fas fa-check text-success" id="icon"></i>');
+                case "Complete":
+                    return ('<i class="fas fa-medal fa-4x text-primary" id="icon"></i>');
+            }
+        }
+    }
+});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
