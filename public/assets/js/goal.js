@@ -1,36 +1,42 @@
 async function addGoalHandler(event) {
     event.preventDefault();
 
-    const goalTitle = document.querySelector('input[name="goal-form-title"]').value.trim();
-    const goalDesc = document.querySelector('input[name="goal-form-desc"]').value.trim();
+    const title = $('#goal-title-input').val;
+    const description = $('#due-date-input').val;
 
     // can use the jquery datepicker function to turn a modal into a calendar
-    const goalDuedate = document.querySelector('input[name="goal-due_date-form"]').value.trim();
+    const due_date = $('input[name="goal-due_date-form"]').val;
 
     // Use a radio button for this so that a boolean value can be used
-    const isPublic = document.querySelector('.goal-public-btn').value;
+    const is_public = $('public-goal').val;
 
-    const isCompleted = document.querySelector('.goal-completed-btn').value;
+    const user_id = $("new-goal-form").attr("user-id").val;
 
-    if (goalTitle && goalDesc && isPublic) {
-        const response = await fetch('/api/goals', {
-            method: 'POST',
-            body: JSON.stringify({
-                goalTitle,
-                goalDesc,
-                goalDuedate,
-                isPublic,
-                userId,
-                isCompleted
-            }),
-            headers: { 'Content-Type': 'application/json' }
-        });
+    if (title && description && is_public) {
+        console.log({
+                title,
+                description,
+                due_date,
+                is_public,
+                user_id
+            })
+            // const response = await fetch('/api/goals', {
+            //     method: 'POST',
+            //     body: JSON.stringify({
+            //         title,
+            //         description,
+            //         due_date,
+            //         is_public,
+            //         user_id
+            //     }),
+            //     headers: { 'Content-Type': 'application/json' }
+            // });
 
-        if (response.ok) {
-            console.log('success');
-        } else {
-            alert(response.statusText);
-        }
+        // if (response.ok) {
+        //     console.log('success');
+        // } else {
+        //     alert(response.statusText);
+        // }
     }
 }
 
@@ -96,13 +102,6 @@ async function deleteGoalHandler(event) {
     }
 }
 
-const triggerTip = (event) => {
-    // console.log(event)
-}
-const disableTip = (event) => {
-
-}
-
-document.querySelector('.edit-goal-form').addEventListener('submit', editGoalHandler);
-document.querySelector('.add-goal-form').addEventListener('submit', addGoalHandler);
-document.querySelector('.delete-goal-btn').addEventListener('click', deleteGoalHandler);
+// document.querySelector('.edit-goal-form').addEventListener('submit', editGoalHandler);
+// document.querySelector('.delete-goal-btn').addEventListener('click', deleteGoalHandler);
+$("#new-goal-form").on("submit", addGoalHandler)

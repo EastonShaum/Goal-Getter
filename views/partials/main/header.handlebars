@@ -5,7 +5,7 @@
             <div class="d-flex">
                 {{#if loggedIn}}
                 <button class="btn btn-dark me-2 fw-bold text-light" type="button"
-                    onclick="location.href='/'">Logout</button>
+                    onclick="location.href='/'" id="logout">Logout</button>
                 {{else}}
                 <button class="btn btn-dark me-2 fw-bold text-light" type="button"
                     onclick="location.href='/signup'">Signup</button>
@@ -15,3 +15,4 @@
         </div>
     </nav>
 </header>
+<script src="assets/js/logout.js"></script>
