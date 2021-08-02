@@ -23,16 +23,8 @@ app.use(session(sess));
 
 const hbs = exphbs.create({
     helpers: {
-        checkGoalCompleted: function(goal) {
-            if (goal.completed === true) {
-                console.log(goal.completed);
-                return true;
-            }
-            console.log(goal.completed);
-            return false;
-        },
-        checkMilestoneStatus: function(milestone, options) {
-            switch (milestone.status) {
+        checkMilestoneStatus: function(status, options) {
+            switch (status) {
                 case "To Do":
                     return ('<i class="fas fa-list-ul" id="icon"></i>');
                 case "In Progress":
