@@ -1,0 +1,1 @@
+$("#new-goal-modal")
