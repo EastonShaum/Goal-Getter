@@ -28,7 +28,8 @@ Milestone.init({
     },
     is_public: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: true
     },
     goal_id: {
         type: DataTypes.INTEGER,

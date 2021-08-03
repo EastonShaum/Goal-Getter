@@ -186,7 +186,11 @@ router.post('/password', (req, res) => {
             minDiversity: 4,
             minLength: 12
         }
+<<<<<<< HEAD
     ])
+=======
+    ]);
+>>>>>>> feature/add-milestone
     res.json(strength);
 });
 
