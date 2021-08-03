@@ -26,23 +26,29 @@ async function signupFormHandler(event) {
                 console.log(data);
                 switch (data[0].path) {
                     case 'password':
-                        alert ('Password validation failed');
+                        $('#password-req').append('<p>Password validation failed</p>').addClass('mt-1 mb-0 text-danger');
+                        //alert ('Password validation failed');
                         break;
                     case 'username':
-                        alert ('Username too short');
+                        $('#username-div').append('<p>Username too short</p>').addClass('mt-1 mb-0 text-danger');
+                        //alert ('Username too short');
                         break;
                     case 'email':
-                        alert ('Not a valid email address');
+                        $('#email-div').append('<p>Not a valid email address</p>').addClass('mt-1 mb-0 text-danger');
+                        //alert ('Not a valid email address');
                         break;
                 }
             });
         }
     } else {
-        alert('Please fill out all text fields before continuing.');
+        
+        $('#password-req').append('<p>Please fill out all text fields before continuing.</p>').addClass('mt-1 mb-0 text-danger');
+        //alert('Please fill out all text fields before continuing.');
+        
         return;
     }
 }
-
+var firstTry = true;
 async function loginFormHandler(event) {
     event.preventDefault();
 
@@ -57,12 +63,18 @@ async function loginFormHandler(event) {
             }),
             headers: { 'Content-Type': 'application/json' }
         });
-
+        
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            if (response.status === 404)
-            alert('Invalid username or password');
+            if (response.status === 404 && firstTry === true) {
+                $('#password-div').append('<p>Invalid password or username</p>').addClass('mt-1 mb-0 text-danger');
+                firstTry = false;
+            } else {
+                $('p').remove(":contains('Invalid password or username')");
+                $('#password-div').append('<p>Invalid password or username</p>').addClass('mt-1 mb-0 text-danger');
+            }      
+            //alert('Invalid username or password');
         }
     }
 }
@@ -99,6 +111,21 @@ async function passwordChecker() {
     }
 }
 
+function removeErrors() {
+    event.preventDefault();
+    $('p').remove(":contains('Password validation failed')");
+    $('p').remove(":contains('Not a valid email address')");
+    $('p').remove(":contains('Username too short')");
+}
+
+function removeFieldsError() {
+    event.preventDefault();
+    $('p').remove(":contains('Please fill out all text fields before continuing.')");
+}
+//, "#email-div", '#password-req'
+
+$( "#username-div").on( "focusin", removeErrors);
+$('#signup-form').on( "focusin", removeFieldsError);
 $('#login-form').on('submit', loginFormHandler);
 $('#signup-form').on('submit', signupFormHandler);
 $('#password-input').on('change', passwordChecker);
