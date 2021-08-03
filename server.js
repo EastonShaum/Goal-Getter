@@ -3,6 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 
+const helpers = require('./utils/helpers')
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -21,20 +23,7 @@ const sess = {
 
 app.use(session(sess));
 
-const hbs = exphbs.create({
-    helpers: {
-        checkMilestoneStatus: function(milestone, options) {
-            switch (milestone.status) {
-                case "To Do":
-                    return ('<i class="fas fa-list-ul" id="icon"></i>');
-                case "In Progress":
-                    return ('<i class="fas fa-check text-success" id="icon"></i>');
-                case "Complete":
-                    return ('<i class="fas fa-medal fa-4x text-primary" id="icon"></i>');
-            }
-        }
-    }
-});
+const hbs = exphbs.create({ helpers });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');

@@ -186,31 +186,6 @@ router.post('/password', (req, res) => {
             minDiversity: 4,
             minLength: 12
         }
-    ]);
-    const strength = passwordStrength(req.body.password, [{
-            id: 0,
-            value: "Invalid",
-            minDiversity: 0,
-            minLength: 0
-        },
-        {
-            id: 1,
-            value: "Weak",
-            minDiversity: 3,
-            minLength: 6
-        },
-        {
-            id: 2,
-            value: "Good",
-            minDiversity: 3,
-            minLength: 10
-        },
-        {
-            id: 3,
-            value: "Strong",
-            minDiversity: 4,
-            minLength: 12
-        }
     ])
     res.json(strength);
 });

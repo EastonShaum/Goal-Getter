@@ -4,17 +4,17 @@
             <div class="d-flex align-items-center mb-2 text-elipsis">
                 <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Goal Title" onclick="location.href='/goal/{{id}}'">{{title}}&nbsp;</h4>
                 {{!-- <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Goal Title" onclick="location.href='/goal/{{id}}'">Goal Title&nbsp;</h4> --}}
-                <span class="fw-bold fs-6 text-success mt-1"> - {{due_date}}</span>
+                <span class="fw-bold fs-6 text-success mt-1"> - {{format_date due_date}}</span>
                 {{!-- <span class="fw-bold fs-6 text-success mt-1 text-nowrap"> - 8/30/2021</span> --}}
             </div>
             <div class="progress">
                 <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25"
                     aria-valuemin="0" aria-valuemax="100">25%</div>
             </div>
-            <h6 class="mt-2">{{complete_milestones}}/{{complete_milestones_milestones}} Milestones Complete</h6>
+            <h6 class="mt-2">{{complete_milestones}}/{{total_milestones}} Milestones Complete</h6>
             <div class="d-flex align-items-center mb-2">
                 <h5 class="text-secondary m-0">Current Milestone&nbsp;</h5>
-                <span class="fw-bold text-success mt-1"> - {{milestone_due_date}}</span>
+                <span class="fw-bold text-success mt-1"> - {{format_date milestone_due_date}}</span>
                 {{!-- <span class="text-success mt-1"> - 8/5/2021</span> --}}
             </div>
             <h6>{{current_milestone}}</h6>

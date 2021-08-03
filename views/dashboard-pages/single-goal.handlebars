@@ -3,9 +3,9 @@
     <hr class="m-1">
     <section class="col-lg-6 ">
         <h4 class="text-primary">Information</h4>
-        <p class="fw-bold">Started: <span id="start-date">{{goalData.created_at}}</span></p>
+        <p class="fw-bold">Started: <span id="start-date">{{format_date goalData.created_at}}</span></p>
         <p class="ml-2"><span id="from-created-date">{{goalData.created_at}}</span> Days Ago</p>
-        <p class="fw-bold">Accomplish Date: <span id="due-date">{{goalData.due_date}}</span></p>
+        <p class="fw-bold">Accomplish Date: <span id="due-date">{{format_date goalData.due_date}}</span></p>
         <p class="ml-2"><span id="to-due-date">{{goalData.due_date}}</span> Days Away</p>
         <h4 class="text-primary">Description</h4>
         <p>{{goalData.description}}</p>
@@ -13,13 +13,14 @@
         {{!-- Create add new note section ??Dropdown/collapse form??--}}
         {{#each goalData.notes as |note|}}
         <p>{{note.text}}</p>
-        <p class="fw-light text-darkest-light">Posted: {{note.created_at}}</p>
+        <p class="fw-light text-darkest-light">Posted: {{format_date note.created_at}}</p>
         <hr class="my-0 mx-3">
         {{/each}}
     </section>
     <section class="col-lg-6">
         <div class="d-flex align-items-center mb-3">
             <h4 class="text-primary m-0">Milestones&nbsp;</h4>
+            {{#if milestones}}
             <span class="fw-bold fs-6 text-darkest-light mt-1 text-nowrap">- {{goalData.complete_milestones}}/{{goalData.total_milestones}} Milestones Completed</span>
         </div>
         <div class="progress">
@@ -30,6 +31,10 @@
             {{#each goalData.milestones as |milestone|}}
             {{> milestoneCard milestone}}
             {{/each}}
+            {{else}}
+            </div>
+            <p class="text-darkest-light">Seems that you haven't created any milestones associated with your goal! Milestones are sub-goals that help move you towards achieving your goal of "{{goalData.title}}"". We encourage adding a few to better flesh out your goal. <span type="button" id="new-goal-btn" data-bs-toggle="modal" data-bs-target="#new-goal-modal" class="text-primary">Click here to get started!</span></p>
+            {{/if}}
         </div>
     </section>
 </div>
