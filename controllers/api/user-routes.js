@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Team, Milestone, Goal, Tag, Userteam } = require('../../models');
+const { passwordStrength } = require('check-password-strength');
 
 // Get all users
 router.get('/', (req, res) => {
@@ -60,6 +61,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+
     User.create({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
@@ -76,6 +78,10 @@ router.post('/', (req, res) => {
                 res.json(dbUserData);
             });
         })
+        .catch(err => {
+            res.status(500).json(err.errors);
+            console.log(err.errors);
+        });
 });
 
 router.put('/:id', (req, res) => {
@@ -156,6 +162,39 @@ router.post('/logout', (req, res) => {
     } else {
         res.status(404).end();
     }
+});
+
+router.post('/password', (req, res) => {
+    const strength = passwordStrength(req.body.password, 
+        [
+            {
+              id: 0,
+              value: "Invalid",
+              minDiversity: 0,
+              minLength: 0
+            },
+            {
+              id: 1,
+              value: "Weak",
+              minDiversity: 3,
+              minLength: 6
+            },
+            {
+              id: 2,
+              value: "Good",
+              minDiversity: 3,
+              minLength: 10
+            },
+            {
+              id: 3,
+              value: "Strong",
+              minDiversity: 4,
+              minLength: 12
+            }
+          ]
+        );
+
+    res.json(strength);
 });
 
 module.exports = router;

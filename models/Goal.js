@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const tomorrowsDate = require('../utils/nextDay.js')
+const tomorrowsDate = require('../utils/nextDay.js');
 
 class Goal extends Model {}
 
@@ -30,6 +30,11 @@ Goal.init({
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
+    completed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+    },
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -37,11 +42,6 @@ Goal.init({
             model: 'user',
             key: 'id'
         }
-    },
-    completed: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
     }
 }, {
     sequelize,
