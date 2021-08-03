@@ -1,39 +1,69 @@
 <div class="container mx-auto row g-4">
     <h3 class="text-primary">{{goalData.title}}</h3>
     <hr class="m-1">
+    {{!-- Left side of Single Goal page, contains Goal information --}}
     <section class="col-lg-6 ">
         <h4 class="text-primary">Information</h4>
-        <p class="fw-bold">Started: <span id="start-date">{{format_date goalData.created_at}}</span></p>
-        <p class="ml-2"><span id="from-created-date">{{goalData.created_at}}</span> Days Ago</p>
-        <p class="fw-bold">Accomplish Date: <span id="due-date">{{format_date goalData.due_date}}</span></p>
-        <p class="ml-2"><span id="to-due-date">{{goalData.due_date}}</span> Days Away</p>
+        {{!-- Start Date information --}}
+        <p class="fw-bold mb-0">Started: <span id="start-date">{{format_date goalData.created_at}}</span></p>
+        <p class="ml-2"><span id="from-created-date">{{getDaysDifference goalData.created_at goalData.today}}</span>
+            Days Ago</p>
+        {{!-- Due Date information --}}
+        <p class="fw-bold mb-0">Accomplish Date: <span id="due-date">{{format_date goalData.due_date}}</span></p>
+        <p class="ml-2"><span id="to-due-date">{{getDaysDifference goalData.today goalData.due_date}}</span> Days Away
+        </p>
+        {{!-- Description --}}
         <h4 class="text-primary">Description</h4>
         <p>{{goalData.description}}</p>
-        <h4 class="text-primary">Notes</h4>
-        {{!-- Create add new note section ??Dropdown/collapse form??--}}
+        {{!-- Notes --}}
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="text-primary">Notes</h4>
+            <p class="text-darkest-light fs-6 my-auto" type="button" id="new-note-btn" data-bs-toggle="collapse"
+                data-bs-target="#note-collapsable-div" aria-expanded="false" aria-controls="note-collapsable-div">
+                <span class="fw-bold">+</span>
+                Add Note
+            </p>
+        </div>
+        {{!-- Create New Note Form--}}
+        {{>dashboard/new-note-collapsable}}
         {{#each goalData.notes as |note|}}
         <p>{{note.text}}</p>
         <p class="fw-light text-darkest-light">Posted: {{format_date note.created_at}}</p>
         <hr class="my-0 mx-3">
         {{/each}}
     </section>
+    {{!-- Right Side of Goal Page Contains the Goals Milestones --}}
     <section class="col-lg-6">
-        <div class="d-flex align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="text-primary m-0">Milestones&nbsp;</h4>
-            {{#if milestones}}
-            <span class="fw-bold fs-6 text-darkest-light mt-1 text-nowrap">- {{goalData.complete_milestones}}/{{goalData.total_milestones}} Milestones Completed</span>
+            <p class="text-darkest-light fs-6 my-auto" type="button" id="new-milestone-btn" data-bs-toggle="collapse"
+                data-bs-target="#milestone-collapsable-div" aria-expanded="false"
+                aria-controls="milestone-collapsable-div"><span class="fw-bold">+</span>
+                Add Milestone</p>
         </div>
+        {{#if milestones}}
+        <span
+            class="fw-bold fs-6 text-darkest-light mt-1 text-nowrap">{{goalData.complete_milestones}}/{{goalData.total_milestones}}
+            Milestones Completed</span>
         <div class="progress">
             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25"
                 aria-valuemin="0" aria-valuemax="100">25%</div>
         </div>
+        {{/if}}
+        {{!-- Add new milestone collapsable form --}}
+        {{>dashboard/new-milestone-collapsable}}
+        {{#if milestones}}
         <div class="row g-4 mt-2">
             {{#each goalData.milestones as |milestone|}}
             {{> milestoneCard milestone}}
             {{/each}}
             {{else}}
-            </div>
-            <p class="text-darkest-light">Seems that you haven't created any milestones associated with your goal! Milestones are sub-goals that help move you towards achieving your goal of "{{goalData.title}}"". We encourage adding a few to better flesh out your goal. <span type="button" id="new-goal-btn" data-bs-toggle="modal" data-bs-target="#new-goal-modal" class="text-primary">Click here to get started!</span></p>
+            <p class="text-darkest-light">Seems that you haven't created any milestones associated with your goal!
+                Milestones are sub-goals that help move you towards achieving your goal of "{{goalData.title}}". We
+                encourage adding a few to better flesh out your goal. <span type="button" id="new-goal-btn"
+                    class="text-primary" data-bs-toggle="collapse" data-bs-target="#milestone-collapsable-div"
+                    aria-expanded="false" aria-controls="milestone-collapsable-div">Click here to get
+                    started!</span></p>
             {{/if}}
         </div>
     </section>

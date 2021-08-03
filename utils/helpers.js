@@ -20,5 +20,20 @@ module.exports = {
             case "Complete":
                 return ('<i class="fas fa-medal fa-4x text-primary" id="icon"></i>');
         }
+    },
+    getDaysDifference: function (startDate, endDate) {
+        // Format Dates
+        const date1 = new Date(startDate);
+        const date2 = new Date(endDate);
+
+        // Conversion for JS Dates from milliseconds to Days
+        const oneDay = 1000 * 60 * 60 * 24
+
+        // Find difference between two dates
+        const diff = date2.getTime() - date1.getTime();
+
+        // Apply oneDay Conversion
+        const daysDifference = Math.round(diff/oneDay);
+        return daysDifference
     }
 }
