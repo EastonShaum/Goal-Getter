@@ -23,8 +23,13 @@ app.use(session(sess));
 
 const hbs = exphbs.create({
     helpers: {
+<<<<<<< HEAD
         checkMilestoneStatus: function(status, options) {
             switch (status) {
+=======
+        checkMilestoneStatus: function(milestone, options) {
+            switch (milestone.status) {
+>>>>>>> develop
                 case "To Do":
                     return ('<i class="fas fa-list-ul" id="icon"></i>');
                 case "In Progress":

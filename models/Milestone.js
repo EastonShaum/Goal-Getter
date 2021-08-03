@@ -48,10 +48,12 @@ Milestone.init({
     },
     status: {
         type: DataTypes.STRING(20),
-        allowNull: false, 
+        allowNull: false,
         defaultValue: "To Do", // To Do, In Progress, Completed
         validate: {
-            isIn: [["To Do", "In Progress", "Completed"]]
+            isIn: [
+                ["To Do", "In Progress", "Completed"]
+            ]
         }
     }
 }, {
@@ -62,6 +64,3 @@ Milestone.init({
 })
 
 module.exports = Milestone;
-
-
-
