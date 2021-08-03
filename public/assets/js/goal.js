@@ -14,23 +14,23 @@ async function addGoalHandler(event) {
 
     if (title && description && isPublic) {
         console.log({
-            title,
-            description,
-            due_date,
-            is_public,
-            user_id
-        })
-        // const response = await fetch('/api/goals', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         title,
-        //         description,
-        //         due_date,
-        //         is_public,
-        //         user_id
-        //     }),
-        //     headers: { 'Content-Type': 'application/json' }
-        // });
+                title,
+                description,
+                due_date,
+                is_public,
+                user_id
+            })
+            // const response = await fetch('/api/goals', {
+            //     method: 'POST',
+            //     body: JSON.stringify({
+            //         title,
+            //         description,
+            //         due_date,
+            //         is_public,
+            //         user_id
+            //     }),
+            //     headers: { 'Content-Type': 'application/json' }
+            // });
 
         // if (response.ok) {
         //     console.log('success');
@@ -52,6 +52,10 @@ async function editGoalHandler(event) {
     // Use a radio button for this so that a boolean value can be used
     const isPublic = document.querySelector('.goal-public-btn').value;
 
+    // Use a radio button for this so that a boolean value can be used
+    const isCompleted = document.querySelector('.goal-completed-btn').value;
+
+
 
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -64,7 +68,8 @@ async function editGoalHandler(event) {
                 goalTitle,
                 goalDesc,
                 goalDuedate,
-                isPublic
+                isPublic,
+                isCompleted
             }),
             headers: {
                 'Content-Type': 'appliation/json'
@@ -96,6 +101,17 @@ async function deleteGoalHandler(event) {
         alert(response.statusText);
     }
 }
+
+const triggerTip = (event) => {
+    // console.log(event)
+}
+const disableTip = (event) => {
+
+}
+
+document.querySelector('.edit-goal-form').addEventListener('submit', editGoalHandler);
+document.querySelector('.add-goal-form').addEventListener('submit', addGoalHandler);
+document.querySelector('.delete-goal-btn').addEventListener('click', deleteGoalHandler);
 
 // document.querySelector('.edit-goal-form').addEventListener('submit', editGoalHandler);
 // document.querySelector('.delete-goal-btn').addEventListener('click', deleteGoalHandler);

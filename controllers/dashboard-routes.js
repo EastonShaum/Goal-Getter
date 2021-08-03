@@ -6,21 +6,20 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, (req, res) => {
     Goal.findAll({
             where: {
-                user_id: req.session.user_id
-                // user_id: 1
+                user_id: 1
+                    // user_id: req.session.user_id
             },
             attributes: [
                 'title',
-                'description', 
-                'due_date', 
-                'is_public', 
-                'user_id',  
-                'created_at', 
-                [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.goal_id = goal.id)"), "total_milestones"],
+                'description',
+                'due_date',
+                'is_public',
+                'user_id',
+                'completed',
+                'created_at', [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.goal_id = goal.id)"), "total_milestones"],
                 [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Completed' AND milestone.goal_id = goal.id)"), "complete_milestones"],
             ],
-            include: [
-                {
+            include: [{
                     model: Team,
                     attributes: ['id', 'name', 'motto'],
                     include: {
@@ -36,8 +35,8 @@ router.get('/', withAuth, (req, res) => {
         })
         .then(dbGoalData => {
             const goals = dbGoalData.map(goal => goal.get({ plain: true }));
-            // console.log(goals)
-            const loggedInUser = {user_id: req.session.user_id}
+            console.log(goals)
+            const loggedInUser = { user_id: req.session.user_id }
             res.render('dashboard-pages/myGoals', { layout: "dashboard", goals, loggedIn: true, loggedInUser })
         })
         .catch(err => {
@@ -54,7 +53,7 @@ router.get('/', withAuth, (req, res) => {
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'completed', 'created_at'],
                     include: {
                         model: Team,
                         attributes: ['name']
@@ -78,7 +77,7 @@ router.get('/', withAuth, (req, res) => {
 
 router.get('/edit/:id', withAuth, (req, res) => {
     Goal.findByPk(req.params.id, {
-            attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at'],
+            attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'completed', 'created_at'],
             include: [{
                     model: Team,
                     attributes: ['id', 'name', 'motto'],
@@ -89,7 +88,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
                 },
                 {
                     model: Milestone,
-                    attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
+                    attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id', 'status'],
                     include: {
                         model: User,
                         attributes: ['username']
@@ -117,10 +116,10 @@ router.get('/edit/:id', withAuth, (req, res) => {
 
 router.get('/edit/:id', withAuth, (req, res) => {
     Milestone.findByPk(req.body.id, {
-            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id', 'status'],
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'team_id', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'completed', 'created_at'],
                     include: {
                         model: Team,
                         attributes: ['name']

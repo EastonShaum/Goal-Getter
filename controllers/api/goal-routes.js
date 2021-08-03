@@ -3,7 +3,7 @@ const { Tag, Team, User, Userteam, Goal, Goaltag, Milestone, Note } = require('.
 
 router.get('/', (req, res) => {
     Goal.findAll({
-            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'created_at'],
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'completed', 'created_at'],
             include: [{
                     model: User,
                     attributes: ['username', 'first_name', 'last_name']
@@ -28,6 +28,7 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'completed', 'created_at'],
             include: [{
                     model: User,
                     attributes: ['username']
@@ -73,8 +74,8 @@ router.post('/', (req, res) => {
                 description: req.body.description,
                 due_date: req.body.due_date,
                 is_public: req.body.is_public,
-                tag_id: req.body.tag_id,
-                user_id: req.session.user_id
+                user_id: req.session.user_id,
+                completed: req.body.completed
             })
             .then(dbGoalData => res.json(dbGoalData))
             .catch(err => {
