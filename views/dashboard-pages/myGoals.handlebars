@@ -10,6 +10,6 @@
         {{>goalCard goal}}
     {{/each}}
     {{else}}
-        <h5 class="text-darkest-light">Looks like your Goal board is empty! There is no better time to start a new goal than right now! <a href="/new-goal">Click here to get started!</a></h5>
+        <h5 class="text-darkest-light">Looks like your Goal board is empty! There is no better time to start a new goal than right now! <span type="button" id="new-goal-btn" data-bs-toggle="modal" data-bs-target="#new-goal-modal" class="text-primary">Click here to get started!</span></h5>
     {{/if}}
 </div>

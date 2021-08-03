@@ -1,6 +1,6 @@
 {{>main/boilerplate}}
-<body class="bg-light control">
-    {{>main/header}}
+<body class="bg-light control" logged-in-user="{{loggedInUser.user_id}}">
+    {{>main/header-logged-in}}
     <div class="box-container">
         <div class="row my-0 flex-lg-grow-1">
             {{>dashboard/sidenav}}

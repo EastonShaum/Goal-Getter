@@ -24,6 +24,13 @@ $(".modal").on("hidden.bs.modal", function(){
     $("#form-check-input").val("");
 });
 
+const getIsPublic = () => {
+    if($('#public-goal-checkbox').is(":checked")){
+        return is_public = true
+    }
+    return is_public = false
+}
+
 async function addGoalHandler(event) {
     event.preventDefault();
 
@@ -33,44 +40,42 @@ async function addGoalHandler(event) {
     // can use the jquery datepicker function to turn a modal into a calendar
     const due_date = $('#due-date-input').val();
 
-    // Use a radio button for this so that a boolean value can be used
-    const is_public = $('#public-goal-checkbox').val();
+    const is_public = getIsPublic()
 
-    // const user_id = $("new-goal-form").attr("user-id").val();
+    const user_id = $("#new-goal-form").attr("user-id");
 
     console.log({
         title,
         description,
         due_date,
         is_public,
-        // user_id
+        user_id
     })
 
-    if (title && description && is_public) {
-        console.log({
-            title,
-            description,
-            due_date,
-            is_public,
-            // user_id
-        })
-        // const response = await fetch('/api/goals', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         title,
-        //         description,
-        //         due_date,
-        //         is_public,
-        //         user_id
-        //     }),
-        //     headers: { 'Content-Type': 'application/json' }
-        // });
+    if (title && description && due_date && user_id) {
+        const response = await fetch('/api/goals', {
+            method: 'POST',
+            body: JSON.stringify({
+                title,
+                description,
+                due_date,
+                is_public,
+                user_id
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-        // if (response.ok) {
-        //     console.log('success');
-        // } else {
-        //     alert(response.statusText);
-        // }
+        if (response.ok) {
+            console.log('success');
+            response.json().then(data => {
+                console.log(data)
+                location.href=`/goal/${data.id}`
+            })
+            // $("#new-goal-modal").modal("toggle");
+            // location.reload()
+        } else {
+            alert(response.statusText);
+        }
     }
 }
 
