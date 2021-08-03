@@ -7,7 +7,6 @@ const withAuth = require('../utils/auth');
 router.get("/:id", withAuth, (req, res) => {
     Goal.findOne({
         where: {
-            user_id: 1,
             id: req.params.id
         },
         attributes: [
@@ -34,7 +33,6 @@ router.get("/:id", withAuth, (req, res) => {
         const goalData = data.get({ plain: true })
         console.log(goalData);
         const loggedInUser = {user_id: req.session.user_id}
-        console.log(loggedInData)
         if(!data){
             res.status(404).json({ message: "No goals found with provided id"});
             return;
