@@ -9,10 +9,8 @@
     {{#each goals as |goal|}}
     {{#if goal.completed}}
         {{>completedGoalCard goal}}
-        {{!-- {{>goalCard goal}} --}}
     {{else}}
         {{>goalCard goal}}
-        {{!-- {{>completedGoalCard goal}}                 --}}
     {{/if}}
     {{/each}}
     {{else}}

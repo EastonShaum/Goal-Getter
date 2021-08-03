@@ -102,17 +102,6 @@ async function deleteGoalHandler(event) {
     }
 }
 
-const triggerTip = (event) => {
-    // console.log(event)
-}
-const disableTip = (event) => {
-
-}
-
-document.querySelector('.edit-goal-form').addEventListener('submit', editGoalHandler);
-document.querySelector('.add-goal-form').addEventListener('submit', addGoalHandler);
-document.querySelector('.delete-goal-btn').addEventListener('click', deleteGoalHandler);
-
 // document.querySelector('.edit-goal-form').addEventListener('submit', editGoalHandler);
 // document.querySelector('.delete-goal-btn').addEventListener('click', deleteGoalHandler);
 $("#new-goal-form").on("submit", addGoalHandler)
