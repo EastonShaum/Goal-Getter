@@ -21,8 +21,7 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
-            include: [
-                {
+            include: [{
                     model: Goal,
                     attributes: ['title', 'description', 'due_date', 'is_public', 'created_at'],
                     as: 'goals',
@@ -37,13 +36,11 @@ router.get('/:id', (req, res) => {
                     attributes: ['name', 'motto'],
                     through: Userteam,
                     as: 'teams',
-                    include: [
-                        {
-                            model: User,
-                            attributes:['first_name', 'last_name'],
-                            as: 'users'
-                        }
-                    ]
+                    include: [{
+                        model: User,
+                        attributes: ['first_name', 'last_name'],
+                        as: 'users'
+                    }]
                 }
             ]
         })
@@ -165,35 +162,56 @@ router.post('/logout', (req, res) => {
 });
 
 router.post('/password', (req, res) => {
-    const strength = passwordStrength(req.body.password, 
-        [
-            {
-              id: 0,
-              value: "Invalid",
-              minDiversity: 0,
-              minLength: 0
-            },
-            {
-              id: 1,
-              value: "Weak",
-              minDiversity: 3,
-              minLength: 6
-            },
-            {
-              id: 2,
-              value: "Good",
-              minDiversity: 3,
-              minLength: 10
-            },
-            {
-              id: 3,
-              value: "Strong",
-              minDiversity: 4,
-              minLength: 12
-            }
-          ]
-        );
-
+    const strength = passwordStrength(req.body.password, [{
+            id: 0,
+            value: "Invalid",
+            minDiversity: 0,
+            minLength: 0
+        },
+        {
+            id: 1,
+            value: "Weak",
+            minDiversity: 3,
+            minLength: 6
+        },
+        {
+            id: 2,
+            value: "Good",
+            minDiversity: 3,
+            minLength: 10
+        },
+        {
+            id: 3,
+            value: "Strong",
+            minDiversity: 4,
+            minLength: 12
+        }
+    ]);
+    const strength = passwordStrength(req.body.password, [{
+            id: 0,
+            value: "Invalid",
+            minDiversity: 0,
+            minLength: 0
+        },
+        {
+            id: 1,
+            value: "Weak",
+            minDiversity: 3,
+            minLength: 6
+        },
+        {
+            id: 2,
+            value: "Good",
+            minDiversity: 3,
+            minLength: 10
+        },
+        {
+            id: 3,
+            value: "Strong",
+            minDiversity: 4,
+            minLength: 12
+        }
+    ])
     res.json(strength);
 });
 
