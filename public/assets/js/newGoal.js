@@ -1,5 +1,5 @@
 let today = new Date()
-let tomorrow =  new Date()
+let tomorrow = new Date()
 tomorrow.setDate(today.getDate() + 1)
 
 let dueDate
@@ -9,15 +9,24 @@ const flatpickrConfig = {
     altFormat: "F j, Y",
     dateFormat: "Z",
     minDate: tomorrow,
-    onClose: function(selectedDates, dateStr, instance) {
+    onClose: function (selectedDates, dateStr, instance) {
         dueDate = dateStr
         console.log(dueDate)
     }
 }
 
+const initDatePickr = (element) => {
+    element.flatpickr({
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Z",
+        minDate: tomorrow,
+    });
+}
+
 const calendar = new flatpickr("#due-date-input", flatpickrConfig)
 
-$(".modal").on("hidden.bs.modal", function(){
+$(".modal").on("hidden.bs.modal", function () {
     $("#goal-title-input").val("");
     $("#due-date-input").val("");
     $("#goal-description-input").val("");
@@ -25,11 +34,42 @@ $(".modal").on("hidden.bs.modal", function(){
 });
 
 const getIsPublic = () => {
-    if($('#public-goal-checkbox').is(":checked")){
+    if ($('#public-goal-checkbox').is(":checked")) {
         return is_public = true
     }
     return is_public = false
 }
+
+async function deleteGoalHandler(goal_id) {
+    const response = await fetch('/api/goals/' + goal_id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (response.ok) {
+        console.log('Goal deleted');
+    }
+}
+
+async function addMilestoneHandler(title, description, date, public, goal_id, user_id) {
+    let milestoneResponse = await fetch('/api/milestones', {
+        method: 'POST',
+        body: JSON.stringify({
+            title,
+            description,
+            date,
+            public,
+            goal_id,
+            user_id
+        }),
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (milestoneResponse.ok) {
+        console.log('Milestone Sent to server');
+    }
+}
+
 
 async function addGoalHandler(event) {
     event.preventDefault();
@@ -69,7 +109,29 @@ async function addGoalHandler(event) {
             console.log('success');
             response.json().then(data => {
                 console.log(data)
-                location.href=`/goal/${data.id}`
+                if (milestoneCounter > 1) {
+                    for (let i = 1; i < milestoneCounter; i++) {
+                        let milestoneTitle = $('#milestone-title-input-' + i).val();
+                        let milestoneDue_date = $('#milestone-date-input-' + i).val();
+                        let milestoneDescription = $('#milestone-description-input-' + i).val();
+                        let milestoneGoal_id = data.id;
+
+                        console.log({
+                            milestoneTitle,
+                            milestoneDescription,
+                            milestoneDue_date,
+                            milestoneGoal_id,
+                        });
+
+                        if (milestoneTitle && milestoneDescription && milestoneDue_date && milestoneGoal_id) {
+                            addMilestoneHandler(milestoneTitle, milestoneDescription, milestoneDue_date, is_public, milestoneGoal_id, user_id); 
+                        } else {
+                            deleteGoalHandler(milestoneGoal_id);
+                            break;
+                        }
+                        location.href=`/goal/${data.id}`;
+                    }
+                }
             })
             // $("#new-goal-modal").modal("toggle");
             // location.reload()
@@ -81,8 +143,6 @@ async function addGoalHandler(event) {
 
 let milestoneCounter = 1;
 const milestoneFormAdd = () => {
-    event.preventDefault;
-
     let nameFieldContainer = $("<div class='form-floating mb-3'></div>");
     let milestoneNameInput = $("<input type='text' class='form-control' id='milestone-title-input-" + milestoneCounter + "' placeholder='Enter your milestone name here'>");
     let milestoneNameLabel = $("<label for='milestone-title-input-" + milestoneCounter + "'>Milestone Name</label>");
@@ -97,12 +157,13 @@ const milestoneFormAdd = () => {
     let milestoneDescriptionInput = $("<textarea class='form-control' placeholder='Provide a description for your 'id='milestone-description-input-" + milestoneCounter + "' style='height: 100px' spellcheck='true'></textarea>");
     let milestoneDescriptionLabel = $("<label for='milestone-description-input-" + milestoneCounter + "'>Milestone Description</label>");
     descriptionContainer.append(milestoneDescriptionInput, milestoneDescriptionLabel);
-    
+
     let contentWrapper = $("<div class='border border-primary mb-3 p-2'></div>");
     contentWrapper.append(nameFieldContainer, dueDateContainer, descriptionContainer);
     $("#submit-wrapper").before(contentWrapper);
+    initDatePickr($("#milestone-date-input-" + milestoneCounter));
     milestoneCounter++;
 }
 
 $("#new-goal-form").on("submit", addGoalHandler);
-$("#add-milestone-button").on("click", milestoneFormHandler);
+$("#add-milestone-button").on("click", milestoneFormAdd);
