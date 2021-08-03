@@ -40,37 +40,6 @@ const getIsPublic = () => {
     return is_public = false
 }
 
-async function deleteGoalHandler(goal_id) {
-    const response = await fetch('/api/goals/' + goal_id, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    if (response.ok) {
-        console.log('Goal deleted');
-    }
-}
-
-async function addMilestoneHandler(title, description, date, public, goal_id, user_id) {
-    let milestoneResponse = await fetch('/api/milestones', {
-        method: 'POST',
-        body: JSON.stringify({
-            title,
-            description,
-            date,
-            public,
-            goal_id,
-            user_id
-        }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    if (milestoneResponse.ok) {
-        console.log('Milestone Sent to server');
-    }
-}
-
-
 async function addGoalHandler(event) {
     event.preventDefault();
 
@@ -138,6 +107,36 @@ async function addGoalHandler(event) {
         } else {
             alert(response.statusText);
         }
+    }
+}
+
+async function addMilestoneHandler(title, description, date, public, goal_id, user_id) {
+    let milestoneResponse = await fetch('/api/milestones', {
+        method: 'POST',
+        body: JSON.stringify({
+            title,
+            description,
+            date,
+            public,
+            goal_id,
+            user_id
+        }),
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (milestoneResponse.ok) {
+        console.log('Milestone Sent to server');
+    }
+}
+
+async function deleteGoalHandler(goal_id) {
+    const response = await fetch('/api/goals/' + goal_id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (response.ok) {
+        console.log('Goal deleted');
     }
 }
 
