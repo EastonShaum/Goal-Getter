@@ -34,7 +34,7 @@ async function editGoalHandler(event) {
     // Use a radio button for this so that a boolean value can be used
     const user_id = $("#edit-goal-form").attr("user-id");
 
-
+    const completed = false
 
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -49,7 +49,7 @@ async function editGoalHandler(event) {
                 due_date,
                 is_public,
                 user_id,
-                isCompleted
+                completed
             }),
             headers: {
                 'Content-Type': 'application/json'
