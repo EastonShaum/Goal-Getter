@@ -175,6 +175,7 @@ const milestoneFormAdd = () => {
 const deleteMilestoneField = (event) => {
     let milestoneNumber = event.target.id.replace( /^\D+/g, '');
     $("#milestone-" + milestoneNumber).remove();
+    milestoneCounter--;
 }
 
 $("#new-goal-form").on("submit", addGoalHandler);

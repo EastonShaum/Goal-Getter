@@ -26,7 +26,7 @@ async function signupFormHandler(event) {
                 console.log(data);
                 switch (data[0].path) {
                     case 'password':
-                        $('#password-req').append('<p>Password validation failed</p>').addClass('mt-1 mb-0 text-danger');
+                        $('#password-req').append('<p>Password does not meet password strength criteria</p>').addClass('mt-1 mb-0 text-danger');
                         //alert ('Password validation failed');
                         break;
                     case 'username':
@@ -36,6 +36,12 @@ async function signupFormHandler(event) {
                     case 'email':
                         $('#email-div').append('<p>Not a valid email address</p>').addClass('mt-1 mb-0 text-danger');
                         //alert ('Not a valid email address');
+                        break;
+                    case 'user.username':
+                        $('#username-div').append('<p>Not a unique username</p>').addClass('mt-1 mb-0 text-danger');
+                        break;
+                    case 'user.email':
+                        $('#email-div').append('<p>Email already in use</p>').addClass('mt-1 mb-0 text-danger');
                         break;
                 }
             });
@@ -113,9 +119,11 @@ async function passwordChecker() {
 
 function removeErrors() {
     event.preventDefault();
-    $('p').remove(":contains('Password validation failed')");
+    $('p').remove(":contains('Password does not meet password strength criteria')");
     $('p').remove(":contains('Not a valid email address')");
     $('p').remove(":contains('Username too short')");
+    $('p').remove(":contains('Not a unique username')");
+    $('p').remove(":contains('Email already in use')");
 }
 
 function removeFieldsError() {
@@ -124,8 +132,8 @@ function removeFieldsError() {
 }
 //, "#email-div", '#password-req'
 
-$( "#username-div").on( "focusin", removeErrors);
+$( "#username-div, #email-div, #password-div").on( "focusin", removeErrors);
 $('#signup-form').on( "focusin", removeFieldsError);
 $('#login-form').on('submit', loginFormHandler);
 $('#signup-form').on('submit', signupFormHandler);
-$('#password-input').on('change', passwordChecker);
+$('#password-input').on('keyup', passwordChecker);
