@@ -101,6 +101,9 @@ async function addGoalHandler(event) {
                         location.href=`/goal/${data.id}`;
                     }
                 }
+                else {
+                    location.href=`/goal/${data.id}`;
+                }
             })
             // $("#new-goal-modal").modal("toggle");
             // location.reload()
