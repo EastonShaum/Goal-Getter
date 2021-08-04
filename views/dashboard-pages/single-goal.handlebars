@@ -11,7 +11,7 @@
         <div class="d-flex">
         <i class="fas fa-edit text-darkest-light dark-hover" id="edit-goal-btn" type="button"></i>
         <span class="border-darkest-light mx-3 border-end border-2"></span> 
-        <i class="fas fa-trash text-darkest-light" type="button" id="delete-goal-btn"></i>
+        <i class="fas fa-trash text-darkest-light dark-hover" type="button" id="delete-goal-btn"></i>
         </div>
     </div>
     {{>dashboard/edit-goal-modal goalData}}
@@ -20,8 +20,6 @@
     <section class="col-lg-6 ">
         <div class="d-flex align-items-center">
             <h4 class="text-primary">Information</h4>
-
-
         </div>
         {{!-- Start Date information --}}
         <p class="fw-bold mb-0">Started: <span id="start-date">{{format_date goalData.created_at}}</span></p>
