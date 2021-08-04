@@ -44,7 +44,11 @@ const getDropdownValue = (event) => {
 
         $('#milestone-' + milestoneId + '-status').text(`${status}`);
 
-        editMilestoneHandler(status);
+        if (status === 'Delete') {
+            deleteMilestoneHandler();
+        } else {
+            editMilestoneHandler(status);
+        }
     });
 }
 
@@ -68,10 +72,8 @@ async function editMilestoneHandler(status) {
     }
 }
 
-async function deleteMilestoneHandler(event) {
-    event.preventDefault();
-
-    const response = await fetch(`/api/milestones/${id}`, {
+async function deleteMilestoneHandler() {
+    const response = await fetch(`/api/milestones/${milestoneId}`, {
         method: 'DELETE'
     });
 
