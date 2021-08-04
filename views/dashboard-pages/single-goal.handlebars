@@ -14,7 +14,7 @@
             Days Ago</p>
         {{!-- Due Date information --}}
         <p class="fw-bold mb-0">Accomplish Date: <span id="due-date">{{format_date goalData.due_date}}</span></p>
-        <p class="ml-2"><span id="to-due-date">{{getDaysDifference goalData.today goalData.due_date}}</span> Days Away
+        <p class="ml-2"><span id="to-due-date">{{getDaysDifference goalData.today goalData.due_date}}</span> {{format_plural Day }} Away
         </p>
         {{!-- Description --}}
         <h4 class="text-primary">Description</h4>
@@ -45,7 +45,7 @@
                 aria-controls="milestone-collapsable-div"><span class="fw-bold">+</span>
                 Add Milestone</p>
         </div>
-        {{#if milestones}}
+        {{#if goalData.milestones}}
         <span
             class="fw-bold fs-6 text-darkest-light mt-1 text-nowrap">{{goalData.complete_milestones}}/{{goalData.total_milestones}}
             Milestones Completed</span>
@@ -56,20 +56,22 @@
         {{/if}}
         {{!-- Add new milestone collapsable form --}}
         {{>dashboard/new-milestone-collapsable}}
-        {{#if milestones}}
+        {{#if goalData.milestones}}
         <div class="row g-4 mt-2">
             {{#each goalData.milestones as |milestone|}}
             {{> milestoneCard milestone}}
             {{/each}}
-            {{else}}
-            <p class="text-darkest-light">Seems that you haven't created any milestones associated with your goal!
-                Milestones are sub-goals that help move you towards achieving your goal of "{{goalData.title}}". We
-                encourage adding a few to better flesh out your goal. <span type="button" id="new-goal-btn"
-                    class="text-primary" data-bs-toggle="collapse" data-bs-target="#milestone-collapsable-div"
-                    aria-expanded="false" aria-controls="milestone-collapsable-div">Click here to get
-                    started!</span></p>
-            {{/if}}
         </div>
+            {{else}}
+        <p class="text-darkest-light">
+            Seems that you haven't created any milestones associated with your goal!
+            Milestones are sub-goals that help move you towards achieving your goal of "{{goalData.title}}". We
+            encourage adding a few to better flesh out your goal. 
+            <span type="button" id="new-goal-btn" class="text-primary" data-bs-toggle="collapse" data-bs-target="#milestone-collapsable-div" aria-expanded="false" aria-controls="milestone-collapsable-div">
+                Click here to get started!
+            </span>
+        </p>
+        {{/if}}
     </section>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

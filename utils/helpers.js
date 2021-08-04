@@ -35,5 +35,6 @@ module.exports = {
         // Apply oneDay Conversion
         const daysDifference = Math.round(diff/oneDay);
         return daysDifference
-    }
+    },
+    
 }
