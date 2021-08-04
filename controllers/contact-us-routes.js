@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.render('extra-pages/about', { layout: "main"})
+    res.render('extra-pages/contact-us', { layout: "main"})
 })
 
 module.exports = router;
