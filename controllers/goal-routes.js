@@ -43,7 +43,7 @@ router.get("/:id", withAuth, (req, res) => {
         } else {
             goalData.can_complete = false
         }
-        if(req.session.id === goalData.user_id) {
+        if(req.session.user_id === goalData.user_id) {
             goalData.is_author = true
         } else {
             goalData.is_author = false
