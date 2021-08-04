@@ -1,20 +1,23 @@
 <div class="container mx-auto row g-4">
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <h3 class="text-primary">{{goalData.title}}</h3>
+            <h3 class="text-primary" id="goal-title" data-goal-id="{{goalData.id}}">{{goalData.title}}</h3>
             {{#if goalData.is_public}}
             <span class="fs-6 text-darkest-light fst-italic" data-public="true" id="public-val"> &nbsp;- Public Goal</span>
             {{else}}
             <span class="fs-6 text-darkest-light fst-italic" data-public="false" id="public-val"> &nbsp;- Private Goal</span>
             {{/if}}
         </div>
+        {{#if goalData.is_author}}
         <div class="d-flex">
-        <i class="fas fa-edit text-darkest-light dark-hover" id="edit-goal-btn" type="button"></i>
-        <span class="border-darkest-light mx-3 border-end border-2"></span> 
-        <i class="fas fa-trash text-darkest-light dark-hover" type="button" id="delete-goal-btn"></i>
+            <i class="fas fa-edit text-darkest-light dark-hover" id="edit-goal-btn" type="button"></i>
+            <span class="border-darkest-light mx-3 border-end border-2"></span> 
+            <i class="fas fa-trash text-darkest-light dark-hover" type="button" id="delete-goal-modal-btn"></i>
         </div>
+        {{/if}}
     </div>
     {{>dashboard/edit-goal-modal goalData}}
+    {{>dashboard/delete-goal-modal goalData}}
     <hr class="m-1">
     {{!-- Left side of Single Goal page, contains Goal information --}}
     <section class="col-lg-6 ">
@@ -33,7 +36,7 @@
         </p>
         {{!-- Description --}}
         <h4 class="text-primary">Description</h4>
-        <p>{{goalData.description}}</p>
+        <p class="pre-wrap">{{goalData.description}}</p>
         {{!-- Notes --}}
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-primary">Notes</h4>
@@ -46,10 +49,15 @@
         </div>
         {{!-- Create New Note Form--}}
         {{>dashboard/new-note-collapsable}}
+        {{#if goalData.notes}}
+        <hr class="mt-0 mb-2">
+        {{/if}}
         {{#each goalData.notes as |note|}}
-        <p>{{note.text}}</p>
-        <p class="fw-light text-darkest-light">Posted: {{format_date note.created_at}}</p>
-        <hr class="my-0 mx-3">
+        <div note-id="{{id}}">
+            <p class="mb-2 pre-wrap">{{note.text}}</p>
+            <p class="fw-light fs-7 mb-1 text-darkest-light">Posted: {{format_date note.createdAt}}</p>
+            <hr class="my-2">
+        </div>
         {{/each}}
     </section>
     {{!-- Right Side of Goal Page Contains the Goals Milestones --}}

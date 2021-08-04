@@ -27,6 +27,11 @@ $custom-colors: (
     "darkest-light": $darkest-light,
 );
 
+$custom-font-sizes: (
+   7: $font-size-sm 
+);
+
+$font-sizes: map-merge($font-sizes, $custom-font-sizes);
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "bootstrap/scss/mixins";
