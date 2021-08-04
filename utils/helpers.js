@@ -1,6 +1,6 @@
 module.exports = {
     format_date: date => {
-        if(date) {
+        if (date) {
             return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
         }
         return "No Date"
@@ -11,8 +11,8 @@ module.exports = {
         }
         return word;
     },
-    checkMilestoneStatus: function(milestone, options) {
-        switch (milestone.status) {
+    checkMilestoneStatus: function(status, options) {
+        switch (status) {
             case "To Do":
                 return ('<i class="fas fa-list-ul" id="icon"></i>');
             case "In Progress":
@@ -21,7 +21,7 @@ module.exports = {
                 return ('<i class="fas fa-medal fa-4x text-primary" id="icon"></i>');
         }
     },
-    getDaysDifference: function (startDate, endDate) {
+    getDaysDifference: function(startDate, endDate) {
         // Format Dates
         const date1 = new Date(startDate);
         const date2 = new Date(endDate);
@@ -33,8 +33,8 @@ module.exports = {
         const diff = date2.getTime() - date1.getTime();
 
         // Apply oneDay Conversion
-        const daysDifference = Math.round(diff/oneDay);
+        const daysDifference = Math.round(diff / oneDay);
         return daysDifference
     },
-    
+
 }

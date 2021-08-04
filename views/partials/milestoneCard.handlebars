@@ -24,7 +24,9 @@
                 <div class="col-3 my-auto">
                     <div class="d-flex justify-content-around">
                         {{!-- Dynmically changes --}}
-                        <i class="fas fa-medal fa-4x text-primary" id="icon"></i>
+                        {{!-- <i class="fas fa-medal fa-4x text-primary" id="icon"></i> --}}
+                        {{#checkMilestoneStatus status}}
+                        {{/checkMilestoneStatus}}
                     </div>
                 </div>
                 {{!-- Milestone Description --}}
