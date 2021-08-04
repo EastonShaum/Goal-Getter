@@ -4,7 +4,7 @@ tomorrow.setDate(today.getDate() + 1)
 
 let dueDate
 
-const flatpickrConfig = {
+const flatpickrNewConfig = {
     altInput: true,
     altFormat: "F j, Y",
     dateFormat: "Z",
@@ -15,16 +15,7 @@ const flatpickrConfig = {
     }
 }
 
-const initDatePickr = (element) => {
-    element.flatpickr({
-        altInput: true,
-        altFormat: "F j, Y",
-        dateFormat: "Z",
-        minDate: tomorrow,
-    });
-}
-
-const calendar = new flatpickr("#due-date-input", flatpickrConfig)
+const calendarNewGoal = new flatpickr("#due-date-input", flatpickrNewConfig)
 
 $(".modal").on("hidden.bs.modal", function () {
     $("#goal-title-input").val("");

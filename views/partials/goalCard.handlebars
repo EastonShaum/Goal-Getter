@@ -8,8 +8,8 @@
             </div>
             {{!-- Progress Bar --}}
             <div class="progress">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                    aria-valuemin="0" aria-valuemax="100">25%</div>
+                <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100" data-completed="{{complete_milestones}}" data-total="{{total_milestones}}"></div>
             </div>
             {{!-- Milestone complete/total--}}
             <h6 class="mt-2">{{complete_milestones}}/{{total_milestones}} Milestones Complete</h6>

@@ -31,9 +31,23 @@ router.get("/:id", withAuth, (req, res) => {
     })
     .then(data => {
         const goalData = data.get({ plain: true })
+        
         const today = new Date()
         goalData.today = today
+
+        if(goalData.complete_milestones === goalData.total_milestones) {
+            goalData.can_complete = true
+        } else {
+            goalData.can_complete = false
+        }
+        if(req.session.id === goalData.user_id) {
+            goalData.is_author = true
+        } else {
+            goalData.is_author = false
+        }
+
         console.log(goalData);
+
         const loggedInUser = {user_id: req.session.user_id}
         if(!data){
             res.status(404).json({ message: "No goals found with provided id"});
