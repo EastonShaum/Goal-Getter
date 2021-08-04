@@ -31,6 +31,8 @@ router.get("/:id", withAuth, (req, res) => {
     })
     .then(data => {
         const goalData = data.get({ plain: true })
+        const today = new Date()
+        goalData.today = today
         console.log(goalData);
         const loggedInUser = {user_id: req.session.user_id}
         if(!data){

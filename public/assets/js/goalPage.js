@@ -102,6 +102,14 @@ async function deleteGoalHandler(event) {
     }
 }
 
-// document.querySelector('.edit-goal-form').addEventListener('submit', editGoalHandler);
+function openEditGoalModal(event) {
+    event.preventDefault();
+    console.log("clicked")
+}
+
+$('#edit-goal-form').on('submit', editGoalHandler);
+$("#edit-goal-btn").on('click', openEditGoalModal)
+// $("#edit-goal-btn").on('shown.bs.modal', function () {
+//     myInput.focus()
+//   })
 // document.querySelector('.delete-goal-btn').addEventListener('click', deleteGoalHandler);
-$("#new-goal-form").on("submit", addGoalHandler)
