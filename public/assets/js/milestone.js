@@ -32,29 +32,40 @@ async function addMilestoneHandler(event) {
     }
 }
 
-async function editMilestoneHandler(event) {
+const getDropdownValue = (event) => {
     event.preventDefault();
 
-    const status = $('#milestone-' + milestoneId + '-status').text();
-    console.log('milestoneId', milestoneId);
-    console.log('status', status);
+    let status
 
-    console.log('id', id);
-    // const response = await fetch(`/api/milestones/${id}`, {
-    //     method: 'PUT',
-    //     body: JSON.stringify({
-    //         status
-    //     }),
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // });
+    const listElId = $('.dropdown-item').on('click', function(status) {
+        const id = $(this).attr('id');
+        status = $(this).text();
+        console.log('status', status);
 
-    // if (response.ok) {
-    //     document.location.replace('/dashboard');
-    // } else {
-    //     alert(response.statusText);
-    // }
+        $('#milestone-' + milestoneId + '-status').text(`${status}`);
+
+        editMilestoneHandler(status);
+    });
+}
+
+async function editMilestoneHandler(status) {
+
+    const response = await fetch(`/api/milestones/${milestoneId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            status
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        document.location.replace('/dashboard');
+        location.reload();
+    } else {
+        alert(response.statusText);
+    }
 }
 
 async function deleteMilestoneHandler(event) {
@@ -73,5 +84,5 @@ async function deleteMilestoneHandler(event) {
 
 
 // document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
-$('#milestone-' + milestoneId + '-status').on('click', editMilestoneHandler);
+$('#milestone-' + milestoneId + '-status').on('click', getDropdownValue);
 // document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);

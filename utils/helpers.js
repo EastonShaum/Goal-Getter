@@ -14,11 +14,11 @@ module.exports = {
     checkMilestoneStatus: function(status, options) {
         switch (status) {
             case "To Do":
-                return ('<i class="fas fa-list-ul" id="icon"></i>');
+                return ('<i class="fas fa-list-ul" style="font-size:35px"></i>');
             case "In Progress":
-                return ('<i class="fas fa-check text-success" id="icon"></i>');
+                return ('<i class="fas fa-tasks text-success" style="font-size:35px"></i>');
             case "Complete":
-                return ('<i class="fas fa-medal fa-4x text-primary" id="icon"></i>');
+                return ('<i class="fas fa-medal fa-4x text-primary" style="font-size:35px"></i>');
         }
     },
     getDaysDifference: function(startDate, endDate) {
