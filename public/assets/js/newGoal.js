@@ -152,16 +152,26 @@ const milestoneFormAdd = () => {
     let milestoneDateLabel = $("<label for='milestone-date-input-" + milestoneCounter + "'>Due Date</label>");
     dueDateContainer.append(milestoneDateInput, milestoneDateLabel);
 
-    let descriptionContainer = $("<div class='form-floating'></div>");
+    let descriptionContainer = $("<div class='form-floating mb-2'></div>");
     let milestoneDescriptionInput = $("<textarea class='form-control' placeholder='Provide a description for your 'id='milestone-description-input-" + milestoneCounter + "' style='height: 100px' spellcheck='true'></textarea>");
     let milestoneDescriptionLabel = $("<label for='milestone-description-input-" + milestoneCounter + "'>Milestone Description</label>");
     descriptionContainer.append(milestoneDescriptionInput, milestoneDescriptionLabel);
 
-    let contentWrapper = $("<div class='border border-primary mb-3 p-2'></div>");
-    contentWrapper.append(nameFieldContainer, dueDateContainer, descriptionContainer);
+    let buttonContainer = $("<div class='form-floating d-grid'></div>")
+    let deleteButton = $("<button type='button' class='btn btn-danger' id='delete-milestone-button-" + milestoneCounter + "'>Remove Milestone</button>");
+    deleteButton.on("click", deleteMilestoneField);
+    buttonContainer.append(deleteButton);
+
+    let contentWrapper = $("<div class='border border-primary mb-3 p-2' id='milestone-" + milestoneCounter + "'></div>");
+    contentWrapper.append(nameFieldContainer, dueDateContainer, descriptionContainer, buttonContainer);
     $("#submit-wrapper").before(contentWrapper);
     initDatePickr($("#milestone-date-input-" + milestoneCounter));
     milestoneCounter++;
+}
+
+const deleteMilestoneField = (event) => {
+    let milestoneNumber = event.target.id.replace( /^\D+/g, '');
+    $("#milestone-" + milestoneNumber).remove();
 }
 
 $("#new-goal-form").on("submit", addGoalHandler);
