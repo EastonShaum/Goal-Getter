@@ -1,20 +1,35 @@
 <div class="container mx-auto row g-4">
     <div class="d-flex justify-content-between align-items-center">
-        <h3 class="text-primary">{{goalData.title}}</h3>
+        <div class="d-flex align-items-center">
+            <h3 class="text-primary">{{goalData.title}}</h3>
+            {{#if goalData.is_public}}
+            <span class="fs-6 text-darkest-light fst-italic" data-public="true" id="public-val"> &nbsp;- Public Goal</span>
+            {{else}}
+            <span class="fs-6 text-darkest-light fst-italic" data-public="false" id="public-val"> &nbsp;- Private Goal</span>
+            {{/if}}
+        </div>
+        <div class="d-flex">
         <i class="fas fa-edit text-darkest-light dark-hover" id="edit-goal-btn" type="button"></i>
+        <span class="border-darkest-light mx-3 border-end border-2"></span> 
+        <i class="fas fa-trash text-darkest-light dark-hover" type="button" id="delete-goal-btn"></i>
+        </div>
     </div>
     {{>dashboard/edit-goal-modal goalData}}
     <hr class="m-1">
     {{!-- Left side of Single Goal page, contains Goal information --}}
     <section class="col-lg-6 ">
-        <h4 class="text-primary">Information</h4>
+        <div class="d-flex align-items-center">
+            <h4 class="text-primary">Information</h4>
+        </div>
         {{!-- Start Date information --}}
         <p class="fw-bold mb-0">Started: <span id="start-date">{{format_date goalData.created_at}}</span></p>
         <p class="ml-2"><span id="from-created-date">{{getDaysDifference goalData.created_at goalData.today}}</span>
             Days Ago</p>
         {{!-- Due Date information --}}
-        <p class="fw-bold mb-0">Accomplish Date: <span id="due-date">{{format_date goalData.due_date}}</span></p>
-        <p class="ml-2"><span id="to-due-date">{{getDaysDifference goalData.today goalData.due_date}}</span> {{format_plural Day }} Away
+        <p class="fw-bold mb-0">Accomplish Date: <span id="due-date" data-date="{{goalData.due_date}}">{{format_date
+                goalData.due_date}}</span></p>
+        <p class="ml-2"><span id="to-due-date">{{getDaysDifference goalData.today goalData.due_date}}</span>
+            {{format_plural Day }} Away
         </p>
         {{!-- Description --}}
         <h4 class="text-primary">Description</h4>
@@ -22,8 +37,9 @@
         {{!-- Notes --}}
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-primary">Notes</h4>
-            <p class="text-darkest-light fs-6 my-auto dark-hover" type="button" id="new-note-btn" data-bs-toggle="collapse"
-                data-bs-target="#note-collapsable-div" aria-expanded="false" aria-controls="note-collapsable-div">
+            <p class="text-darkest-light fs-6 my-auto dark-hover" type="button" id="new-note-btn"
+                data-bs-toggle="collapse" data-bs-target="#note-collapsable-div" aria-expanded="false"
+                aria-controls="note-collapsable-div">
                 <span class="fw-bold">+</span>
                 Add Note
             </p>
@@ -40,8 +56,8 @@
     <section class="col-lg-6">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="text-primary m-0">Milestones&nbsp;</h4>
-            <p class="text-darkest-light fs-6 my-auto dark-hover" type="button" id="new-milestone-btn" data-bs-toggle="collapse"
-                data-bs-target="#milestone-collapsable-div" aria-expanded="false"
+            <p class="text-darkest-light fs-6 my-auto dark-hover" type="button" id="new-milestone-btn"
+                data-bs-toggle="collapse" data-bs-target="#milestone-collapsable-div" aria-expanded="false"
                 aria-controls="milestone-collapsable-div"><span class="fw-bold">+</span>
                 Add Milestone</p>
         </div>
@@ -62,12 +78,14 @@
             {{> milestoneCard milestone}}
             {{/each}}
         </div>
-            {{else}}
+        {{else}}
         <p class="text-darkest-light">
             Seems that you haven't created any milestones associated with your goal!
             Milestones are sub-goals that help move you towards achieving your goal of "{{goalData.title}}". We
-            encourage adding a few to better flesh out your goal. 
-            <span type="button" id="new-goal-btn" class="text-primary" data-bs-toggle="collapse" data-bs-target="#milestone-collapsable-div" aria-expanded="false" aria-controls="milestone-collapsable-div">
+            encourage adding a few to better flesh out your goal.
+            <span type="button" id="new-goal-btn" class="text-primary" data-bs-toggle="collapse"
+                data-bs-target="#milestone-collapsable-div" aria-expanded="false"
+                aria-controls="milestone-collapsable-div">
                 Click here to get started!
             </span>
         </p>
@@ -75,9 +93,13 @@
     </section>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="../assets/js/logout.js"></script>
 <script src="../assets/js/tooltips.js"></script>
+<script src="../assets/js/logout.js"></script>
 <script src="../assets/js/newGoal.js"></script>
+<<<<<<< HEAD
 <script src="../assets/js/tooltips.js"></script>
 <script src="../assets/js/goalPage.js"></script>
 <script src="../assets/js/milestone.js"></script>
+=======
+<script src="../assets/js/goalPage.js"></script>
+>>>>>>> bb6ea1b8ab5d7ccc436ffc13f667b0032738e69a
