@@ -92,7 +92,7 @@ async function addGoalHandler(event) {
                             milestoneGoal_id,
                         });
 
-                        if (milestoneTitle && milestoneDescription && milestoneDue_date && milestoneGoal_id) {
+                        if (milestoneTitle && milestoneDue_date && milestoneGoal_id) {
                             addMilestoneHandler(milestoneTitle, milestoneDescription, milestoneDue_date, is_public, milestoneGoal_id, user_id); 
                         } else {
                             deleteGoalHandler(milestoneGoal_id);
