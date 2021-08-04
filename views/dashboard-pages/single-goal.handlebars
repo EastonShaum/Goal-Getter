@@ -1,7 +1,7 @@
 <div class="container mx-auto row g-4">
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <h3 class="text-primary">{{goalData.title}}</h3>
+            <h3 class="text-primary" id="goal-title" data-goal-id="{{goalData.id}}">{{goalData.title}}</h3>
             {{#if goalData.is_public}}
             <span class="fs-6 text-darkest-light fst-italic" data-public="true" id="public-val"> &nbsp;- Public Goal</span>
             {{else}}
@@ -46,10 +46,15 @@
         </div>
         {{!-- Create New Note Form--}}
         {{>dashboard/new-note-collapsable}}
+        {{#if goalData.notes}}
+        <hr class="mt-0 mb-2">
+        {{/if}}
         {{#each goalData.notes as |note|}}
-        <p>{{note.text}}</p>
-        <p class="fw-light text-darkest-light">Posted: {{format_date note.created_at}}</p>
-        <hr class="my-0 mx-3">
+        <div note-id="{{id}}">
+            <p class="mb-2">{{note.text}}</p>
+            <p class="fw-light fs-7 mb-1 text-darkest-light">Posted: {{format_date note.createdAt}}</p>
+            <hr class="my-2">
+        </div>
         {{/each}}
     </section>
     {{!-- Right Side of Goal Page Contains the Goals Milestones --}}

@@ -12,6 +12,20 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/', (req, res) => {
+    Note.findAll({
+        where: {
+
+        },
+            attributes: ['id', 'text', 'goal_id', 'milestone_id']
+        })
+        .then(dbNoteData => res.json(dbNoteData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
 router.post('/', (req, res) => {
     Note.create({
             text: req.body.text,
