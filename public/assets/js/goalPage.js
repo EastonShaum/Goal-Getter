@@ -211,8 +211,8 @@ function openDeleteGoalModal(event) {
 }
 
 function enableDeleteBtn(){
-    let timeLeft = 4
-    $("#delete-timer").text("5");
+    let timeLeft = 2
+    $("#delete-timer").text("3");
 
     const disableTimer = setInterval(function() {
         $("#delete-timer").text(timeLeft.toString());
@@ -227,6 +227,10 @@ function enableDeleteBtn(){
 
     disableTimer
 }
+
+$(".modal").on("hidden.bs.modal", function () {
+    $("#delete-goal-confirm").addClass("disabled");
+});
 
 // =======================================================
 // EVENT LISTENERS
