@@ -23,7 +23,7 @@ Milestone.init({
         type: DataTypes.STRING,
         allowNull: true,
         validate: {
-            isAfter: new Date()
+            isAfter: tomorrowsDate()
         }
     },
     is_public: {
@@ -49,7 +49,7 @@ Milestone.init({
     },
     status: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
         defaultValue: "To Do", // To Do, In Progress, Completed
     }
 }, {
