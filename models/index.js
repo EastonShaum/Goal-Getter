@@ -17,13 +17,16 @@ Milestone.belongsTo(Goal);
 Milestone.hasMany(Note);
 Goal.hasMany(Note);
 
+Milestone.belongsTo(User);
+User.hasMany(Milestone);
+
 Note.belongsTo(Goal);
 Note.belongsTo(Milestone);
 
 Goal.belongsToMany(Tag, {
     through: Goaltag,
     // as: 'tags',
-    foreginKey: 'goal_id'
+    foreignKey: 'goal_id'
 });
 Tag.belongsToMany(Goal, {
     through: Goaltag,

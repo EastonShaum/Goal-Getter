@@ -19,6 +19,9 @@
     {{>dashboard/edit-goal-modal goalData}}
     {{>dashboard/delete-goal-modal goalData}}
     <hr class="m-1">
+    {{#unless goalData.completed}}
+    <button class="btn flex-1 btn-secondary mb-2 mt-4 fw-bold get-started-btn d-none" id="goal-complete-btn">Complete Goal!</button>
+    {{/unless}}
     {{!-- Left side of Single Goal page, contains Goal information --}}
     <section class="col-lg-6 ">
         <div class="d-flex align-items-center">
@@ -63,7 +66,7 @@
     {{!-- Right Side of Goal Page Contains the Goals Milestones --}}
     <section class="col-lg-6">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-primary m-0">Milestones&nbsp;</h4>
+            <h4 class="text-primary m-0" id="milestone-header" data-total-milestone="{{goalData.total_milestones}}" data-complete-milestone="{{goalData.complete_milestones}}">Milestones&nbsp;</h4>
             <p class="text-darkest-light fs-6 my-auto dark-hover" type="button" id="new-milestone-btn"
                 data-bs-toggle="collapse" data-bs-target="#milestone-collapsable-div" aria-expanded="false"
                 aria-controls="milestone-collapsable-div"><span class="fw-bold">+</span>
@@ -108,3 +111,6 @@
 <script src="../assets/js/goalPage.js"></script>
 <script src="../assets/js/milestone.js"></script>
 <script src="../assets/js/percentageBar.js"></script>
+{{#unless goalData.completed}}
+<script src="../assets/js/completeGoal.js"></script>
+{{/unless}}

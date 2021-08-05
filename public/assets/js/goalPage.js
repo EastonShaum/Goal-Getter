@@ -75,8 +75,6 @@ function getNoteObj (event) {
     createNoteHandler(noteObj)
 }
 
-
-
 // =======================================================
 // CALENDAR JS FUNCTIONS AND OBJECTS
 // =======================================================
@@ -118,7 +116,7 @@ async function editGoalHandler(event) {
     ];
     // Verifies that the goal was edited, if not throws error
     if (objDiff(ogGoal, editGoal).length > 0) {
-        if (editGoal.title && editGoal.description && editGoal.due_date && editGoal.user_id) {
+        if (editGoal.title || editGoal.description || editGoal.due_date || editGoal.user_id || editGoal.completed) {
             const response = await fetch(`/api/goals/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(editGoal),
@@ -231,6 +229,8 @@ function enableDeleteBtn(){
 $(".modal").on("hidden.bs.modal", function () {
     $("#delete-goal-confirm").addClass("disabled");
 });
+
+
 
 // =======================================================
 // EVENT LISTENERS
