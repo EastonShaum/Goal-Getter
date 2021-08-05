@@ -16,6 +16,7 @@ router.get('/', withAuth, (req, res) => {
                 'due_date',
                 'is_public',
                 'user_id',
+                'completed_date',
                 'completed',
                 'created_at', [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.goal_id = goal.id)"), "total_milestones"],
                 [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Complete' AND milestone.goal_id = goal.id)"), "complete_milestones"],
@@ -59,7 +60,9 @@ router.get('/', withAuth, (req, res) => {
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'completed', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id',
+                        'completed_date', 'completed', 'created_at'
+                    ],
                     include: {
                         model: Team,
                         attributes: ['name']
@@ -83,7 +86,9 @@ router.get('/', withAuth, (req, res) => {
 
 router.get('/edit/:id', withAuth, (req, res) => {
     Goal.findByPk(req.params.id, {
-            attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'completed', 'created_at'],
+            attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id',
+                'completed_date', 'completed', 'created_at'
+            ],
             include: [{
                     model: Team,
                     attributes: ['id', 'name', 'motto'],
@@ -125,7 +130,9 @@ router.get('/edit/:id', withAuth, (req, res) => {
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id', 'status'],
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id', 'completed', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id',
+                        'completed_date', 'completed', 'created_at'
+                    ],
                     include: {
                         model: Team,
                         attributes: ['name']

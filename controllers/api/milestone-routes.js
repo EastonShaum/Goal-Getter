@@ -17,7 +17,9 @@ router.get('/:id', (req, res) => {
             },
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'user_id', 'completed', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'user_id',
+                        'completed_date', 'completed', 'created_at'
+                    ],
                 },
                 {
                     model: User,
