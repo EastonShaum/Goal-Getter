@@ -17,6 +17,7 @@ router.get('/', withAuth, (req, res) => {
                 'due_date',
                 'is_public',
                 'user_id',
+                'completed_date',
                 'completed',
                 'created_at', [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Complete' AND milestone.goal_id = goal.id)"), "complete_milestones"],
             ],
