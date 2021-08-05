@@ -31,6 +31,12 @@
 
   Github: [EastonShaum](https://github.com/EastonShaum)
   Email:  eastonshaum@gmail.com
+  Github: [JamieVesterfelt](https://github.com/jvesterfelt)
+  Email:  jamie.e.vesterfelt@gmail.com
+  Github: [JakePedigo](https://github.com/jbped)
+  Email:  pedigojacob@gmail.com
+  Github: [BoDeeAngus](https://github.com/NYX1122)
+  Email:  nyx0hemir@gmail.com
 
   ## License
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
