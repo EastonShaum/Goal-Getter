@@ -18,7 +18,7 @@ router.get('/', withAuth, (req, res) => {
                 'user_id',
                 'completed',
                 'created_at', [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.goal_id = goal.id)"), "total_milestones"],
-                [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Completed' AND milestone.goal_id = goal.id)"), "complete_milestones"],
+                [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Complete' AND milestone.goal_id = goal.id)"), "complete_milestones"],
             ],
             include: [{
                     model: Team,

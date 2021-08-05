@@ -40,7 +40,7 @@ async function addGoalHandler(event) {
     // can use the jquery datepicker function to turn a modal into a calendar
     const due_date = $('#due-date-input').val();
 
-    const is_public = getIsPublic()
+    const is_public = getIsPublic();
 
     const user_id = $("#new-goal-form").attr("user-id");
 
