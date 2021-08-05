@@ -53,7 +53,8 @@ router.get('/', withAuth, (req, res) => {
 router.get('/', withAuth, (req, res) => {
     Milestone.findAll({
             where: {
-                user_id: req.session.user_id
+                user_id: req.session.user_id,
+                completed: false
             },
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id'],
             include: [{
