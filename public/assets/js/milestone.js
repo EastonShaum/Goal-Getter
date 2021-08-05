@@ -1,5 +1,3 @@
-const milestoneId = $('.milestone-card').attr('data-milestone-id');
-
 async function addMilestoneHandler(event) {
     event.preventDefault();
 
@@ -32,29 +30,8 @@ async function addMilestoneHandler(event) {
     }
 }
 
-const getDropdownValue = (event) => {
-    event.preventDefault();
-
-    let status
-
-    const listElId = $('.dropdown-item').on('click', function(status) {
-        const id = $(this).attr('id');
-        status = $(this).text();
-        console.log('status', status);
-
-        $('#milestone-' + milestoneId + '-status').text(`${status}`);
-
-        if (status === 'Delete') {
-            deleteMilestoneHandler();
-        } else {
-            editMilestoneHandler(status);
-        }
-    });
-}
-
-async function editMilestoneHandler(status) {
-
-    const response = await fetch(`/api/milestones/${milestoneId}`, {
+async function editMilestoneHandler(id, status) {
+    const response = await fetch(`/api/milestones/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
             status
@@ -63,28 +40,45 @@ async function editMilestoneHandler(status) {
             'Content-Type': 'application/json'
         }
     });
-
     if (response.ok) {
-        document.location.replace('/dashboard');
         location.reload();
     } else {
         alert(response.statusText);
     }
 }
 
-async function deleteMilestoneHandler() {
-    const response = await fetch(`/api/milestones/${milestoneId}`, {
+async function deleteMilestoneHandler(id) {
+    const response = await fetch(`/api/milestones/${id}`, {
         method: 'DELETE'
     });
-
+    
     if (response.ok) {
-        document.location.replace('/dashboard');
+        location.reload();
     } else {
         alert(response.statusText);
     }
 }
 
-
+$('.dropdown-toggle').on('click', function() {
+    let id = $(this).attr('milestone-id');
+    $(this).next().find('li.todo').on('click', function() {
+        let newStatus = $(this).text();
+        $(this).parent().prev().html(newStatus);
+        editMilestoneHandler(id, newStatus);
+    });
+    $(this).next().find('li.inprogress').on('click', function() {
+        let newStatus = $(this).text();
+        $(this).parent().prev().html(newStatus);
+        editMilestoneHandler(id, newStatus);
+    });
+    $(this).next().find('li.complete').on('click', function() {
+        let newStatus = $(this).text();
+        $(this).parent().prev().html(newStatus);
+        editMilestoneHandler(id, newStatus);
+    });
+    $(this).next().find('li.text-danger').on('click', function() {
+        deleteMilestoneHandler(id);
+    });
+});
 // document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
-$('#milestone-' + milestoneId + '-status').on('click', getDropdownValue);
 // document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);
