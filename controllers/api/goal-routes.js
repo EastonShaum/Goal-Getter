@@ -75,6 +75,7 @@ router.post('/', (req, res) => {
                 due_date: req.body.due_date,
                 is_public: req.body.is_public,
                 user_id: req.session.user_id,
+                completed_date: req.body.completed_date,
                 completed: req.body.completed
             })
             .then(dbGoalData => res.json(dbGoalData))
