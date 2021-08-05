@@ -14,8 +14,11 @@ Goal.belongsTo(User);
 Goal.hasMany(Milestone);
 Milestone.belongsTo(Goal);
 
-Milestone.hasOne(Note);
-Goal.hasOne(Note);
+Milestone.hasMany(Note);
+Goal.hasMany(Note);
+
+Note.belongsTo(Goal);
+Note.belongsTo(Milestone);
 
 Goal.belongsToMany(Tag, {
     through: Goaltag,

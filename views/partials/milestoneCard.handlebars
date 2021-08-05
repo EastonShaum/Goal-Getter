@@ -1,21 +1,21 @@
 <article class="col">
-    <div class="card milestone-card" data-milestone-id={{id}}>
+    <div class="card milestone-card" data-milestone-id="{{id}}">
         <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
                 {{!-- Milestone information --}}
                 <div class="d-flex align-items-center text-elipsis">
-                    <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{title}}">{{title}}&nbsp;</h4>
-                    <span class="fw-bold fs-6 text-success mt-1" id="due-date"> - {{format_date due_date}}&nbsp;</span>
+                    <h4 id="milestone-title" class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{title}}">{{title}}&nbsp;</h4>
+                    <span class="fw-bold fs-6 text-success mt-1" id="milestone-due-date"> - {{format_date due_date}}&nbsp;</span>
                 </div>
                 {{!-- Milestone status dropdown --}}
                 <div class="dropdown">
                     <button class="btn btn-secondary py-0 dropdown-toggle" type="button" id="milestone-{{id}}-status" data-bs-toggle="dropdown" aria-expanded="false">{{status}}</button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="milestone-{{id}}-status">
-                        <li class="dropdown-item">To Do</li>
-                        <li class="dropdown-item">In Progress</li>
-                        <li class="dropdown-item">Complete</li>
+                    <ul class="dropdown-menu dropdown-menu-end" id="milestone-list" aria-labelledby="milestone-{{id}}-status">
+                        <li class="dropdown-item " id="to-do">To Do</li>
+                        <li class="dropdown-item " id="in-progress">In Progress</li>
+                        <li class="dropdown-item " id="complete">Complete</li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item text-danger">Delete</li>
+                        <li class="dropdown-item text-danger selected">Delete</li>
                     </ul>
                 </div>
             </div>
@@ -24,13 +24,12 @@
                 <div class="col-3 my-auto">
                     <div class="d-flex justify-content-around">
                         {{!-- Dynmically changes --}}
-                        {{!-- <i class="fas fa-medal fa-4x text-primary" id="icon"></i> --}}
                         {{#checkMilestoneStatus status}}
                         {{/checkMilestoneStatus}}
                     </div>
                 </div>
                 {{!-- Milestone Description --}}
-                <p class="col-9 my-auto">
+                <p class="col-9 my-auto" id="milestone-description">
                     {{description}}
                 </p>
             </div>

@@ -1,14 +1,16 @@
 <div class="modal" tabindex="-1" id="edit-goal-modal">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content p-3">
-            <h3 class="fw-bold text-secondary">Edit Goal</h3>
+            <div id="edit-modal-header">
+                <h3 class="fw-bold text-secondary">Edit Goal</h3>
+            </div>
             <form action="" id="edit-goal-form" user-id="{{user_id}}">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="goal-title-edit" value="{{title}}">
                     <label for="goal-title-edit">Goal Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="datetime-local" class="form-control" id="due-date-edit" value="{{due-date}}">
+                    <input type="datetime-local" class="form-control" id="due-date-edit">
                     <label for="due-date-edit">Due Date</label>
                 </div>
                 <div class="form-floating mb-3">
@@ -16,7 +18,7 @@
                     <label for="goal-description-edit">Goal Description</label>
                 </div>
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" value="" id="public-goal-checkbox">
+                    <input class="form-check-input" type="checkbox" value="" id="public-goal-checkbox-edit">
                     <label class="form-check-label" for="public-goal-checkbox-edit">
                         Would you like this goal to be visible to other Goal Getters?
                     </label>

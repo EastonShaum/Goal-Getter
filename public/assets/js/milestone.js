@@ -1,3 +1,5 @@
+const milestoneId = $('.milestone-card').attr('data-milestone-id');
+
 async function addMilestoneHandler(event) {
     event.preventDefault();
 
@@ -30,52 +32,48 @@ async function addMilestoneHandler(event) {
     }
 }
 
-async function editMilestoneHandler(event) {
+const getDropdownValue = (event) => {
     event.preventDefault();
 
-    const title = document.querySelector('input[name="milestone-title"]').value.trim();
-    const description = document.querySelector('input[name="milestone-description"]').value.trim();
+    let status
 
-    // can use the jquery datepicker function to turn a modal into a calendar
-    const dueDate = document.querySelector('input[name="milestone-dueDate"]').value.trim();
+    const listElId = $('.dropdown-item').on('click', function(status) {
+        const id = $(this).attr('id');
+        status = $(this).text();
+        console.log('status', status);
 
-    // Use a radio button for this so that a boolean value can be used
-    const isPublic = document.querySelector('.milestone-isPublic').value;
+        $('#milestone-' + milestoneId + '-status').text(`${status}`);
 
-    const id = window.location.toString().split('/')[
-        window.location.toString().split('/').length - 1
-    ];
-
-    if (title && description && isPublic) {
-        const response = await fetch(`/api/milestones/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                title,
-                description,
-                dueDate,
-                isPublic
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (response.ok) {
-            document.location.replace('/dashboard');
+        if (status === 'Delete') {
+            deleteMilestoneHandler();
         } else {
-            alert(response.statusText);
+            editMilestoneHandler(status);
         }
+    });
+}
+
+async function editMilestoneHandler(status) {
+
+    const response = await fetch(`/api/milestones/${milestoneId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            status
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        document.location.replace('/dashboard');
+        location.reload();
+    } else {
+        alert(response.statusText);
     }
 }
 
-async function deleteMilestoneHandler(event) {
-    event.preventDefault();
-
-    const id = window.location.toString().split('/')[
-        window.location.toString().split('/').length - 1
-    ];
-
-    const response = await fetch(`/api/milestones/${id}`, {
+async function deleteMilestoneHandler() {
+    const response = await fetch(`/api/milestones/${milestoneId}`, {
         method: 'DELETE'
     });
 
@@ -87,6 +85,6 @@ async function deleteMilestoneHandler(event) {
 }
 
 
-document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
-document.querySelector(".edit-goal-form").addEventListener('', editMilestoneHandler);
-document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);
+// document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
+$('#milestone-' + milestoneId + '-status').on('click', getDropdownValue);
+// document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);

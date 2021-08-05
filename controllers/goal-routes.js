@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User, Team, Milestone, Goal, Tag } = require('../models');
+const { User, Team, Note, Milestone, Goal, Tag } = require('../models');
 const withAuth = require('../utils/auth');
 
 // GET SINGLE GOAL AND MILESTONES
@@ -25,13 +25,16 @@ router.get("/:id", withAuth, (req, res) => {
         include: [
             {
                 model: Milestone,
+            }, 
+            {
+                model: Note
             }
         ],
         plain: true
     })
     .then(data => {
         const goalData = data.get({ plain: true })
-        
+
         const today = new Date()
         goalData.today = today
 
@@ -40,7 +43,7 @@ router.get("/:id", withAuth, (req, res) => {
         } else {
             goalData.can_complete = false
         }
-        if(req.session.id === goalData.user_id) {
+        if(req.session.user_id === goalData.user_id) {
             goalData.is_author = true
         } else {
             goalData.is_author = false
