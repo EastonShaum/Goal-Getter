@@ -19,7 +19,7 @@ async function signupFormHandler(event) {
         });
 
         if (response.ok) {
-            alert('account created');
+            //alert('account created');
             document.location.replace('/dashboard');
         } else {
             response.json().then(function(data) {
