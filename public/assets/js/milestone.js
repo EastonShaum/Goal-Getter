@@ -1,31 +1,44 @@
 const milestoneId = $('.milestone-card').attr('data-milestone-id');
 
+const getMilestoneIsPublic = () => {
+    if ($('#public-milestone-checkbox').is(":checked")) {
+        return is_public = true
+    }
+    return is_public = false
+}
+
+const flatpickrNewMilestoneConfig = {
+    altInput: true,
+    altFormat: "F j, Y",
+    dateFormat: "Z",
+    minDate: tomorrow,
+}
+
+const calendarNewMilestone = new flatpickr("#milestone-due-date-input", flatpickrNewMilestoneConfig)
+
 async function addMilestoneHandler(event) {
     event.preventDefault();
 
-    const title = document.querySelector('input[name="milestone-title"]').value.trim();
-    const description = document.querySelector('input[name="milestone-description"]').value.trim();
+    milestoneObj = {
+        title: $("#milestone-title-input").val().trim(),
+        description: $("#milestone-description-input").val().trim(),
+        due_date: $("#milestone-due-date-input").val().trim(),
+        is_public: getMilestoneIsPublic(),
+        goal_id: $("#goal-title").attr("data-goal-id"),
+        user_id: $("#goal-title").attr("data-logged-in-user"),
+    }
 
-    // can use the jquery datepicker function to turn a modal into a calendar
-    const dueDate = document.querySelector('input[name="milestone-dueDate"]').value.trim();
+    console.log(milestoneObj)
 
-    // Use a radio button for this so that a boolean value can be used
-    const isPublic = document.querySelector('.milestone-isPublic').value;
-
-    if (title && description && isPublic) {
+    if (milestoneObj.title && milestoneObj.description && milestoneObj.due_date && milestoneObj.goal_id && milestoneObj.user_id) {
         const response = await fetch('/api/milestones', {
             method: 'POST',
-            body: JSON.stringify({
-                title,
-                description,
-                dueDate,
-                isPublic
-            }),
+            body: JSON.stringify(milestoneObj),
             headers: { 'Content-Type': 'application/json' }
         });
 
         if (response.ok) {
-            document.location.replace('/dashboard');
+            location.reload();
         } else {
             alert(response.statusText);
         }
@@ -78,13 +91,12 @@ async function deleteMilestoneHandler() {
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard');
+        location.reload();
     } else {
         alert(response.statusText);
     }
 }
 
 
-// document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
 $('#milestone-' + milestoneId + '-status').on('click', getDropdownValue);
-// document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);
+$("#new-milestone-form").on("submit", addMilestoneHandler)

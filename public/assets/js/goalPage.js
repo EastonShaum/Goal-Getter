@@ -33,8 +33,6 @@ const ogGoal = {
     completed: false
 }
 
-console.log(ogGoal)
-
 // Create Update Note for the changes made to the goal.
 const updateNotes = (editedKeys, editGoal) => {
     if(editedKeys.length > 0) {

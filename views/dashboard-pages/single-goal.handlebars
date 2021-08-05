@@ -1,7 +1,7 @@
 <div class="container mx-auto row g-4">
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <h3 class="text-primary" id="goal-title" data-goal-id="{{goalData.id}}">{{goalData.title}}</h3>
+            <h3 class="text-primary" id="goal-title" data-goal-id="{{goalData.id}}" data-logged-in-user="{{loggedInUser.user_id}}">{{goalData.title}}</h3>
             {{#if goalData.is_public}}
             <span class="fs-6 text-darkest-light fst-italic" data-public="true" id="public-val"> &nbsp;- Public Goal</span>
             {{else}}
@@ -75,7 +75,7 @@
             Milestones Completed</span>
         <div class="progress">
             <div class="progress-bar bg-primary single-progress" role="progressbar" style="width: 0%;" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100" data-completed="{{goalData.complete_milestones}}" data-total="{{goalData.total_milestones}}"">0%</div>
+                aria-valuemin="0" aria-valuemax="100" data-completed="{{goalData.complete_milestones}}" data-total="{{goalData.total_milestones}}">0%</div>
         </div>
         {{/if}}
         {{!-- Add new milestone collapsable form --}}
