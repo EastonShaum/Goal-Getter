@@ -1,28 +1,39 @@
+let tomorr = new Date()
+tomorr.setDate(today.getDate() + 1)
+
 function initDatePickr(element) {
     element.flatpickr({
         altInput: true,
         altFormat: "F j, Y",
         dateFormat: "Z",
+        minDate: tomorr
     });
+}
+
+const getPublic = () => {
+    if ($('#public-milestone-checkbox').is(":checked")) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 initDatePickr($('#milestone-due-date-input'));
 
 async function addMilestoneHandler(event) {
-    event.preventDefault();
 
     milestoneObj = {
         title: $("#milestone-title-input").val().trim(),
         description: $("#milestone-description-input").val().trim(),
         due_date: $("#milestone-due-date-input").val().trim(),
-        is_public: getMilestoneIsPublic(),
+        is_public: getPublic(),
         goal_id: $("#goal-title").attr("data-goal-id"),
     }
 
 
     console.log(milestoneObj)
 
-    if (milestoneObj.title && milestoneObj.description && milestoneObj.due_date && milestoneObj.goal_id && milestoneObj.user_id) {
+    if (milestoneObj.title && milestoneObj.description && milestoneObj.due_date && milestoneObj.goal_id) {
         const response = await fetch('/api/milestones', {
             method: 'POST',
             body: JSON.stringify(milestoneObj),
@@ -30,7 +41,7 @@ async function addMilestoneHandler(event) {
         });
 
         if (response.ok) {
-            //location.reload();
+            location.reload();
         } else {
             alert(response.statusText);
         }
@@ -89,6 +100,6 @@ $('.dropdown-toggle').on('click', function() {
         deleteMilestoneHandler(id);
     });
 });
-$('#milestone-add').on('submit', addMilestoneHandler);
+$('#milestone-add').on('click', addMilestoneHandler);
 // document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
 // document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);
