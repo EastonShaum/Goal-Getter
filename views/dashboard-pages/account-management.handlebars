@@ -1,0 +1,21 @@
+<div class="container mx-auto row g-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <h3 class="text-primary" id="account-title">{{goalData.title}}</h3>
+        </div>
+        <div class="d-flex">
+            <i class="fas fa-edit text-darkest-light dark-hover" id="edit-acct-btn" type="button"></i>
+            <span class="border-darkest-light mx-3 border-end border-2"></span> 
+            <i class="fas fa-trash text-darkest-light dark-hover" type="button" id="delete-acct-modal-btn"></i>
+        </div>
+    </div>
+    {{>dashboard/edit-goal-modal goalData}}
+    {{>dashboard/delete-goal-modal goalData}}
+    <hr class="m-1">
+    {{!-- Left side of Single Goal page, contains Goal information --}}
+    <section class="col-lg-6 ">
+        
+    </section>
+</div>
+<script src="../assets/js/tooltips.js"></script>
+<script src="../assets/js/logout.js"></script>

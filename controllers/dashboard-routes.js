@@ -36,11 +36,6 @@ router.get('/', withAuth, (req, res) => {
         })
         .then(dbGoalData => {
             const goals = dbGoalData.map(goal => goal.get({ plain: true }));
-            
-            
-
-
-            console.log(goals)
             const loggedInUser = { user_id: req.session.user_id }
             res.render('dashboard-pages/myGoals', { layout: "dashboard", goals, loggedIn: true, loggedInUser })
         })

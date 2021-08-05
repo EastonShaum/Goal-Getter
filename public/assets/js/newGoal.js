@@ -53,6 +53,7 @@ async function addGoalHandler(event) {
     })
 
     if (title && description && due_date && user_id) {
+        console.log("true")
         const response = await fetch('/api/goals', {
             method: 'POST',
             body: JSON.stringify({
