@@ -100,6 +100,6 @@ $('.dropdown-toggle').on('click', function() {
         deleteMilestoneHandler(id);
     });
 });
-$('#milestone-add').on('click', addMilestoneHandler);
+$('#new-milestone-form').on('submit', addMilestoneHandler);
 // document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
 // document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);
