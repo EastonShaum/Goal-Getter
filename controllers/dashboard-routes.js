@@ -36,8 +36,8 @@ router.get('/', withAuth, (req, res) => {
         })
         .then(dbGoalData => {
             const goals = dbGoalData.map(goal => goal.get({ plain: true }));
-            
-            
+
+
 
 
             console.log(goals)
