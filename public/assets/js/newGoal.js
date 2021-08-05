@@ -17,6 +17,15 @@ const flatpickrNewConfig = {
 
 const calendarNewGoal = new flatpickr("#due-date-input", flatpickrNewConfig)
 
+function initDatePickr(element) {
+    element.flatpickr({
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Z",
+        minDate: tomorrow
+    });
+}
+
 $(".modal").on("hidden.bs.modal", function () {
     $("#goal-title-input").val("");
     $("#due-date-input").val("");
