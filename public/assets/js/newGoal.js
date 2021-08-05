@@ -81,7 +81,7 @@ async function addGoalHandler(event) {
                 if (milestoneCounter > 1) {
                     for (let i = 1; i < milestoneCounter; i++) {
                         let milestoneTitle = $('#milestone-title-input-' + i).val();
-                        let milestoneDue_date = $('#milestone-date-input-' + i).val();
+                        let milestoneDue_date = $('#milestone-date-input-' + i).val().toString();
                         let milestoneDescription = $('#milestone-description-input-' + i).val();
                         let milestoneGoal_id = data.id;
 
@@ -93,7 +93,7 @@ async function addGoalHandler(event) {
                         });
 
                         if (milestoneTitle && milestoneDue_date && milestoneGoal_id) {
-                            addMilestoneHandler(milestoneTitle, milestoneDescription, milestoneDue_date, is_public, milestoneGoal_id, user_id); 
+                            addMilestoneHandler(milestoneTitle, milestoneDescription, milestoneDue_date, is_public, milestoneGoal_id); 
                         } else {
                             deleteGoalHandler(milestoneGoal_id);
                             break;
@@ -106,23 +106,23 @@ async function addGoalHandler(event) {
                 }
             })
             // $("#new-goal-modal").modal("toggle");
-            // location.reload()
+            //location.reload()
         } else {
             alert(response.statusText);
         }
     }
 }
 
-async function addMilestoneHandler(title, description, due_date, public, goal_id, user_id) {
+async function addMilestoneHandler(title, description, due_date, is_public, goal_id) {
+    console.log(title, description, due_date, is_public, goal_id);
     let milestoneResponse = await fetch('/api/milestones', {
         method: 'POST',
         body: JSON.stringify({
             title,
             description,
             due_date,
-            public,
-            goal_id,
-            user_id
+            is_public,
+            goal_id
         }),
         headers: { 'Content-Type': 'application/json' }
     });

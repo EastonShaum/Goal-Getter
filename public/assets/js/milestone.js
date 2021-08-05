@@ -3,7 +3,6 @@ function initDatePickr(element) {
         altInput: true,
         altFormat: "F j, Y",
         dateFormat: "Z",
-        minDate: tomorrow
     });
 }
 
@@ -18,8 +17,8 @@ async function addMilestoneHandler(event) {
         due_date: $("#milestone-due-date-input").val().trim(),
         is_public: getMilestoneIsPublic(),
         goal_id: $("#goal-title").attr("data-goal-id"),
-        user_id: $("#goal-title").attr("data-logged-in-user"),
     }
+
 
     console.log(milestoneObj)
 
@@ -31,10 +30,12 @@ async function addMilestoneHandler(event) {
         });
 
         if (response.ok) {
-            location.reload();
+            //location.reload();
         } else {
             alert(response.statusText);
         }
+    } else {
+        alert('Please fill out all form fields before pushing submit.');
     }
 }
 
@@ -88,5 +89,6 @@ $('.dropdown-toggle').on('click', function() {
         deleteMilestoneHandler(id);
     });
 });
+$('#milestone-add').on('submit', addMilestoneHandler);
 // document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
 // document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);
