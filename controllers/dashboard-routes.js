@@ -6,8 +6,8 @@ const withAuth = require('../utils/auth');
 router.get('/', withAuth, (req, res) => {
     Goal.findAll({
             where: {
-                // user_id: 1
-                user_id: req.session.user_id
+                user_id: req.session.user_id,
+                completed: false
             },
             attributes: [
                 'id',
