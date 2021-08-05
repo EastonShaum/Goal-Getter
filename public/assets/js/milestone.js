@@ -1,3 +1,14 @@
+function initDatePickr(element) {
+    element.flatpickr({
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Z",
+        minDate: tomorrow
+    });
+}
+
+initDatePickr($('#milestone-due-date-input'));
+
 async function addMilestoneHandler(event) {
     event.preventDefault();
 

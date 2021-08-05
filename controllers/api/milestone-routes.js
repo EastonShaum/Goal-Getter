@@ -44,6 +44,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     if (req.session) {
+        console.log(req.body);
         Milestone.create({
                 title: req.body.title,
                 description: req.body.description,

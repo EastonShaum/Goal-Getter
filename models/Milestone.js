@@ -23,7 +23,7 @@ Milestone.init({
         type: DataTypes.STRING,
         allowNull: true,
         validate: {
-            isAfter: tomorrowsDate()
+            isAfter: new Date()
         }
     },
     is_public: {

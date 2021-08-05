@@ -113,13 +113,13 @@ async function addGoalHandler(event) {
     }
 }
 
-async function addMilestoneHandler(title, description, date, public, goal_id, user_id) {
+async function addMilestoneHandler(title, description, due_date, public, goal_id, user_id) {
     let milestoneResponse = await fetch('/api/milestones', {
         method: 'POST',
         body: JSON.stringify({
             title,
             description,
-            date,
+            due_date,
             public,
             goal_id,
             user_id
