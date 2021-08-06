@@ -4,18 +4,21 @@
             <div class="d-flex align-items-center mb-2 text-elipsis">
                 <h4 class="text-primary fw-bold m-0">{{title}}&nbsp;</h4>
                 {{!-- <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Goal Title">Goal Title&nbsp;</h4> --}}
-                <span class="fw-bold fs-6 text-success mt-1"> - Complete</span>
+                <span class="fw-bold fs-6 text-success mt-1"> - Completed {{format_date completed_date}}</span>
                 {{!-- <span class="fw-bold fs-6 text-success mt-1 text-nowrap"> - 8/30/2021</span> --}}
             </div>
             <div>
-                <p>
-                <i class="fas fa-trophy text-primary" style="font-size: xx-large;"></i>
-                
+                <div class="row">
+                {{!-- Completed Icon --}}
+                <div class="col-3 my-auto">
+                    <div class="d-flex justify-content-around">
+                        <i class="fas fa-trophy text-primary" style="font-size: xx-large;"></i>
+                    </div>
+                    {{!-- Goal Description --}}
+                </div>
+                    <p class="col-9 my-auto" id="milestone-description">
                     {{description}}
-                    {{!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo tenetur commodi similique eius
-                    provident laborum ea est minus aperiam adipisci sequi ipsum culpa iure exercitationem autem a error,
-                    repudiandae asperiores? --}}
-                </p>
+                    </p>
             </div>
         </div>
     </div>

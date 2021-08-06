@@ -30,6 +30,13 @@ Goal.init({
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
+    completed_date: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            isDate: true
+        }
+    },
     completed: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,

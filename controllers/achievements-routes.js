@@ -19,6 +19,7 @@ router.get('/', withAuth, (req, res) => {
                 'user_id',
                 'completed_date',
                 'completed',
+                'completed_date',
                 'created_at', [sequelize.literal("(SELECT COUNT(*) FROM milestone WHERE milestone.status = 'Complete' AND milestone.goal_id = goal.id)"), "complete_milestones"],
             ],
             include: [{
@@ -37,10 +38,6 @@ router.get('/', withAuth, (req, res) => {
         })
         .then(dbGoalData => {
             const goals = dbGoalData.map(goal => goal.get({ plain: true }));
-
-
-
-
             console.log(goals)
             const loggedInUser = { user_id: req.session.user_id }
             res.render('dashboard-pages/achievements', { layout: "dashboard", goals, loggedIn: true, loggedInUser })

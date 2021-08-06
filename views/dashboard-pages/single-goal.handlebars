@@ -29,13 +29,11 @@
         </div>
         {{!-- Start Date information --}}
         <p class="fw-bold mb-0">Started: <span id="start-date">{{format_date goalData.created_at}}</span></p>
-        <p class="ml-2"><span id="from-created-date">{{getDaysDifference goalData.created_at goalData.today}}</span>
-            {{format_plural "day" Day}} Ago</p>
+        <p class="ml-2"><span id="from-created-date">{{getDaysAgo goalData.created_at goalData.today}}</span></p>
         {{!-- Due Date information --}}
         <p class="fw-bold mb-0">Accomplish Date: <span id="due-date" data-date="{{goalData.due_date}}">{{format_date
                 goalData.due_date}}</span></p>
-        <p class="ml-2"><span id="to-due-date">{{getDaysDifference goalData.today goalData.due_date}}</span>
-            {{format_plural "day" Day}} Away
+        <p class="ml-2"><span id="to-due-date">{{getDaysAway goalData.today goalData.due_date}}</span>
         </p>
         {{!-- Description --}}
         <h4 class="text-primary">Description</h4>

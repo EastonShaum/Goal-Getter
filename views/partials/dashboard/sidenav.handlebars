@@ -6,7 +6,7 @@
         </div>
     </a>
     <div class="collapse d-lg-block" id="sideNav">
-        {{!-- <hr class="d-lg-none"> --}}
+        <hr class="d-lg-none">
         <ul class="list-unstyled">
             <li>
                 <a href="/dashboard" class="link-unstyled">
@@ -14,11 +14,17 @@
                 </a>
             </li>
             <li>
-                <a href="/dashboard/achievements" class="link-unstyled">
+                <a href="/achievements" class="link-unstyled">
                     <h5 class="text-secondary mt-3">Achievements</h5>
                 </a>
             </li>
             <li>
+                <a href="/account" class="link-unstyled">
+                    <h5 class="text-secondary mt-3">Account</h5>
+                </a>
+            </li>
+
+            {{!-- <li>
                 <a href="#collapseTeams" class="link-unstyled" data-bs-toggle="collapse" role="button">
                     <h5 class="text-secondary mt-3">Teams</h5>
                 </a>
@@ -29,14 +35,14 @@
                                 <h6 class="text-darkest-light">Team Nasdfasdfasdfasdfasdfasdfasdfme</h6>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     {{!-- {{#each teams as |team|}}
                     <a href="/dashboard/team/{{team.id}}">
                         <h6 class="darker-light">{{team.name}}</h6>
                     </a>
                     {{/each}} --}}
-                </div>
-            </li>
+                {{!-- </div>
+            </li> --}}
         </ul>
     </div>
 </aside>

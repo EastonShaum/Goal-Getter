@@ -8,6 +8,8 @@ test('Check for goal validation', async () => {
         description: 'Using a rocket I will make it to space',
         due_date: '10/31/2021',
         is_public: true,
+        completed_date: '10/31/2021',
+        completed: false,
         user_id: 1
     }
     const newgoal = Goal.build(goal);
