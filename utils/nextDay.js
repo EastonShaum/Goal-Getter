@@ -1,9 +1,6 @@
 
 const tomorrows_date = () => {
-        const date = new Date();
-        return `${new Date(date).getMonth() + 1}/${new Date(date).getDate() + 1}/${new Date(date).getFullYear()}`;
+        return `${new Date()}`;
     }
-
-
 
 module.exports = tomorrows_date

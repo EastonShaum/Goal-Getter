@@ -14,7 +14,10 @@ const completeGoalHandler = async () => {
 
     const response = await fetch(`/api/goals/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({completed: true}),
+        body: JSON.stringify({
+            completed_date: `${new Date()}`,
+            completed: true
+        }),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -27,7 +30,7 @@ const completeGoalHandler = async () => {
             goal_id: $("#goal-title").attr("data-goal-id")
         } 
         createNoteHandler(noteObj)
-        location.reload();
+        location.replace("/achievements");
     } else {
         alert(response.statusText);
     }
