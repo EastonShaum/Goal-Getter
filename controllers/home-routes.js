@@ -3,6 +3,9 @@ const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag } = require('../models');
 
 router.get('/', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/dashboard');
+    }
     res.render('homepage', {
             loggedIn: req.session.loggedIn
         })

@@ -21,7 +21,7 @@ User.init({
         allowNull: false,
         unique: true,
         validate: {
-            len: [5]
+            len: [3]
         }
     },
     first_name: {
@@ -44,9 +44,9 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [4]
+            is: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/i,
         }
-    },
+    }
 }, {
     hooks: {
         async beforeCreate(newUserData) {
@@ -59,7 +59,6 @@ User.init({
         }
     },
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'user'

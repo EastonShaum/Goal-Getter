@@ -1,6 +1,7 @@
-// @import "bootstrap/scss/bootstrap-utilities/";
+@import "bootstrap/scss/functions";
 
-// Edit of color pallete
+
+// Edit of Standard Color Pallete
 $primary: #FFC53A;
 $secondary: #3A425D;
 $success: #2FA71C;
@@ -8,10 +9,36 @@ $danger: #AA2525;
 $dark: #3A3A3A;
 
 // Edit the input focus width and color
-$input-btn-focus-width:1px;
+$input-btn-focus-width: 1px;
 $input-btn-focus-color-opacity:1;
 $input-btn-focus-color: rgba($secondary, $input-btn-focus-color-opacity); 
 $input-focus-border-color: tint-color($secondary, 50%);
+
+@import "bootstrap/scss/variables";
+
+// Custom Colors
+$dark-light: #f5f5f5;
+$darker-light: #f2f2f2;
+$darkest-light: #878787;
+
+$custom-colors: (
+    "dark-light": $dark-light,
+    "darker-light": $darker-light,
+    "darkest-light": $darkest-light,
+);
+
+$custom-font-sizes: (
+   7: $font-size-sm 
+);
+
+$font-sizes: map-merge($font-sizes, $custom-font-sizes);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "bootstrap/scss/mixins";
+
+@import "bootstrap/scss/buttons";
+
+@import "bootstrap/scss/utilities";
 
 // DON'T WRITE ANY CODE BELOW THE IMPORT LINE
 @import "~bootstrap/scss/bootstrap";

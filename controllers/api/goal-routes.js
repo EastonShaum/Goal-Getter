@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const { Team, User, Milestone, Tag, Goal, Goaltag, Note } = require('../../models');
+const { Tag, Team, User, Userteam, Goal, Goaltag, Milestone, Note } = require('../../models');
 
 router.get('/', (req, res) => {
     Goal.findAll({
-            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'created_at'],
-            include: [
-                {
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'completed_date', 'completed', 'created_at'],
+            include: [{
                     model: User,
                     attributes: ['username', 'first_name', 'last_name']
                 },
@@ -29,8 +28,8 @@ router.get('/:id', (req, res) => {
             where: {
                 id: req.params.id
             },
-            include: [
-                {
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'completed_date', 'completed', 'created_at'],
+            include: [{
                     model: User,
                     attributes: ['username']
                 },
@@ -44,12 +43,10 @@ router.get('/:id', (req, res) => {
                     model: Milestone,
                     attributes: ['title', 'description', 'due_date'],
                     as: 'milestones',
-                    include: [
-                        {
-                            model: Note,
-                            attributes:['text']
-                        }
-                    ]
+                    include: [{
+                        model: Note,
+                        attributes: ['text']
+                    }]
                 },
                 {
                     model: Note,
@@ -77,8 +74,9 @@ router.post('/', (req, res) => {
                 description: req.body.description,
                 due_date: req.body.due_date,
                 is_public: req.body.is_public,
-                tag_id: req.body.tag_id,
-                user_id: req.session.user_id
+                user_id: req.session.user_id,
+                completed_date: req.body.completed_date,
+                completed: req.body.completed
             })
             .then(dbGoalData => res.json(dbGoalData))
             .catch(err => {
@@ -109,7 +107,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
-router.delete(':/id', (req, res) => {
+router.delete('/:id', (req, res) => {
     if (req.session) {
         Goal.destroy({
                 where: {

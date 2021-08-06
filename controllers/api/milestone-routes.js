@@ -17,7 +17,9 @@ router.get('/:id', (req, res) => {
             },
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'user_id', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public', 'user_id',
+                        'completed_date', 'completed', 'created_at'
+                    ],
                 },
                 {
                     model: User,
@@ -44,6 +46,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     if (req.session) {
+        console.log(req.body);
         Milestone.create({
                 title: req.body.title,
                 description: req.body.description,

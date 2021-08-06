@@ -1,7 +1,7 @@
 async function newTagHandler(event) {
     event.preventDefault();
 
-    const name = document.querySelector('input[name=tag-name]').value;
+    const name = document.querySelector('input[name="tag-name"]').value.trim();
 
     const response = await fetch('/api/tags', {
         method: 'POST',
@@ -26,7 +26,7 @@ async function deleteTagHandler(event) {
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
-    const response = await fetch(`/api/tags/${id}` {
+    const response = await fetch(`/api/tags/${id}`, {
         method: 'DELETE'
     });
 

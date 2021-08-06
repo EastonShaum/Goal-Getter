@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const tomorrowsDate = require('../utils/nextDay.js')
 
 class Milestone extends Model {}
 
@@ -20,11 +21,15 @@ Milestone.init({
     },
     due_date: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        validate: {
+            isAfter: tomorrowsDate()
+        }
     },
     is_public: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: true
     },
     goal_id: {
         type: DataTypes.INTEGER,
@@ -41,6 +46,11 @@ Milestone.init({
             model: 'user',
             key: 'id'
         }
+    },
+    status: {
+        type: DataTypes.STRING(20),
+        allowNull: true,
+        defaultValue: "To Do", // To Do, In Progress, Completed
     }
 }, {
     sequelize,
