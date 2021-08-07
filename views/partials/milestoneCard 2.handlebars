@@ -11,17 +11,12 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary py-0 dropdown-toggle" type="button" milestone-id="{{id}}" data-bs-toggle="dropdown" aria-expanded="false">{{status}}</button>
                     <ul class="dropdown-menu dropdown-menu-end" id="milestone-list" aria-labelledby="milestone-{{id}}-status">
-                        <script>console.log(status)</script>
-                        {{#if completed}}
-                        <li class="dropdown-item text-danger selected">Delete</li>
-                        {{else}}
                         <li class="dropdown-item todo">To Do</li>
                         <li class="dropdown-item inprogress">In Progress</li>
                         <li class="dropdown-item complete">Complete</li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item text-success selected">Edit</li>
                         <li class="dropdown-item text-danger selected">Delete</li>
-                        {{/if}}
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,22 @@
+<article class="col-xl-4 col-lg-6 col-sm-12">
+    <div class="card" goal-id={{id}} onclick="location.href='/goal/{{id}}'">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-2 text-elipsis">
+                <h4 class="text-primary fw-bold m-0">{{title}}&nbsp;</h4>
+                {{!-- <h4 class="text-primary fw-bold m-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Goal Title">Goal Title&nbsp;</h4> --}}
+                <span class="fw-bold fs-6 text-success mt-1"> - Complete</span>
+                {{!-- <span class="fw-bold fs-6 text-success mt-1 text-nowrap"> - 8/30/2021</span> --}}
+            </div>
+            <div>
+                <p>
+                <i class="fas fa-trophy text-primary" style="font-size: xx-large;"></i>
+                
+                    {{description}}
+                    {{!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo tenetur commodi similique eius
+                    provident laborum ea est minus aperiam adipisci sequi ipsum culpa iure exercitationem autem a error,
+                    repudiandae asperiores? --}}
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
