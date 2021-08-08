@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
         res.render('extra-pages/about-us', { layout: "main", loggedIn: false})
     }
     
-    
 })
 
 module.exports = router;
