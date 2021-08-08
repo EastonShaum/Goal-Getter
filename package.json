@@ -6,7 +6,6 @@
     "scripts": {
         "start": "node server.js",
         "test": "jest",
-        "build": "webpack",
         "seed": "node seeds/index.js"
     },
     "repository": {
