@@ -47,10 +47,10 @@ async function signupFormHandler(event) {
             });
         }
     } else {
-        
+
         $('#password-req').append('<p>Please fill out all text fields before continuing.</p>').addClass('mt-1 mb-0 text-danger');
         //alert('Please fill out all text fields before continuing.');
-        
+
         return;
     }
 }
@@ -69,7 +69,7 @@ async function loginFormHandler(event) {
             }),
             headers: { 'Content-Type': 'application/json' }
         });
-        
+
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
@@ -79,7 +79,7 @@ async function loginFormHandler(event) {
             } else {
                 $('p').remove(":contains('Invalid password or username')");
                 $('#password-div').append('<p>Invalid password or username</p>').addClass('mt-1 mb-0 text-danger');
-            }      
+            }
             //alert('Invalid username or password');
         }
     }
@@ -96,7 +96,7 @@ async function passwordChecker() {
         headers: { 'Content-Type': 'application/json' }
     });
 
-    if(response.ok) {
+    if (response.ok) {
         response.json().then(function(data) {
             if (data.value === 'Invalid') {
                 $('#password-strength').removeClass();
@@ -117,7 +117,7 @@ async function passwordChecker() {
     }
 }
 
-function removeErrors() {
+function removeErrors(event) {
     event.preventDefault();
     $('p').remove(":contains('Password does not meet password strength criteria')");
     $('p').remove(":contains('Not a valid email address')");
@@ -126,14 +126,14 @@ function removeErrors() {
     $('p').remove(":contains('Email already in use')");
 }
 
-function removeFieldsError() {
+function removeFieldsError(event) {
     event.preventDefault();
     $('p').remove(":contains('Please fill out all text fields before continuing.')");
 }
 //, "#email-div", '#password-req'
 
-$( "#username-div, #email-div, #password-div").on( "focusin", removeErrors);
-$('#signup-form').on( "focusin", removeFieldsError);
+$("#username-div, #email-div, #password-div").on("focusin", removeErrors);
+$('#signup-form').on("focusin", removeFieldsError);
 $('#login-form').on('submit', loginFormHandler);
 $('#signup-form').on('submit', signupFormHandler);
 $('#password-input').on('keyup', passwordChecker);

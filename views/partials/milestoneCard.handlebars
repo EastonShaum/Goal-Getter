@@ -8,17 +8,19 @@
                     <span class="fw-bold fs-6 text-success mt-1" id="milestone-due-date"> - {{format_date due_date}}&nbsp;</span>
                 </div>
                 {{!-- Milestone status dropdown --}}
-                <div class="dropdown">
+                {{#if (renderDropdown status)}}
+                <div class="dropdown" id="dropdown-{{id}}">
                     <button class="btn btn-secondary py-0 dropdown-toggle" type="button" milestone-id="{{id}}" data-bs-toggle="dropdown" aria-expanded="false">{{status}}</button>
                     <ul class="dropdown-menu dropdown-menu-end" id="milestone-list" aria-labelledby="milestone-{{id}}-status">
-                        <li class="dropdown-item todo">To Do</li>
-                        <li class="dropdown-item inprogress">In Progress</li>
-                        <li class="dropdown-item complete">Complete</li>
+                        <li class="dropdown-item todo" id="{{id}}-todo">To Do</li>
+                        <li class="dropdown-item inprogress" id="{{id}}-inprogress">In Progress</li>
+                        <li class="dropdown-item complete" id="{{id}}-complete">Complete</li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item text-success selected">Edit</li>
-                        <li class="dropdown-item text-danger selected">Delete</li>
+                        <li class="dropdown-item text-success edit selected" id="{{id}}-edit">Edit</li>
+                        <li class="dropdown-item text-danger delete selected">Delete</li>
                     </ul>
                 </div>
+                {{/if}}
             </div>
             <div class="row">
                 {{!-- Status Icon --}}

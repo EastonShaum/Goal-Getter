@@ -71,7 +71,7 @@ async function deleteMilestoneHandler(id) {
     const response = await fetch(`/api/milestones/${id}`, {
         method: 'DELETE'
     });
-    
+
     if (response.ok) {
         location.reload();
     } else {

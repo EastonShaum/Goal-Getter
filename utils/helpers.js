@@ -21,6 +21,16 @@ module.exports = {
                 return ('<i class="fas fa-medal fa-4x text-primary" style="font-size:35px"></i>');
         }
     },
+    renderDropdown: function(status, options) {
+        switch (status) {
+            case "To Do":
+                return true;
+            case "In Progress":
+                return true;
+            case "Complete":
+                return false;
+        }
+    },
     getDaysAway: function(today, dueDate) {
         // Format Dates
         const date1 = new Date(today);
@@ -41,10 +51,10 @@ module.exports = {
             return "Today"
         } else if (daysDifference === 1 && date2.getDate() !== date1.getDate()) {
             return "Tomorrow"
-        } 
+        }
         // Conversion for JS Dates from milliseconds to Days
         return `${daysDifference} days away`
-        
+
     },
     getDaysAgo: function(startDate, today) {
         // Format Dates
@@ -63,7 +73,7 @@ module.exports = {
             return "Today"
         } else if (daysDifference === 1 && date2.getDate() !== date1.getDate()) {
             return "Yesterday"
-        } 
+        }
         // Conversion for JS Dates from milliseconds to Days
         return `${daysDifference} days ago`
     }
