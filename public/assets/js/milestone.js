@@ -26,6 +26,13 @@ const getPublic = () => {
         return false;
     }
 }
+const getPublicElement = element => {
+    if ($(element).is(":checked")) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 initDatePickr($('#milestone-due-date-input'));
 
@@ -75,12 +82,10 @@ async function editMilestoneStatusHandler(id, status) {
         alert(response.statusText);
     }
 }
-async function editMilestoneHandler(id, status) {
+async function editMilestoneHandler(id, milestoneObj) {
     const response = await fetch(`/api/milestones/${id}`, {
         method: 'PUT',
-        body: JSON.stringify({
-            status
-        }),
+        body: JSON.stringify(milestoneObj),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -105,14 +110,17 @@ async function deleteMilestoneHandler(id) {
 }
 
 $('.dropdown-toggle').on('click', function() {
-    let id = $(this).attr('milestone-id');
+    const id = $(this).attr('milestone-id');
+    console.log("dropdown", id)
     $(this).next().find('li.todo').on('click', function() {
         let newStatus = $(this).text();
+        console.log("to-do", id)
         $(this).parent().prev().html(newStatus);
         editMilestoneStatusHandler(id, newStatus);
     });
     $(this).next().find('li.inprogress').on('click', function() {
         let newStatus = $(this).text();
+        console.log("in-progress", id)
         $(this).parent().prev().html(newStatus);
         editMilestoneStatusHandler(id, newStatus);
     });
@@ -123,8 +131,9 @@ $('.dropdown-toggle').on('click', function() {
     });
     $(this).next().find('li.editBtn').on('click', function() {
         console.log($(this))
-        let newStatus = $(this).text();
-        let dueDate = $("#due-date").attr("data-date");
+        let dueDate = $(this).parent().parent().parent().siblings(".milestoneEdit").children(".edit-milestone-form").attr("data-due-date");
+        let dueDateElement = $(this).parent().parent().parent().siblings(".milestoneEdit").children(".edit-milestone-form").children(".due-date-div").children(".due-date-edit");
+        initDefaultDatePickr(dueDateElement, dueDate)
         unhideMilestoneEdit($(this))
         $(this).parent().parent().parent().siblings(".milestoneEdit").children(".edit-milestone-form").on("submit", milestoneFormHandler);
     });
@@ -134,23 +143,50 @@ $('.dropdown-toggle').on('click', function() {
 });
 
 $(".cancelBtn").on("click", function() {
-    hideMilestoneEdit($(this))
+    // hideMilestoneEdit($(this))
+    location.reload();
 })
 
 function milestoneFormHandler(event) {
-    event.preventDefault()
-    console.log(event)
+    event.preventDefault();
+    const editMilestoneForm = $(event.target);
+    let milestoneId = $(event.target).attr("data-milestone-id")
+    console.log(editMilestoneForm)
+    let goalId = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+    ]
+    console.log(goalId)
+    // let milestoneId = $('.edit-milestone-form').attr('data-milestone-id');
+    // console.log(milestoneId)
+
+    let milestoneObj = {
+        title: editMilestoneForm[0][0].value.trim(),
+        description: editMilestoneForm[0][3].value,
+        due_date: editMilestoneForm[0][1].value,
+        is_public: getPublicElement(editMilestoneForm[0][4]),
+        goal_id: goalId
+    }
+    console.log(milestoneObj)
+
+    editMilestoneHandler(milestoneId, milestoneObj);
 }
 
 function unhideMilestoneEdit(milestone) {
-    $(milestone).parent().parent().parent().next().addClass("d-none")
-    $(milestone).parent().parent().parent().siblings(".milestoneEdit").removeClass("d-none")
+    $(milestone).parent().parent().parent().next().addClass("d-none");
+    $(milestone).parent().parent().parent().siblings(".milestoneEdit").removeClass("d-none");
+    $(milestone).parent().parent().addClass("d-none");
 }
 
-function hideMilestoneEdit(milestone){
-    $(milestone).parent().parent().parent().siblings(".milestoneInfo").removeClass("d-none")
-    $(milestone).parent().parent().parent().addClass("d-none")
-}
+// function hideMilestoneEdit(milestone){
+//     $(milestone).parent().parent().parent().siblings(".milestoneInfo").removeClass("d-none");
+//     $(milestone).parent().parent().parent().addClass("d-none");
+//     $(milestone).parent().parent().parent()
+// }
+
+// $('.edit-milestone-form').on('submit', function() {
+    
+// });
+
 $('#new-milestone-form').on('submit', addMilestoneHandler);
 // document.querySelector(".add-goal-form").addEventListener('', addMilestoneHandler);
 // document.querySelector(".delete-goal-btn").addEventListener('', deleteMilestoneHandler);

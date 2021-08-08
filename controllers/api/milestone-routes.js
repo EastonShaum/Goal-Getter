@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Milestone, Goal, User, Team } = require('../../models');
+const { Milestone, Goal, User, Userteam ,Team } = require('../../models');
 
 router.get('/', (req, res) => {
     Milestone.findAll()
@@ -26,8 +26,9 @@ router.get('/:id', (req, res) => {
                     attributes: { exclude: ['password'] },
                     include: {
                         model: Team,
-                        attributes: ['']
-                    }
+                        through: Userteam,
+                        as: "teams"
+                    }          
                 }
             ]
         })

@@ -1,7 +1,7 @@
 const checkForComplete = () => {
     const totalMilestones = $("#milestone-header").attr("data-total-milestone")
     const completeMilestones = $("#milestone-header").attr("data-complete-milestone")
-    console.log(totalMilestones, completeMilestones)
+    // console.log(totalMilestones, completeMilestones)
     if (totalMilestones == completeMilestones) {
         $("#goal-complete-btn").removeClass("d-none");
     }

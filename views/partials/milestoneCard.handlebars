@@ -6,7 +6,7 @@
                 <div class="d-flex align-items-center text-elipsis">
                     <h4 id="milestone-title" class="text-primary fw-bold m-0" data-bs-toggle="tooltip"
                         data-bs-placement="bottom" title="{{title}}">{{title}}&nbsp;</h4>
-                    <span class="fw-bold fs-6 text-success mt-1" id="milestone-due-date"> - {{format_date
+                    <span class="fw-bold fs-6 text-success mt-1 text-nowrap" id="milestone-due-date"> - {{format_date
                         due_date}}&nbsp;</span>
                 </div>
                 {{!-- Milestone status dropdown --}}
@@ -18,7 +18,7 @@
                         <li class="dropdown-item inprogress" id="{{id}}-inprogress">In Progress</li>
                         <li class="dropdown-item complete" id="{{id}}-complete">Complete</li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item text-success edit selected" id="{{id}}-edit">Edit</li>
+                        <li class="dropdown-item text-success edit selected editBtn" id="{{id}}-edit">Edit</li>
                         <li class="dropdown-item text-danger delete selected">Delete</li>
                     </ul>
                 </div>
@@ -40,12 +40,12 @@
             </div>
             <div class="milestoneEdit d-none">
                 {{!-- Status Icon --}}
-                <form action="" class="edit-milestone-form" user-id="{{user_id}}">
+                <form action="" class="edit-milestone-form" data-milestone-id="{{id}}" data-due-date="{{due_date}}" user-id="{{user_id}}">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control milestone-title-edit" id="milestone-title-edit-{{id}}" value="{{title}}">
                         <label for="milestone-title-edit-{{id}}">Milestone Title</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-3 due-date-div">
                         <input type="datetime-local" class="form-control due-date-edit" id="due-date-edit-{{id}}">
                         <label for="due-date-edit-{{id}}">Due Date</label>
                     </div>
