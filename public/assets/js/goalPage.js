@@ -16,7 +16,7 @@ const getEditIsPublic = () => {
 const objDiff = (obj1, obj2) => {
     let keysArr = [];
     Object.keys(obj1).forEach(key => {
-        if(obj1[key] !== obj2[key]){
+        if (obj1[key] !== obj2[key]) {
             keysArr.push(key)
         }
     });
@@ -35,24 +35,24 @@ const ogGoal = {
 
 // Create Update Note for the changes made to the goal.
 const updateNotes = (editedKeys, editGoal) => {
-    if(editedKeys.length > 0) {
+    if (editedKeys.length > 0) {
         let updateNote = `Goal Edited:\n`
         editedKeys.forEach(key => {
             switch (key) {
                 case "title":
                     return updateNote = updateNote + `  - Goal Title was updated from "${ogGoal.title}" to "${editGoal.title}"\n`;
-                case "description": 
+                case "description":
                     return updateNote = updateNote + `  - Goal Description was updated.\n`
                 case "due_date":
                     return updateNote = updateNote + `  - Goal Due Date was changed from ${dateFormater(ogGoal.due_date)} to ${dateFormater(editGoal.due_date)}\n`
                 case "is_public":
-                    if(editGoal.is_public === true) {
+                    if (editGoal.is_public === true) {
                         return updateNote = updateNote + `  - Goal is now a public goal!`
                     } else {
                         return updateNote = updateNote + `  - Goal is now a private goal.`
                     }
                 case "completed":
-                    if(editGoal.completed === true) {
+                    if (editGoal.completed === true) {
                         return updateNote = updateNote + `  - Goal was marked as Complete!`
                     } else {
                         return updateNote = updateNote + `  - Goal was marked as In Progress.`
@@ -64,7 +64,7 @@ const updateNotes = (editedKeys, editGoal) => {
 }
 
 // Creates a noteObj for the CREATE NOTE FETCH when using the New Note feature
-function getNoteObj (event) {
+function getNoteObj(event) {
     event.preventDefault();
 
     const noteObj = {
@@ -72,7 +72,16 @@ function getNoteObj (event) {
         goal_id: $("#goal-title").attr("data-goal-id"),
         // milestone_id:
     }
-    createNoteHandler(noteObj)
+    if (noteObj.text) {
+        createNoteHandler(noteObj)
+    } else {
+        let errMsg = $('#note-err').text();
+        console.log('errMsg', errMsg);
+        if (!errMsg) {
+            $('#new-note-form').append('<p id="note-err">Make sure that your note has some text, or click cancel.</p>').addClass('mt-1 mb-0 text-danger');
+        }
+    }
+
 }
 
 // =======================================================
@@ -86,7 +95,7 @@ const flatpickrEditConfig = {
     dateFormat: "Z",
     defaultDate: $("#due-date").attr("data-date"),
     minDate: tomorrow,
-    onClose: function (selectedDates, dateStr, instance) {
+    onClose: function(selectedDates, dateStr, instance) {
         dueDate = dateStr
     }
 }
@@ -124,7 +133,7 @@ async function editGoalHandler(event) {
                     'Content-Type': 'application/json'
                 }
             });
-            
+
             if (response.ok) {
                 // Create System Note for Edits made
                 const editedKeys = objDiff(ogGoal, editGoal);
@@ -132,15 +141,14 @@ async function editGoalHandler(event) {
                 const noteObj = {
                     text: updateNote,
                     goal_id: $("#goal-title").attr("data-goal-id")
-                } 
+                }
                 createNoteHandler(noteObj)
                 location.reload();
             } else {
                 alert(response.statusText);
             }
         }
-    } 
-    else {
+    } else {
         $("#req-update").remove()
         $("#edit-modal-header").append(
             `<div class="alert alert-danger" id="req-update" role="alert">
@@ -170,7 +178,7 @@ async function deleteGoalHandler(event) {
 }
 
 // CREATE NOTE 
-async function createNoteHandler(noteObj){
+async function createNoteHandler(noteObj) {
     const response = await fetch(`/api/notes`, {
         method: 'POST',
         body: JSON.stringify(noteObj),
@@ -194,7 +202,7 @@ async function createNoteHandler(noteObj){
 function openEditGoalModal(event) {
     event.preventDefault();
     console.log("clicked");
-    if($("#public-val").attr("data-public") === "true") {
+    if ($("#public-val").attr("data-public") === "true") {
         $("#public-goal-checkbox").prop("checked", true)
     }
     $("#edit-goal-modal").modal("toggle");
@@ -208,25 +216,25 @@ function openDeleteGoalModal(event) {
     enableDeleteBtn()
 }
 
-function enableDeleteBtn(){
+function enableDeleteBtn() {
     let timeLeft = 2
     $("#delete-timer").text("3");
 
     const disableTimer = setInterval(function() {
         $("#delete-timer").text(timeLeft.toString());
         timeLeft--
-    },1000)
+    }, 1000)
 
-    setTimeout(function (){
+    setTimeout(function() {
         clearInterval(disableTimer)
         $("#delete-timer").text("");
         $("#delete-goal-confirm").removeClass("disabled");
-    },3000)
+    }, 3000)
 
     disableTimer
 }
 
-$(".modal").on("hidden.bs.modal", function () {
+$(".modal").on("hidden.bs.modal", function() {
     $("#delete-goal-confirm").addClass("disabled");
 });
 
