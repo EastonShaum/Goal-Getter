@@ -47,10 +47,14 @@ async function signupFormHandler(event) {
             });
         }
     } else {
+        let errMsg = $('#password-error').text();
 
-        $('#password-req').append('<p>Please fill out all text fields before continuing.</p>').addClass('mt-1 mb-0 text-danger');
-        //alert('Please fill out all text fields before continuing.');
+        console.log('errMsg', errMsg);
 
+        if (!errMsg) {
+            $('#password-req').append('<p id="password-error">Please fill out all text fields before continuing.</p>').addClass('mt-1 mb-0 text-danger');
+            //alert('Please fill out all text fields before continuing.');
+        }
         return;
     }
 }
