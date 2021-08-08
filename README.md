@@ -1,5 +1,7 @@
 # Goal Getter
 
+## Live URL: https://goal-getters-app.herokuapp.com/
+
   ## Description 
 
   This app will help you ACHIEVE your goals! Anything is possible when you make a plan with milestones and a date in mind!
@@ -20,6 +22,10 @@
 
 
   ## Usage 
+
+
+### Screenshot:
+![image](https://user-images.githubusercontent.com/81572838/128648882-4ac37736-46c9-4716-9f50-a438dcee8ed1.png)
 
   
 
