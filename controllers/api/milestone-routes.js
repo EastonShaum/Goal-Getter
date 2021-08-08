@@ -72,7 +72,6 @@ router.put('/:id', (req, res) => {
                 
             })
             .then(dbMilestoneData => {
-                console.log(req.body, dbMilestoneData)
                 if (!dbMilestoneData[0]) {
                     res.status(404).json({ message: 'Milestone not found' });
                     return;

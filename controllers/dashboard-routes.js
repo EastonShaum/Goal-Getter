@@ -124,10 +124,10 @@ router.get('/edit/:id', withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-// You need to add comlpleted to everywhere it talks about milestone and updated it when the rest gets updated
+
 router.get('/edit/:id', withAuth, (req, res) => {
     Milestone.findByPk(req.body.id, {
-            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id', 'status', 'completed'],
+            attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id', 'status'],
             include: [{
                     model: Goal,
                     attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id',

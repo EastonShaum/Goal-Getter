@@ -51,11 +51,6 @@ Milestone.init({
         type: DataTypes.STRING(20),
         allowNull: true,
         defaultValue: "To Do", // To Do, In Progress, Completed
-    },
-    completed: {
-        type: DataTypes.BOOLEAN,
-        allowNull: true,
-        defaultValue: false
     }
 }, {
     sequelize,
