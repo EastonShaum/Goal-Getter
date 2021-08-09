@@ -8,7 +8,7 @@ async function logout(event) {
 
     if (response.ok) {
         console.log("logged out")
-        document.location.reload();
+        document.location.replace("/");
     } else {
         alert(response.statusText);
     }
