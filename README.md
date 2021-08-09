@@ -2,7 +2,7 @@
 
 ## Description 
 
-[Goal Getter](https://github.com/EastonShaum/Goal-Getter) is an app that helps you ACHIEVE your goals! Anything is possible when you make a plan with milestones and a date in mind! Simply create an account and get started on adding new goals!
+[Goal Getter](https://goal-getters-app.herokuapp.com/) is an app that helps you ACHIEVE your goals! Anything is possible when you make a plan with milestones and a date in mind! Simply create an account and get started on adding new goals!
 
 ## Table of Contents 
 
