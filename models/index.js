@@ -3,7 +3,7 @@ const Team = require('./Team');
 const User = require('./User');
 const Userteam = require('./Userteam');
 const Goal = require('./Goal');
-const Goaltag = require('./Goaltag');
+const Goaltag = require('./GoalTag');
 const Milestone = require('./Milestone');
 const Note = require('./Note');
 

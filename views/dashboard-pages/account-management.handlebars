@@ -4,13 +4,14 @@
             {{!-- Acct Title --}}
             <h3 class="text-primary" id="account-title">{{user.first_name}}&nbsp;{{user.last_name}}'s Profile</h3>
         </div>
-        <div class="d-flex">
+        {{!-- <div class="d-flex">
             <i class="fas fa-edit text-darkest-light dark-hover" id="edit-acct-btn" type="button"></i>
             <span class="border-darkest-light mx-3 border-end border-2"></span>
             <i class="fas fa-trash text-darkest-light dark-hover" type="button" id="delete-acct-modal-btn"></i>
-        </div>
+        </div> --}}
     </div>
-
+    {{> dashboard/delete-account-modal}}
+    {{> dashboard/edit-account-modal user}}
     {{!-- ADD EDIT AND DELETE MODALS --}}
     <hr class="m-1">
     <section class="col-lg-6 ">
@@ -21,32 +22,25 @@
                 user.created_at}}</span></p>
         <br>
         <h4 class="text-primary">Goal Getter History</h4>
-        <p class="mt-0">Since you became a Goal Getter you have started <span
-                class="fw-bold">{{user.total_goals}}</span> {{format_plural "goal" user.total_goals}}
-            {{#if user.total_milestones}}
-            with a total of <span
-                class="fw-bold">{{user.total_milestones}}</span> {{format_plural "milestone" user.total_milestones}}{{/if}}! Well done!
-        </p>
-        <p>Of your <span>{{user.total_goals}}</span> {{format_plural "goal" user.total_goals}} you have
-            completed <span class="fw-bold">{{user.complete_goals}}</span> {{format_plural "goal" user.complete_goals}}!
-            Keep working hard and achieving those goals!</p>
-
+        <p class="mt-0 fw-bold">Goals Started: <span class="fw-normal">{{user.total_goals}}</span>
+        <p class="mt-0 fw-bold">Milestones Created: <span class="fw-normal">{{user.total_milestones}}</span>
+        <p class="mt-0 fw-bold">Goals Completed: <span class="fw-normal">{{user.complete_goals}}</span>
     </section>
     {{!-- Left side of AccountPage, contains Goal information --}}
-    <section class="col-lg-6 ">
+    {{!-- <section class="col-lg-6 ">
         <h4 class="text-primary">Bio</h4>
         <p class="text-darkest-light">
-            Seems that you haven't created added a bio yet!
+            Seems that you haven't added a bio yet!
             Bio's are a short, sweet, and informative blurb about you and what you are working to achieve!
-            {{!-- <span type="button" id="new-goal-btn" class="text-primary" data-bs-toggle="collapse"
+            <span type="button" id="new-goal-btn" class="text-primary" data-bs-toggle="collapse"
                 data-bs-target="#milestone-collapsable-div" aria-expanded="false"
-                aria-controls="milestone-collapsable-div"> --}}
+                aria-controls="milestone-collapsable-div">
                 <span type="button" id="edit-bio-btn" class="text-primary">
                     Click here to add a bio!
                 </span>
         </p>
 
-    </section>
+    </section> --}}
 </div>
 <script src="../assets/js/tooltips.js"></script>
 <script src="../assets/js/logout.js"></script>

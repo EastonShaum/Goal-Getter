@@ -6,9 +6,8 @@
     "scripts": {
         "start": "node server.js",
         "test": "jest",
-        "build": "webpack",
         "seed": "node seeds/index.js",
-        "prestart": "npm run build"
+        "build": "webpack"
     },
     "repository": {
         "type": "git",

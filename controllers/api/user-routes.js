@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
             },
             include: [{
                     model: Goal,
-                    attributes: ['title', 'description', 'due_date', 'is_public', 'created_at'],
+                    attributes: ['title', 'description', 'due_date', 'is_public'],
                     as: 'goals',
                     include: {
                         model: Milestone,
