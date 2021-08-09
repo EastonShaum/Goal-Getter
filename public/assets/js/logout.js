@@ -1,11 +1,14 @@
-async function logout() {
+async function logout(event) {
+    event.preventDefault();
+    console.log("log out initiated")
     const response = await fetch('/api/users/logout', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' }
     });
 
     if (response.ok) {
-        document.location.replace('/');
+        console.log("logged out")
+        document.location.replace("/");
     } else {
         alert(response.statusText);
     }
