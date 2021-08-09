@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag, Userteam } = require('../models');
 const withAuth = require('../utils/auth');
 
-
+// Get account details to be displayed on the /account page
 router.get('/', withAuth, (req, res) => {
     User.findOne({
             where: {

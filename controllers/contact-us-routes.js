@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-
+// provides the contact-us page
 router.get('/', (req, res) => {
     const loggedIn = req.session.loggedIn 
     

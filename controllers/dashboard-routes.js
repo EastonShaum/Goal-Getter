@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag } = require('../models');
 const withAuth = require('../utils/auth');
 
+// Main dashboard page
 router.get('/', withAuth, (req, res) => {
     Goal.findAll({
             where: {
@@ -51,6 +52,7 @@ router.get('/', withAuth, (req, res) => {
         });
 });
 
+// Not in use at the moment, but a little too scared to just start deleting things right before submitting.
 router.get('/', withAuth, (req, res) => {
     Milestone.findAll({
             where: {
@@ -84,6 +86,8 @@ router.get('/', withAuth, (req, res) => {
         });
 });
 
+// Not in use at the moment, but a little too scared to just start deleting things right before submitting.
+// Edit Goal page
 router.get('/edit/:id', withAuth, (req, res) => {
     Goal.findByPk(req.params.id, {
             attributes: ['title', 'description', 'due_date', 'is_public', 'tag_id', 'user_id',
@@ -125,6 +129,8 @@ router.get('/edit/:id', withAuth, (req, res) => {
         });
 });
 
+// Not in use at the moment, but a little too scared to just start deleting things right before submitting.
+// Edit milestone page
 router.get('/edit/:id', withAuth, (req, res) => {
     Milestone.findByPk(req.body.id, {
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'goal_id', 'user_id', 'status'],

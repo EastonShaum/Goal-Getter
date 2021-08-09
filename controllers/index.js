@@ -17,6 +17,7 @@ router.use('/contact-us', contactUsRoutes)
 router.use('/achievements', achievementRoutes);
 router.use('/account', accountRoutes);
 
+// 404 error if route doesn't exist
 router.use((req, res) => {
     res.status(404).end();
 });

@@ -1,3 +1,5 @@
+// FILE NOT IN USE ATM
+// Create new notes retrieves new values and POST Fetch to API route
 async function newNoteHandler(event) {
     event.preventDefault();
 
@@ -24,7 +26,7 @@ async function newNoteHandler(event) {
     }
 }
 
-
+// Delete notes not in use atm
 async function deleteNoteHandler(event) {
     event.preventDefault();
 
@@ -42,6 +44,7 @@ async function deleteNoteHandler(event) {
     }
 }
 
+// edit notes not in use atm
 async function editNoteHandler(event) {
     event.preventDefault();
 

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Tag } = require('../../models');
 
+// GET ALL TAGS
 router.get('/', (req, res) => {
     Tag.findAll()
         .then(dbTagData => res.json(dbTagData))
@@ -10,6 +11,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// CREATE NEW TAG
 router.post('/', (req, res) => {
     Tag.create({
             name: req.body.name
@@ -21,6 +23,7 @@ router.post('/', (req, res) => {
         });
 });
 
+// DELETE TAG
 router.delete('/:id', (req, res) => {
     Tag.destroy({
             where: {

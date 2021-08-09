@@ -4,6 +4,7 @@ tomorrow.setDate(today.getDate() + 1)
 
 let dueDate
 
+// Configuration for flatPickr file
 const flatpickrNewConfig = {
     altInput: true,
     altFormat: "F j, Y",
@@ -15,8 +16,10 @@ const flatpickrNewConfig = {
     }
 }
 
+// Create new calendar on element with id of due-date-input 
 const calendarNewGoal = new flatpickr("#due-date-input", flatpickrNewConfig)
 
+// Initialize flatPickr on passed through element
 function initDatePickr(element) {
     element.flatpickr({
         altInput: true,
@@ -26,6 +29,7 @@ function initDatePickr(element) {
     });
 }
 
+// Clear modal values when hidden
 $(".modal").on("hidden.bs.modal", function () {
     $("#goal-title-input").val("");
     $("#due-date-input").val("");
@@ -33,13 +37,15 @@ $(".modal").on("hidden.bs.modal", function () {
     $("#form-check-input").val("");
 });
 
+// Logic to verify if goal is public checkbox is checked
 const getIsPublic = () => {
     if ($('#public-goal-checkbox').is(":checked")) {
-        return is_public = true
+        return true
     }
-    return is_public = false
+    return false
 }
 
+// Create new goal, retrieves values and FETCH POSTS through api route
 async function addGoalHandler(event) {
     event.preventDefault();
 
@@ -61,6 +67,7 @@ async function addGoalHandler(event) {
         user_id
     })
 
+    // Verification logic to prevent partial goals from being submitted
     if (title && description && due_date && user_id) {
         const response = await fetch('/api/goals', {
             method: 'POST',
@@ -78,6 +85,7 @@ async function addGoalHandler(event) {
             console.log('success');
             response.json().then(data => {
                 console.log(data)
+                // Add milestones after goal has been created
                 if (milestoneCounter > 1) {
                     for (let i = 1; i < milestoneCounter; i++) {
                         let milestoneTitle = $('#milestone-title-input-' + i).val();
@@ -98,6 +106,7 @@ async function addGoalHandler(event) {
                             deleteGoalHandler(milestoneGoal_id);
                             break;
                         }
+                        // Navigate to the new goal page
                         location.href=`/goal/${data.id}`;
                     }
                 }
@@ -113,6 +122,7 @@ async function addGoalHandler(event) {
     }
 }
 
+// FETCH for adding new milestones in the New Goal Modal
 async function addMilestoneHandler(title, description, due_date, is_public, goal_id) {
     console.log(title, description, due_date, is_public, goal_id);
     let milestoneResponse = await fetch('/api/milestones', {
@@ -132,6 +142,7 @@ async function addMilestoneHandler(title, description, due_date, is_public, goal
     }
 }
 
+
 async function deleteGoalHandler(goal_id) {
     const response = await fetch('/api/goals/' + goal_id, {
         method: 'DELETE',
@@ -143,6 +154,7 @@ async function deleteGoalHandler(goal_id) {
     }
 }
 
+// Logic for adding multiple milestones to a new goal.
 let milestoneCounter = 1;
 const milestoneFormAdd = () => {
     let nameFieldContainer = $("<div class='form-floating mb-3'></div>");
@@ -172,6 +184,7 @@ const milestoneFormAdd = () => {
     milestoneCounter++;
 }
 
+// Deletes unwanted milestones from the new goal modal
 const deleteMilestoneField = (event) => {
     let milestoneNumber = event.target.id.replace( /^\D+/g, '');
     $("#milestone-" + milestoneNumber).remove();

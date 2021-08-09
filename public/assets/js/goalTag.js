@@ -1,3 +1,4 @@
+// File not in use
 async function addGoalTagHandler(event) {
     event.preventDefault();
 

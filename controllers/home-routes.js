@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag } = require('../models');
 
+// Home page
 router.get('/', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/dashboard');
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
         // });
 });
 
+// Login page
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -22,6 +24,7 @@ router.get('/login', (req, res) => {
     res.render('login', { layout: "blank" });
 });
 
+// Signup page
 router.get('/signup', (req, res) => {
     res.render('signup', { layout: "blank" })
         // .catch(err => {

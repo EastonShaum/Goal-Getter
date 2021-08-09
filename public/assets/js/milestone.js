@@ -1,6 +1,8 @@
+// Get tomorrows date
 let tomorr = new Date()
 tomorr.setDate(today.getDate() + 1)
 
+// Initialize flatPickr on passed through element
 function initDatePickr(element) {
     element.flatpickr({
         altInput: true,
@@ -9,6 +11,8 @@ function initDatePickr(element) {
         minDate: tomorr
     });
 }
+
+// Initialize flatPickr on passed through element with a default date
 function initDefaultDatePickr(element, date) {
     element.flatpickr({
         altInput: true,
@@ -19,6 +23,7 @@ function initDefaultDatePickr(element, date) {
     });
 }
 
+// Logic to verify if goal is public checkbox is checked
 const getPublic = () => {
     if ($('#public-milestone-checkbox').is(":checked")) {
         return true;
@@ -26,6 +31,8 @@ const getPublic = () => {
         return false;
     }
 }
+
+// Logic to verify if goal is public checkbox is checked based on element passed through
 const getPublicElement = element => {
     if ($(element).is(":checked")) {
         return true;
@@ -36,8 +43,10 @@ const getPublicElement = element => {
 
 initDatePickr($('#milestone-due-date-input'));
 
+// Add new milestone
 async function addMilestoneHandler(event) {
 
+    // Create milestone obj to pass to the fetch
     milestoneObj = {
         title: $("#milestone-title-input").val().trim(),
         description: $("#milestone-description-input").val().trim(),
@@ -48,7 +57,7 @@ async function addMilestoneHandler(event) {
 
 
     console.log(milestoneObj)
-
+    // Verification that milestone fields are populated before sending to db
     if (milestoneObj.title && milestoneObj.description && milestoneObj.due_date && milestoneObj.goal_id) {
         const response = await fetch('/api/milestones', {
             method: 'POST',
@@ -66,6 +75,7 @@ async function addMilestoneHandler(event) {
     }
 }
 
+// Edit milestone handler used for editing milestone status when using the dropdown in the milestone card requires milestone id and status
 async function editMilestoneStatusHandler(id, status) {
     const response = await fetch(`/api/milestones/${id}`, {
         method: 'PUT',
@@ -82,6 +92,8 @@ async function editMilestoneStatusHandler(id, status) {
         alert(response.statusText);
     }
 }
+
+// Edit milestone content, used for milestone edit forms
 async function editMilestoneHandler(id, milestoneObj) {
     const response = await fetch(`/api/milestones/${id}`, {
         method: 'PUT',
@@ -97,6 +109,7 @@ async function editMilestoneHandler(id, milestoneObj) {
     }
 }
 
+// Delete selected milestones
 async function deleteMilestoneHandler(id) {
     const response = await fetch(`/api/milestones/${id}`, {
         method: 'DELETE'
@@ -109,6 +122,11 @@ async function deleteMilestoneHandler(id) {
     }
 }
 
+// Logic for dropdown buttons on milestones on the single-goal page,
+// adds event listeners for each dropdown menu and the buttons within
+// each dropdown menu. If a button is clicked it updates said milestone
+// within the database and also alters how the milestone progress bar
+// appears on the front end.
 $('.dropdown-toggle').on('click', function() {
     const id = $(this).attr('milestone-id');
     console.log("dropdown", id)
@@ -142,11 +160,13 @@ $('.dropdown-toggle').on('click', function() {
     });
 });
 
+// Closes edit milestone forms (really just reloads the page)
 $(".cancelBtn").on("click", function() {
     // hideMilestoneEdit($(this))
     location.reload();
 })
 
+// Gets milestone edit field values through DOM navigation, this was a biatch to build, and it is ugly, but please no judgy.
 function milestoneFormHandler(event) {
     event.preventDefault();
     const editMilestoneForm = $(event.target);
@@ -171,6 +191,7 @@ function milestoneFormHandler(event) {
     editMilestoneHandler(milestoneId, milestoneObj);
 }
 
+// Unhides the form used to edit milestones
 function unhideMilestoneEdit(milestone) {
     $(milestone).parent().parent().parent().next().addClass("d-none");
     $(milestone).parent().parent().parent().siblings(".milestoneEdit").removeClass("d-none");

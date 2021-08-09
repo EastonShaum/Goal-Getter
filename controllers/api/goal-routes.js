@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Tag, Team, User, Userteam, Goal, Goaltag, Milestone, Note } = require('../../models');
 
+// Get All Goals
 router.get('/', (req, res) => {
     Goal.findAll({
             attributes: ['id', 'title', 'description', 'due_date', 'is_public', 'completed_date', 'completed', 'created_at'],
@@ -23,6 +24,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// Get one goal from provided id
 router.get('/:id', (req, res) => {
     Goal.findOne({
             where: {
@@ -67,6 +69,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// Create new Goal
 router.post('/', (req, res) => {
     if (req.session) {
         Goal.create({
@@ -86,6 +89,7 @@ router.post('/', (req, res) => {
     }
 });
 
+// Update goals, requires goal id
 router.put('/:id', (req, res) => {
     if (req.session) {
         Goal.update(req.body, {
@@ -107,6 +111,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
+// Delete Goal with provided ID
 router.delete('/:id', (req, res) => {
     if (req.session) {
         Goal.destroy({

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Milestone, Goal, User, Userteam ,Team } = require('../../models');
 
+// GET ALL MILESTONES
 router.get('/', (req, res) => {
     Milestone.findAll()
         .then(dbMilestoneData => res.json(dbMilestoneData))
@@ -10,6 +11,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// GET ONE MILESTONE
 router.get('/:id', (req, res) => {
     Milestone.findOne({
             where: {
@@ -45,6 +47,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// CREATE MILESTONE
 router.post('/', (req, res) => {
     if (req.session) {
         console.log(req.body);
@@ -64,6 +67,7 @@ router.post('/', (req, res) => {
     }
 });
 
+// UPDTE MILESTONE
 router.put('/:id', (req, res) => {
     if (req.session) {
         Milestone.update(req.body, {
@@ -85,6 +89,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
+// DELETE MILESTONE
 router.delete('/:id', (req, res) => {
     if (req.session) {
         Milestone.destroy({

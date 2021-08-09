@@ -1,3 +1,4 @@
+// Compares total milestones vs complete milestones. If equal to eachother complete goal button will be displayed. 
 const checkForComplete = () => {
     const totalMilestones = $("#milestone-header").attr("data-total-milestone")
     const completeMilestones = $("#milestone-header").attr("data-complete-milestone")
@@ -7,6 +8,7 @@ const checkForComplete = () => {
     }
 }
 
+// Upon clicking the complete button, fetch put to goal aopi changes the goal to complete.
 const completeGoalHandler = async () => {
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1

@@ -1,3 +1,4 @@
+// File not in use at the moment
 async function addTeamHandler(event) {
     event.preventDefault();
 
