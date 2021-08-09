@@ -1,3 +1,6 @@
+// Handles what happens when a user clicks submit after filling out sign up fields,
+// which adds a user to the database and then redirects them to their personal
+// dashboard.
 async function signupFormHandler(event) {
     event.preventDefault();
     const first_name = $("#first-name-input").val().trim();
@@ -58,6 +61,11 @@ async function signupFormHandler(event) {
         return;
     }
 }
+
+// Handles what happens when a user clicks submit after filling out sign in fields,
+// which gets username and password input and then asks the database if said user exists,
+// while also providing the user feedback if the password or username does not match
+// any user in the database.
 var firstTry = true;
 async function loginFormHandler(event) {
     event.preventDefault();
@@ -89,6 +97,11 @@ async function loginFormHandler(event) {
     }
 }
 
+// Function that handles what happens whenever a user types a new key
+// into the password field on the signup page. It sends the password
+// to the server which then does some logic to check if the password
+// is weak or strong, then notifiying the user of said description
+// after returning it through the fetch.
 async function passwordChecker() {
     let password = $('#password-input').val().trim();
 
@@ -121,6 +134,7 @@ async function passwordChecker() {
     }
 }
 
+// removes error messages after a user clicks away from affected field
 function removeErrors(event) {
     event.preventDefault();
     $('p').remove(":contains('Password does not meet password strength criteria')");
@@ -136,6 +150,7 @@ function removeFieldsError(event) {
 }
 //, "#email-div", '#password-req'
 
+// event listeners
 $("#username-div, #email-div, #password-div").on("focusin", removeErrors);
 $('#signup-form').on("focusin", removeFieldsError);
 $('#login-form').on('submit', loginFormHandler);

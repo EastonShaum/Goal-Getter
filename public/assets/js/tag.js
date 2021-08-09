@@ -1,3 +1,5 @@
+// File not in use at the moment
+
 async function newTagHandler(event) {
     event.preventDefault();
 

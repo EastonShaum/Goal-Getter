@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Team, Milestone, Goal, Tag } = require('../../models');
 
+// not in use, but gets all teams
 router.get('/', (req, res) => {
     Team.findAll({
             attributes: ['id', 'name', 'motto']
@@ -12,6 +13,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// not in use, but gets specific team
 router.get('/:id', (req, res) => {
     Team.findOne({
             where: {
@@ -31,6 +33,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// not in use, but posts team data
 router.post('/', (req, res) => {
     if (req.session) {
         Team.create({
@@ -45,6 +48,7 @@ router.post('/', (req, res) => {
     }
 });
 
+// not in use, but updates specific team data
 router.put('/:id', (req, res) => {
     if (req.session) {
         Team.update({
@@ -66,6 +70,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
+// not in use, but deletes specific team
 router.delete('/:id', (req, res) => {
     if (req.session) {
         Team.destroy({

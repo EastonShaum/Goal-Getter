@@ -1,3 +1,4 @@
+// Logic that enables dynamic progress bars dependent on completed vs total
 const progressLoadMygoals = () => {
     $('.card-progress').each(function() {
         let completed = parseInt($(this).attr('data-completed'));

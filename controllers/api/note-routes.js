@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Note } = require('../../models');
 
+// GET ALL NOTES
 router.get('/', (req, res) => {
     Note.findAll({
             attributes: ['id', 'text', 'goal_id', 'milestone_id']
@@ -12,6 +13,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// FIND ONE NOTE
 router.get('/', (req, res) => {
     Note.findAll({
         where: {
@@ -26,6 +28,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// CREATE NOTE
 router.post('/', (req, res) => {
     Note.create({
             text: req.body.text,
@@ -39,6 +42,7 @@ router.post('/', (req, res) => {
         });
 });
 
+// UPDATE NOTE
 router.put('/:id', (req, res) => {
     if (req.session) {
         Note.update(req.body, {
@@ -60,6 +64,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
+// DELETE NOTE
 router.delete('/:id', (req, res) => {
     Note.destroy({
             where: {

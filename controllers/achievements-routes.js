@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 const { User, Team, Milestone, Goal, Tag } = require('../models');
 const withAuth = require('../utils/auth');
 
+// gets all completed goals for the acheivements page
 router.get('/', withAuth, (req, res) => {
     Goal.findAll({
             where: {

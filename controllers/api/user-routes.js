@@ -57,6 +57,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// CREATE USER
 router.post('/', (req, res) => {
 
     User.create({
@@ -81,6 +82,7 @@ router.post('/', (req, res) => {
         });
 });
 
+// EDIT USER
 router.put('/:id', (req, res) => {
     User.update(req.body, {
             inidividualHooks: true,
@@ -101,6 +103,7 @@ router.put('/:id', (req, res) => {
         });
 });
 
+// DELETE USER
 router.delete('/:id', (req, res) => {
     User.destroy({
             where: {
@@ -120,6 +123,7 @@ router.delete('/:id', (req, res) => {
         });
 });
 
+// FIND ONE USER
 router.post('/login', (req, res) => {
     User.findOne({
             where: {
@@ -151,6 +155,7 @@ router.post('/login', (req, res) => {
         })
 });
 
+// LOGOUT 
 router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
@@ -161,6 +166,8 @@ router.post('/logout', (req, res) => {
     }
 });
 
+// route that checks if a user's password is weak or strong by using the password-strength-checker
+// module.
 router.post('/password', (req, res) => {
     const strength = passwordStrength(req.body.password, [{
             id: 0,

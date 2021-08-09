@@ -1,3 +1,4 @@
+// logout logic for the logout buttons
 async function logout(event) {
     event.preventDefault();
     console.log("log out initiated")

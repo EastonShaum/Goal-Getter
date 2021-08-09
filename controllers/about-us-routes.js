@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// gets info for the about us page
 router.get('/', (req, res) => {
     const loggedIn = req.session.loggedIn 
     
